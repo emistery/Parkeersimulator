@@ -1,7 +1,7 @@
 package Parkeersimulator;
 //test
 import java.util.Random;
-
+//myfirstcomment
 public class Simulator {
 
 	private static final String AD_HOC = "1";
@@ -36,7 +36,11 @@ public class Simulator {
         exitCarQueue = new CarQueue();
         simulatorView = new SimulatorView(3, 6, 30);
     }
-
+    public static void main(String[] args)
+    {
+        Simulator game = new Simulator();
+        game.run();
+    }
     public void run() {
         for (int i = 0; i < 10000; i++) {
             tick();
