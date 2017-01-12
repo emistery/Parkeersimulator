@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="parkeersimulator">
+    <output-path>$PROJECT_DIR$/out/artifacts/parkeersimulator</output-path>
+    <root id="archive" name="parkeersimulator.jar" />
+  </artifact>
+</component>

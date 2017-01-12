@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Parkeersimulator:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Parkeersimulator_jar</output-path>
+    <root id="archive" name="Parkeersimulator.jar">
+      <element id="module-output" name="Parkeersimulator" />
+    </root>
+  </artifact>
+</component>
