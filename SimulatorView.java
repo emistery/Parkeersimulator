@@ -2,26 +2,33 @@ package Parkeersimulator;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class SimulatorView extends JFrame {
     private CarParkView carParkView;
+    private Controller controller;
     private int numberOfFloors;
     private int numberOfRows;
     private int numberOfPlaces;
     private int numberOfOpenSpots;
     private Car[][][] cars;
 
-    public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
+    public SimulatorView(Simulator simulator, int numberOfFloors, int numberOfRows, int numberOfPlaces) {
         this.numberOfFloors = numberOfFloors;
         this.numberOfRows = numberOfRows;
         this.numberOfPlaces = numberOfPlaces;
         this.numberOfOpenSpots =numberOfFloors*numberOfRows*numberOfPlaces;
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
-        
+
         carParkView = new CarParkView();
+        controller = new Controller(simulator);
+
 
         Container contentPane = getContentPane();
+        contentPane.add(controller, BorderLayout.SOUTH);
         contentPane.add(carParkView, BorderLayout.CENTER);
+
         pack();
         setVisible(true);
 
@@ -30,8 +37,9 @@ public class SimulatorView extends JFrame {
 
     public void updateView() {
         carParkView.updateView();
+
     }
-    
+
 	public int getNumberOfFloors() {
         return numberOfFloors;
     }
@@ -47,7 +55,7 @@ public class SimulatorView extends JFrame {
     public int getNumberOfOpenSpots(){
     	return numberOfOpenSpots;
     }
-    
+
     public Car getCarAt(Location location) {
         if (!locationIsValid(location)) {
             return null;
@@ -151,9 +159,7 @@ public class SimulatorView extends JFrame {
         /**
          * Overridden. Tell the GUI manager how big we would like to be.
          */
-        public Dimension getPreferredSize() {
-            return new Dimension(800, 500);
-        }
+        public Dimension getPreferredSize() {return new Dimension(800, 500);}
     
         /**
          * Overriden. The car park view component needs to be redisplayed. Copy the
@@ -207,4 +213,46 @@ public class SimulatorView extends JFrame {
         }
     }
 
-}
+    public class Controller extends JPanel implements ActionListener {
+        private Simulator simulator;
+        private JButton mineen;
+        private JButton pluseen;
+        private JButton plushonderd;
+
+        public Controller(Simulator simulator) {
+            this.simulator=simulator;
+
+            mineen=new JButton("1 tick");
+            mineen.addActionListener(this);
+            pluseen=new JButton("100 ticks");
+            pluseen.addActionListener(this);
+            plushonderd=new JButton("1000 ticks");
+            plushonderd.addActionListener(this);
+
+            add(mineen);
+            add(pluseen);
+            add(plushonderd);
+            mineen.setBounds(25, 10, 50, 30);
+            pluseen.setBounds(100, 10, 50, 30);
+            plushonderd.setBounds(175, 10, 50, 30);
+            setVisible(true);
+
+        }
+        //public Dimension getPreferredSize() {return new Dimension(250, 250);}
+
+        public void actionPerformed(ActionEvent e) {
+            if (e.getSource()==mineen) {
+               simulator.run(1);
+            }
+
+            if (e.getSource()==pluseen) {
+                simulator.run(100);
+            }
+            if (e.getSource()==plushonderd) {
+                simulator.run(1000);
+            }
+        }
+
+
+
+}}

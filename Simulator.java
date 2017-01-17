@@ -34,7 +34,7 @@ public class Simulator {
         entrancePassQueue = new CarQueue();
         paymentCarQueue = new CarQueue();
         exitCarQueue = new CarQueue();
-        simulatorView = new SimulatorView(3, 6, 30);
+        simulatorView = new SimulatorView(this, 3, 6, 30);
     }
     public static void main(String[] args)
     {
@@ -43,6 +43,11 @@ public class Simulator {
     }
     public void run() {
         for (int i = 0; i < 10000; i++) {
+            tick();
+        }
+    }
+    public void run(int tick) {
+        for (int i = 0; i < tick; i++) {
             tick();
         }
     }
