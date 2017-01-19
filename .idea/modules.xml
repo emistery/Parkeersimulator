@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Parkeersimulator.iml" filepath="$PROJECT_DIR$/Parkeersimulator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Parkeersimulator.iml" filepath="$PROJECT_DIR$/.idea/Parkeersimulator.iml" />
     </modules>
   </component>
 </project>
