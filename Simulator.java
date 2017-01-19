@@ -2,7 +2,7 @@ package Parkeersimulator;
 
 import java.util.Random;
 //myfirstcomment
-
+//mysecondcomment
 //test234
 public class Simulator {
 
