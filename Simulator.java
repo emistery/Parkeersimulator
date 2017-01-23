@@ -3,9 +3,6 @@ package Parkeersimulator;
 import java.util.Random;
 import java.lang.Runnable;
 
-//myfirstcomment
-
-//test123
 public class Simulator implements Runnable {
 
 	private static final String AD_HOC = "1";
