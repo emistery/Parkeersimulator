@@ -241,7 +241,7 @@ public class SimulatorView extends JFrame {
 
         }
         //public Dimension getPreferredSize() {return new Dimension(250, 250);}
-
+//
         public void actionPerformed(ActionEvent e) {
             //
         }
