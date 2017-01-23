@@ -15,6 +15,7 @@ public class SimulatorView extends JFrame {
     private int numberOfPlaces;
     private int numberOfOpenSpots;
     private Car[][][] cars;
+    private JLabel tickLabel = new JLabel("0");
 
     public SimulatorView(Simulator simulator, int numberOfFloors, int numberOfRows, int numberOfPlaces) {
         this.numberOfFloors = numberOfFloors;
@@ -27,7 +28,9 @@ public class SimulatorView extends JFrame {
         controller = new Controller(simulator);
 
 
+
         Container contentPane = getContentPane();
+        contentPane.add(tickLabel, BorderLayout.NORTH);
         contentPane.add(controller, BorderLayout.SOUTH);
         contentPane.add(carParkView, BorderLayout.CENTER);
 
@@ -39,6 +42,7 @@ public class SimulatorView extends JFrame {
 
     public void updateView() {
         carParkView.updateView();
+        tickLabel.repaint();
 
     }
 
@@ -214,7 +218,11 @@ public class SimulatorView extends JFrame {
                     10 - 1); // TODO use dynamic size or constants
         }
     }
+    public void tick(int tick) {
 
+        tickLabel.setText("Tick: "+tick);
+
+    }
     public class Controller extends JPanel implements ActionListener {
         private Simulator simulator;
         private JButton eenStep;
@@ -241,7 +249,7 @@ public class SimulatorView extends JFrame {
 
         }
         //public Dimension getPreferredSize() {return new Dimension(250, 250);}
-//
+
         public void actionPerformed(ActionEvent e) {
             //
         }

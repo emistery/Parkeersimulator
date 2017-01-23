@@ -23,6 +23,7 @@ public class Simulator implements Runnable {
     private int minute = 0;
 
     private int tickPause = 100;
+    private int tick = 0;
 
     int weekDayArrivals= 100; // average number of arriving cars per hour
     int weekendArrivals = 200; // average number of arriving cars per hour
@@ -61,6 +62,7 @@ public class Simulator implements Runnable {
     }
 
     private void tick() {
+        this.tick++;
     	advanceTime();
     	handleExit();
     	updateViews();
@@ -103,7 +105,7 @@ public class Simulator implements Runnable {
     }
     
     private void updateViews(){
-    	simulatorView.tick();
+    	simulatorView.tick(tick);
         // Update the car park view.
         simulatorView.updateView();	
     }
