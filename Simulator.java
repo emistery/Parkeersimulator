@@ -4,7 +4,7 @@ import java.util.Random;
 //myfirstcomment
 
 //test123
-public class Simulator {
+public class Simulator implements Runnable {
 
 	private static final String AD_HOC = "1";
 	private static final String PASS = "2";
@@ -41,7 +41,7 @@ public class Simulator {
     public static void main(String[] args)
     {
         Simulator game = new Simulator();
-        game.run();
+        //game.run();
     }
     public void run() {
         for (int i = 0; i < 10000; i++) {

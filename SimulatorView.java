@@ -1,9 +1,11 @@
 package Parkeersimulator;
 
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.Runnable;
 
 public class SimulatorView extends JFrame {
     private CarParkView carParkView;
@@ -215,44 +217,40 @@ public class SimulatorView extends JFrame {
 
     public class Controller extends JPanel implements ActionListener {
         private Simulator simulator;
-        private JButton mineen;
-        private JButton pluseen;
-        private JButton plushonderd;
+        private JButton eenStep;
+        private JButton honderdStep;
+        private JButton duizendStep;
 
         public Controller(Simulator simulator) {
-            this.simulator=simulator;
+            this.simulator = simulator;
 
-            mineen=new JButton("1 tick");
-            mineen.addActionListener(this);
-            pluseen=new JButton("100 ticks");
-            pluseen.addActionListener(this);
-            plushonderd=new JButton("1000 ticks");
-            plushonderd.addActionListener(this);
+            eenStep = new JButton("1 tick");
+            eenStep.addActionListener(e -> (new Thread(() -> {
+                simulator.run(1);
+            })).start());
+            honderdStep = new JButton("100 ticks");
+            honderdStep.addActionListener(e -> (new Thread(() -> {
+                simulator.run(100);
+            })).start());
+            duizendStep = new JButton("1000 ticks");
+            duizendStep.addActionListener(e -> (new Thread(() -> {
+                simulator.run(1000);
+            })).start());
 
-            add(mineen);
-            add(pluseen);
-            add(plushonderd);
-            mineen.setBounds(25, 10, 50, 30);
-            pluseen.setBounds(100, 10, 50, 30);
-            plushonderd.setBounds(175, 10, 50, 30);
+            add(eenStep);
+            add(honderdStep);
+            add(duizendStep);
+            eenStep.setBounds(25, 10, 50, 30);
+            honderdStep.setBounds(100, 10, 50, 30);
+            duizendStep.setBounds(175, 10, 50, 30);
             setVisible(true);
 
         }
         //public Dimension getPreferredSize() {return new Dimension(250, 250);}
 
         public void actionPerformed(ActionEvent e) {
-            if (e.getSource()==mineen) {
-               simulator.run(1);
-            }
-
-            if (e.getSource()==pluseen) {
-                simulator.run(100);
-            }
-            if (e.getSource()==plushonderd) {
-                simulator.run(1000);
-            }
+            //
         }
 
 
-
-}}
+    }}
