@@ -93,6 +93,7 @@ public class Simulator implements Runnable {
     }
 
     private void handleEntrance(){
+        //PassCar krijgt eerste parkeerplek toegewezen
     	carsArriving();
     	carsEntering(entrancePassQueue);
     	carsEntering(entranceCarQueue);  	
