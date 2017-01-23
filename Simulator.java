@@ -62,7 +62,9 @@ public class Simulator implements Runnable {
     }
 
     private void tick() {
+        simulatorView.tick();
         this.tick++;
+        simulatorView.tick(tick);
     	advanceTime();
     	handleExit();
     	updateViews();
@@ -105,7 +107,7 @@ public class Simulator implements Runnable {
     }
     
     private void updateViews(){
-    	simulatorView.tick(tick);
+
         // Update the car park view.
         simulatorView.updateView();	
     }
