@@ -1,6 +1,8 @@
 package Parkeersimulator;
 
 import java.util.Random;
+import java.lang.Runnable;
+
 //myfirstcomment
 
 //test123
@@ -49,9 +51,13 @@ public class Simulator implements Runnable {
         }
     }
     public void run(int tick) {
-        for (int i = 0; i < tick; i++) {
-            tick();
-        }
+
+        (new Thread(() -> {
+            for (int i = 0; i < tick; i++) {
+                tick();
+            }
+        })).start();
+
     }
 
     private void tick() {

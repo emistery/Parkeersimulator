@@ -225,17 +225,11 @@ public class SimulatorView extends JFrame {
             this.simulator = simulator;
 
             eenStep = new JButton("1 tick");
-            eenStep.addActionListener(e -> (new Thread(() -> {
-                simulator.run(1);
-            })).start());
+            eenStep.addActionListener(e -> simulator.run(1));
             honderdStep = new JButton("100 ticks");
-            honderdStep.addActionListener(e -> (new Thread(() -> {
-                simulator.run(100);
-            })).start());
+            honderdStep.addActionListener(e ->  simulator.run(100));
             duizendStep = new JButton("1000 ticks");
-            duizendStep.addActionListener(e -> (new Thread(() -> {
-                simulator.run(1000);
-            })).start());
+            duizendStep.addActionListener(e ->  simulator.run(1000));
 
             add(eenStep);
             add(honderdStep);
