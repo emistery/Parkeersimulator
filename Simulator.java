@@ -15,6 +15,7 @@ public class Simulator implements Runnable {
     private CarQueue exitCarQueue;
     private SimulatorView simulatorView;
 
+
     private int day = 0;
     private int hour = 0;
     private int minute = 0;
@@ -43,6 +44,36 @@ public class Simulator implements Runnable {
         Simulator game = new Simulator();
         //game.run();
     }
+
+    //added getters & setters
+    // TODO add other getters & setters
+
+    public int getDay(){
+        return day;
+    }
+
+    public int getHour(){
+        return hour;
+    }
+
+    public int getMinute(){
+        return minute;
+    }
+
+    public void setDay(int day){
+        this.day = day;
+    }
+
+    public void setHour(int hour){
+        this.hour = hour;
+    }
+
+    public void setMinute(int minute){
+        this.minute = minute;
+    }
+
+    // default methods
+
     public void run() {
         for (int i = 0; i < 10000; i++) {
             tick();
