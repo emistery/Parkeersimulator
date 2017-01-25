@@ -23,14 +23,14 @@ public class Simulator implements Runnable {
     private int tickPause = 1;
     private int tick = 0;
 
-    int weekDayArrivals= 100; // average number of arriving cars per hour
-    int weekendArrivals = 200; // average number of arriving cars per hour
-    int weekDayPassArrivals= 50; // average number of arriving cars per hour
-    int weekendPassArrivals = 5; // average number of arriving cars per hour
+    private int weekDayArrivals= 100; // average number of arriving cars per hour
+    private int weekendArrivals = 200; // average number of arriving cars per hour
+    private int weekDayPassArrivals= 50; // average number of arriving cars per hour
+    private int weekendPassArrivals = 5; // average number of arriving cars per hour
 
-    int enterSpeed = 3; // number of cars that can enter per minute
-    int paymentSpeed = 7; // number of cars that can pay per minute
-    int exitSpeed = 5; // number of cars that can leave per minute
+    private int enterSpeed = 3; // number of cars that can enter per minute
+    private int paymentSpeed = 7; // number of cars that can pay per minute
+    private int exitSpeed = 5; // number of cars that can leave per minute
 
     public Simulator() {
         entranceCarQueue = new CarQueue();
@@ -45,8 +45,8 @@ public class Simulator implements Runnable {
         //game.run();
     }
 
-    //added getters & setters
-    // TODO add other getters & setters
+    //Added getters & setters
+    //Get methods
 
     public int getDay(){
         return day;
@@ -60,6 +60,44 @@ public class Simulator implements Runnable {
         return minute;
     }
 
+    public int getTickPause(){
+        return tickPause;
+    }
+
+    public int getTick(){
+        return tick;
+    }
+
+    public int getWeekDayArrivals(){
+        return weekDayArrivals;
+    }
+
+    public int getWeekendArrivals(){
+        return weekendArrivals;
+    }
+
+    public int getWeekDayPassArrivals(){
+        return weekDayPassArrivals;
+    }
+
+    public int getWeekendPassArrivals(){
+        return weekendPassArrivals;
+    }
+
+    public int getEnterSpeed(){
+        return enterSpeed;
+    }
+
+    public int getPaymentSpeed(){
+        return paymentSpeed;
+    }
+
+    public int getExitSpeed(){
+        return exitSpeed;
+    }
+
+    //Set methods
+
     public void setDay(int day){
         this.day = day;
     }
@@ -70,6 +108,42 @@ public class Simulator implements Runnable {
 
     public void setMinute(int minute){
         this.minute = minute;
+    }
+
+    public void setTickPause(int tickPause){
+        this.tickPause = tickPause;
+    }
+
+    public void setTick(int tick){
+        this.tick = tick;
+    }
+
+    public void setWeekDayArrivals(int weekDayArrivals){
+        this.weekDayArrivals = weekDayArrivals;
+    }
+
+    public void setWeekendArrivals(int weekendArrivals){
+        this.weekendArrivals = weekendArrivals;
+    }
+
+    public void setWeekDayPassArrivals(int weekDayPassArrivals ){
+        this.weekDayPassArrivals = weekDayPassArrivals;
+    }
+
+    public void setWeekendPassArrivals (int weekendPassArrivals){
+        this.weekendPassArrivals = weekendPassArrivals;
+    }
+
+    public void setEnterSpeed(int enterSpeed){
+        this.enterSpeed = enterSpeed;
+    }
+
+    public void setPaymentSpeed(int paymentSpeed){
+        this.paymentSpeed = paymentSpeed;
+    }
+
+    public void setExitSpeed(int exitSpeed){
+        this.exitSpeed = exitSpeed;
     }
 
     // default methods
