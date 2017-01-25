@@ -20,7 +20,7 @@ public class Simulator implements Runnable {
     private int hour = 0;
     private int minute = 0;
 
-    private int tickPause = 100;
+    private int tickPause = 1;
     private int tick = 0;
 
     int weekDayArrivals= 100; // average number of arriving cars per hour
@@ -79,10 +79,10 @@ public class Simulator implements Runnable {
             tick();
         }
     }
-    public void run(int tick) {
+    public void run(int numberOfTick) {
 
         (new Thread(() -> {
-            for (int i = 0; i < tick; i++) {
+            for (int i = 0; i < numberOfTick; i++) {
                 tick();
             }
         })).start();
@@ -90,9 +90,9 @@ public class Simulator implements Runnable {
     }
 
     private void tick() {
-        simulatorView.tick();
         this.tick++;
         simulatorView.tick(tick);
+        simulatorView.tick();
     	advanceTime();
     	handleExit();
     	updateViews();
