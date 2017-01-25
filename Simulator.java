@@ -178,9 +178,12 @@ public class Simulator implements Runnable {
         }
     	handleEntrance();
     }
-
+    //Kan verplaatst worden naar controller
     private void advanceTime(){
-        // Advance the time by one minute.
+        // Advance the time by one minute
+        int minute = getMinute();
+        int hour = getHour();
+        int day = getDay();
         minute++;
         while (minute > 59) {
             minute -= 60;
@@ -193,9 +196,11 @@ public class Simulator implements Runnable {
         while (day > 6) {
             day -= 7;
         }
+        setMinute(minute);
+        setHour(hour);
+        setDay(day);
 
     }
-
     private void handleEntrance(){
         //PassCar krijgt eerste parkeerplek toegewezen
     	carsArriving();
