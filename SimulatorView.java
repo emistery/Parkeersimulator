@@ -3,6 +3,7 @@ package Parkeersimulator;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.Runnable;
@@ -15,6 +16,7 @@ public class SimulatorView extends JFrame {
     private int numberOfPlaces;
     private int numberOfOpenSpots;
     private Car[][][] cars;
+    private ArrayList<Location> locations= new ArrayList<>();
     private JLabel tickLabel = new JLabel("0");
 
     public SimulatorView(Simulator simulator, int numberOfFloors, int numberOfRows, int numberOfPlaces) {
@@ -38,6 +40,7 @@ public class SimulatorView extends JFrame {
         setVisible(true);
 
         updateView();
+        fillLocation();
     }
 
     public void updateView() {
@@ -96,6 +99,16 @@ public class SimulatorView extends JFrame {
         numberOfOpenSpots++;
         return car;
     }
+    public void fillLocation() {
+        for (int floor = 0; floor < getNumberOfFloors(); floor++) {
+            for (int row = 0; row < getNumberOfRows(); row++) {
+                for (int place = 0; place < getNumberOfPlaces(); place++) {
+                    Location location = new Location(floor, row, place);
+                }
+            }
+        }
+    }
+
 
     public Location getFirstFreeLocation() {
         for (int floor = 0; floor < getNumberOfFloors(); floor++) {

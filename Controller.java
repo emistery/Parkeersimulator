@@ -29,7 +29,7 @@ public class Controller extends JPanel implements ActionListener {
         setVisible(true);
 
     }
-    //public Dimension getPreferredSize() {return new Dimension(250, 250);}
+    //public Dimension setPreferredSize() {return new Dimension(250, 250);}
 
     public void actionPerformed(ActionEvent e) {
         //
