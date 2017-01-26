@@ -5,16 +5,16 @@ import java.awt.*;
 
 public class CarParkView extends JPanel {
 
-    SimulatorView simulatorView;
+    Simulator simulator;
     private Dimension size;
     private Image carParkImage;
 
     /**
      * Constructor for objects of class CarPark
      */
-    public CarParkView(SimulatorView simuView) {
+    public CarParkView(Simulator simulator) {
         size = new Dimension(0, 0);
-        simulatorView = simuView;
+        this.simulator = simulator;
     }
 
     /**
@@ -48,8 +48,8 @@ public class CarParkView extends JPanel {
             carParkImage = createImage(size.width, size.height);
         }
         Graphics graphics = carParkImage.getGraphics();
-        for(Location location : simulatorView.getLocations()){
-                    Car car = simulatorView.getCarAt(location);
+        for(Location location : simulator.getLocations()){
+                    Car car = simulator.getCarAt(location);
                     Color color = car == null ? Color.white : car.getColor();
                     drawPlace(graphics, location, color);
                 }
