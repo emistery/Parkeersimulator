@@ -1,4 +1,5 @@
 package Parkeersimulator;
+//-----MODEL-----
 
 import java.util.Random;
 import java.lang.Runnable;
@@ -39,11 +40,7 @@ public class Simulator implements Runnable {
         exitCarQueue = new CarQueue();
         simulatorView = new SimulatorView(this, 3, 6, 30);
     }
-    public static void main(String[] args)
-    {
-        Simulator game = new Simulator();
-        //game.run();
-    }
+
 
     //Added getters & setters
     //Get methods
@@ -59,6 +56,7 @@ public class Simulator implements Runnable {
     public int getMinute(){
         return minute;
     }
+
 
     public int getTickPause(){
         return tickPause;

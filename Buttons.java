@@ -4,13 +4,13 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Controller extends JPanel implements ActionListener {
+public class Buttons extends JPanel implements ActionListener {
     private Simulator simulator;
     private JButton eenStep;
     private JButton honderdStep;
     private JButton duizendStep;
 
-    public Controller(Simulator simulator) {
+    public Buttons(Simulator simulator) {
         this.simulator = simulator;
 
         eenStep = new JButton("1 tick");

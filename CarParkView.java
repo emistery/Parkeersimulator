@@ -48,16 +48,11 @@ public class CarParkView extends JPanel {
             carParkImage = createImage(size.width, size.height);
         }
         Graphics graphics = carParkImage.getGraphics();
-        for(int floor = 0; floor < simulatorView.getNumberOfFloors(); floor++) {
-            for(int row = 0; row < simulatorView.getNumberOfRows(); row++) {
-                for(int place = 0; place < simulatorView.getNumberOfPlaces(); place++) {
-                    Location location = new Location(floor, row, place);
+        for(Location location : simulatorView.getLocations()){
                     Car car = simulatorView.getCarAt(location);
                     Color color = car == null ? Color.white : car.getColor();
                     drawPlace(graphics, location, color);
                 }
-            }
-        }
         repaint();
     }
 

@@ -10,13 +10,15 @@ import java.lang.Runnable;
 
 public class SimulatorView extends JFrame {
     private CarParkView carParkView;
-    private Controller controller;
+    private Buttons controller;
     private int numberOfFloors;
     private int numberOfRows;
     private int numberOfPlaces;
     private int numberOfOpenSpots;
+
     private Car[][][] cars;
     private ArrayList<Location> locations= new ArrayList<>();
+
     private JLabel tickLabel = new JLabel("0");
 
     public SimulatorView(Simulator simulator, int numberOfFloors, int numberOfRows, int numberOfPlaces) {
@@ -25,9 +27,10 @@ public class SimulatorView extends JFrame {
         this.numberOfPlaces = numberOfPlaces;
         this.numberOfOpenSpots =numberOfFloors*numberOfRows*numberOfPlaces;
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
+        fillLocation(numberOfFloors, numberOfRows, numberOfPlaces);
 
         carParkView = new CarParkView(this);
-        controller = new Controller(simulator);
+        controller = new Buttons(simulator);
 
 
 
@@ -40,7 +43,7 @@ public class SimulatorView extends JFrame {
         setVisible(true);
 
         updateView();
-        fillLocation();
+
     }
 
     public void updateView() {
@@ -72,6 +75,10 @@ public class SimulatorView extends JFrame {
         return cars[location.getFloor()][location.getRow()][location.getPlace()];
     }
 
+    public ArrayList<Location> getLocations(){
+        return locations;
+    }
+
     public boolean setCarAt(Location location, Car car) {
         if (!locationIsValid(location)) {
             return false;
@@ -99,11 +106,13 @@ public class SimulatorView extends JFrame {
         numberOfOpenSpots++;
         return car;
     }
-    public void fillLocation() {
-        for (int floor = 0; floor < getNumberOfFloors(); floor++) {
-            for (int row = 0; row < getNumberOfRows(); row++) {
-                for (int place = 0; place < getNumberOfPlaces(); place++) {
+    //creates an ArrayList with all the locations used
+    public void fillLocation(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
+        for (int floor = 0; floor < numberOfFloors; floor++) {
+            for (int row = 0; row < numberOfRows; row++) {
+                for (int place = 0; place < numberOfPlaces; place++) {
                     Location location = new Location(floor, row, place);
+                    locations.add(location);
                 }
             }
         }
@@ -111,47 +120,33 @@ public class SimulatorView extends JFrame {
 
 
     public Location getFirstFreeLocation() {
-        for (int floor = 0; floor < getNumberOfFloors(); floor++) {
-            for (int row = 0; row < getNumberOfRows(); row++) {
-                for (int place = 0; place < getNumberOfPlaces(); place++) {
-                    Location location = new Location(floor, row, place);
+        for(Location location : locations){
                     if (getCarAt(location) == null) {
                         return location;
                     }
                 }
-            }
-        }
         return null;
     }
 
     public Car getFirstLeavingCar() {
-        for (int floor = 0; floor < getNumberOfFloors(); floor++) {
-            for (int row = 0; row < getNumberOfRows(); row++) {
-                for (int place = 0; place < getNumberOfPlaces(); place++) {
-                    Location location = new Location(floor, row, place);
+        for(Location location : locations){
                     Car car = getCarAt(location);
                     if (car != null && car.getMinutesLeft() <= 0 && !car.getIsPaying()) {
                         return car;
                     }
-                }
-            }
         }
         return null;
     }
 
     public void tick() {
-        for (int floor = 0; floor < getNumberOfFloors(); floor++) {
-            for (int row = 0; row < getNumberOfRows(); row++) {
-                for (int place = 0; place < getNumberOfPlaces(); place++) {
-                    Location location = new Location(floor, row, place);
+        for(Location location : locations){
                     Car car = getCarAt(location);
                     if (car != null) {
                         car.tick();
                     }
                 }
-            }
         }
-    }
+
 
     private boolean locationIsValid(Location location) {
         int floor = location.getFloor();
