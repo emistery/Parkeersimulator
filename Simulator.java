@@ -257,12 +257,44 @@ public class Simulator implements Runnable {
     			numberOfOpenSpots>0 &&
     			i<enterSpeed) {
             Car car = queue.removeCar();
-            Location freeLocation = getFirstFreeLocation();
-            setCarAt(freeLocation, car);
+            if(car.getHasToPay() == true)
+            {
+                Location freeLocation = getFirstFreeLocation();
+                setCarAt(freeLocation, car);
+            }else{
+                Location freePassLocation = getFirstFreePassLocation();
+                setCarAt(freePassLocation, car);
+            }
             i++;
         }
     }
-    
+
+    public Location getFirstFreeLocation() {
+        for(Location location : locations){
+            if (getCarAt(location) == null && !location.checkPassLocation()) {
+                return location;
+            }
+        }
+        return null;
+    }
+
+    public Location getFirstFreePassLocation(){
+        for(Location location : locations){
+            if (getCarAt(location) == null && location.checkPassLocation() ) {
+                return location;
+            }
+        }
+        return null;
+    }
+
+
+    public Car getCarAt(Location location) {
+        if (!locationIsValid(location)) {
+            return null;
+        }
+        return cars[location.getFloor()][location.getRow()][location.getPlace()];
+    }
+
     private void carsReadyToLeave(){
         // Add leaving cars to the payment queue.
         Car car = getFirstLeavingCar();
@@ -348,12 +380,7 @@ public class Simulator implements Runnable {
         return numberOfPlaces;
     }
 
-    public Car getCarAt(Location location) {
-        if (!locationIsValid(location)) {
-            return null;
-        }
-        return cars[location.getFloor()][location.getRow()][location.getPlace()];
-    }
+
 
     public ArrayList<Location> getLocations(){
         return locations;
@@ -399,14 +426,7 @@ public class Simulator implements Runnable {
     }
 
 
-    public Location getFirstFreeLocation() {
-        for(Location location : locations){
-            if (getCarAt(location) == null) {
-                return location;
-            }
-        }
-        return null;
-    }
+
 
     public Car getFirstLeavingCar() {
         for(Location location : locations){
