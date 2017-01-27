@@ -3,8 +3,6 @@
  */
 package Parkeersimulator;
 
-import org.w3c.dom.views.AbstractView;
-
 public class SimulatorController {
     private Simulator simulator;
     private AbstrView carParkView;

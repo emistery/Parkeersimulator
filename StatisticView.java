@@ -5,18 +5,28 @@ package Parkeersimulator;
 import javax.swing.*;
 import java.awt.*;
 
-public class StatisticView extends JFrame {
-    JTextPane textPane = new JTextPane();
+public class StatisticView {
+    private SimulatorController controller;
+
+    private JFrame frame;
+    private JTextPane textPane = new JTextPane();
+
+    private JLabel tickLabel = new JLabel("tick: 0");
+
+  public StatisticView() {
+      //controller = contr;
+
+      frame = new JFrame();
+      Container contentPane = frame.getContentPane();
+      contentPane.setLayout(new FlowLayout());
+      contentPane.add(textPane);
+      contentPane.add(tickLabel);
+
+      frame.pack();
+      frame.setVisible(true);
+  }
     public static void main(String[] args)
     {
         StatisticView view = new StatisticView();
     }
-  public StatisticView() {
-      Container contentPane = getContentPane();
-      contentPane.add(textPane);
-
-      pack();
-      setVisible(true);
-  }
-
 }

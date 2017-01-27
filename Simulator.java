@@ -1,8 +1,6 @@
 package Parkeersimulator;
 //-----MODEL-----
 //needs methods for views and controllers to subscribe to state changes
-
-
 import java.util.ArrayList;
 import java.util.Random;
 import java.lang.Runnable;
@@ -18,8 +16,6 @@ public class Simulator implements Runnable {
     private CarQueue paymentCarQueue;
     private CarQueue exitCarQueue;
 
-
-
     private int day = 0;
     private int hour = 0;
     private int minute = 0;
@@ -30,7 +26,7 @@ public class Simulator implements Runnable {
     private int weekDayArrivals= 100; // average number of arriving cars per hour
     private int weekendArrivals = 200; // average number of arriving cars per hour
     private int weekDayPassArrivals= 50; // average number of arriving cars per hour
-    private int weekendPassArrivals = 5; // average number of arriving cars per hour
+    private int weekendPassArrivals = 6; // average number of arriving cars per hour
 
     private int enterSpeed = 3; // number of cars that can enter per minute
     private int paymentSpeed = 7; // number of cars that can pay per minute
