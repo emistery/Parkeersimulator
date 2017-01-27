@@ -1,5 +1,6 @@
 package Parkeersimulator;
 //-----MODEL-----
+//needs methods for views and controllers to subscribe to state changes
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -49,9 +50,6 @@ public class Simulator implements Runnable {
         entrancePassQueue = new CarQueue();
         paymentCarQueue = new CarQueue();
         exitCarQueue = new CarQueue();
-
-
-
 
 
         this.numberOfFloors = numberOfFloors;

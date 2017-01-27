@@ -20,6 +20,7 @@ public class SimulatorView extends JFrame {
     public SimulatorView(Simulator simulator, CarParkView carParkView) {
 
         this.carParkView = carParkView;
+
         buttons = new Buttons(simulator);
 
         Container contentPane = getContentPane();
