@@ -3,7 +3,7 @@ package Parkeersimulator;
 import javax.swing.*;
 import java.awt.*;
 
-public class CarParkView extends JPanel {
+public class CarParkView extends JPanel implements AbstrView {
 
     Simulator simulator;
     private Dimension size;
@@ -67,4 +67,7 @@ public class CarParkView extends JPanel {
                 20 - 1,
                 10 - 1); // TODO use dynamic size or constants
     }
+
+    //moest van compiler
+
 }

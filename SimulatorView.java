@@ -1,26 +1,18 @@
 package Parkeersimulator;
 
-
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.lang.Runnable;
 
-public class SimulatorView extends JFrame {
-
+public class SimulatorView extends JFrame implements AbstrView {
     private Buttons buttons;
     private CarParkView carParkView;
-
-
+    private Simulator simulator;
 
     private JLabel tickLabel = new JLabel("0");
 
     public SimulatorView(Simulator simulator, CarParkView carParkView) {
-
         this.carParkView = carParkView;
-
+        this.simulator = simulator;
         buttons = new Buttons(simulator);
 
         Container contentPane = getContentPane();
@@ -33,18 +25,14 @@ public class SimulatorView extends JFrame {
 
         carParkView.updateView();
         updateView();
-
-
     }
 
     public void updateView() {
         tickLabel.repaint();
-
+        tick(simulator.getTick());
     }
     public void tick(int tick) {
-
         tickLabel.setText("Tick: "+tick);
-
     }
 
 

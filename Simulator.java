@@ -2,6 +2,7 @@ package Parkeersimulator;
 //-----MODEL-----
 //needs methods for views and controllers to subscribe to state changes
 
+
 import java.util.ArrayList;
 import java.util.Random;
 import java.lang.Runnable;
@@ -16,7 +17,7 @@ public class Simulator implements Runnable {
     private CarQueue entrancePassQueue;
     private CarQueue paymentCarQueue;
     private CarQueue exitCarQueue;
-    private SimulatorView simulatorView;
+
 
 
     private int day = 0;
@@ -40,12 +41,12 @@ public class Simulator implements Runnable {
     private int numberOfRows;
     private int numberOfPlaces;
     private int numberOfOpenSpots;
+
     private Car[][][] cars;
-    private ArrayList<Location> locations= new ArrayList<>();
+    private ArrayList<Location> locations = new ArrayList<>();
+    private ArrayList<AbstrView> views = new ArrayList<>();
 
-    private CarParkView carParkView;
-
-    public Simulator(int numberOfFloors, int numberOfRows, int numberOfPlaces ) {
+    public Simulator(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
         entranceCarQueue = new CarQueue();
         entrancePassQueue = new CarQueue();
         paymentCarQueue = new CarQueue();
@@ -58,10 +59,6 @@ public class Simulator implements Runnable {
         this.numberOfOpenSpots =numberOfFloors*numberOfRows*numberOfPlaces;
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
         fillLocation(numberOfFloors, numberOfRows, numberOfPlaces);
-
-        carParkView = new CarParkView(this);
-        simulatorView = new SimulatorView(this, carParkView);
-
     }
 
 
@@ -79,7 +76,6 @@ public class Simulator implements Runnable {
     public int getMinute(){
         return minute;
     }
-
 
     public int getTickPause(){
         return tickPause;
@@ -181,12 +177,10 @@ public class Simulator implements Runnable {
                 tick();
             }
         })).start();
-
     }
 
     private void tick() {
         this.tick++;
-        simulatorView.tick(tick);
         tickker();
     	advanceTime();
     	handleExit();
@@ -199,6 +193,7 @@ public class Simulator implements Runnable {
         }
     	handleEntrance();
     }
+
     //Kan verplaatst worden naar controller
     private void advanceTime(){
         // Advance the time by one minute
@@ -234,12 +229,16 @@ public class Simulator implements Runnable {
         carsPaying();
         carsLeaving();
     }
-    
+    public void addView(AbstrView view)
+    {
+        views.add(view);
+    }
     private void updateViews(){
-
+        for(AbstrView view : views){
+            view.updateView();
+        }
         // Update the car park view.
-        simulatorView.updateView();
-        carParkView.updateView();
+
 
     }
     
