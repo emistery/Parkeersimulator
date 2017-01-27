@@ -252,6 +252,9 @@ public class Simulator implements Runnable {
     private void carsEntering(CarQueue queue){
         int i=0;
         // Remove car from the front of the queue and assign to a parking space.
+        while(spotsAvailable() == false){
+            queue.driveAway();
+        }
     	while (queue.carsInQueue()>0 &&
     			numberOfOpenSpots>0 &&
     			i<enterSpeed) {
@@ -266,6 +269,22 @@ public class Simulator implements Runnable {
             }
             i++;
         }
+    }
+
+    private boolean openSpots(){
+        if(numberOfOpenSpots <= 0){
+            return false;
+        }
+        return true;
+    }
+
+    public boolean spotsAvailable(){
+        for(Location location : locations){
+            if (getCarAt(location) == null) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public Location getFirstFreeLocation() {

@@ -16,4 +16,9 @@ public class CarQueue {
     public int carsInQueue(){
     	return queue.size();
     }
+
+    public void driveAway(){
+        int length = queue.size();
+        queue.remove(length);
+    }
 }

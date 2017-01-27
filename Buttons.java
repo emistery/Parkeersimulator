@@ -24,7 +24,7 @@ public class Buttons extends JPanel implements ActionListener {
         honderdStep.addActionListener(e ->  simulator.run(100));
         duizendStep = new JButton("1000 ticks");
         duizendStep.addActionListener(e ->  simulator.run(1000));
-        textField = new JTextField(20);
+        textField = new JTextField(5);
         textField.addActionListener(this);
 
 
