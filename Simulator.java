@@ -437,20 +437,15 @@ public class Simulator implements Runnable {
         if (car == null) {
             return null;
         }
+        cars[location.getFloor()][location.getRow()][location.getPlace()] = null;
+        car.setLocation(null);
+        numberOfOpenSpots++;
         if(car.getHasToPay() == true) {
-            cars[location.getFloor()][location.getRow()][location.getPlace()] = null;
-            car.setLocation(null);
             openAdHocSpots++;
-            numberOfOpenSpots++;
-            return car;
         }else if(car.getHasToPay() == false){
-            cars[location.getFloor()][location.getRow()][location.getPlace()] = null;
-            car.setLocation(null);
             openPassSpots++;
-            numberOfOpenSpots++;
-            return car;
         }
-        return null;
+        return car;
     }
     //creates an ArrayList with all the locations used
     public void fillLocation(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
