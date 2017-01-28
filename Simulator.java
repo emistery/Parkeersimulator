@@ -6,11 +6,11 @@ import java.util.Random;
 import java.lang.Runnable;
 
 public class Simulator implements Runnable {
-
+    //types of cars
 	private static final String AD_HOC = "1";
 	private static final String PASS = "2";
 	
-
+    //all the queues
     private CarQueue entranceCarQueue;
     private CarQueue entrancePassQueue;
     private CarQueue paymentCarQueue;
@@ -23,12 +23,12 @@ public class Simulator implements Runnable {
     private int tickPause = 1;
     private int tick = 0;
 
-    private int weekDayArrivals= 1000; // average number of arriving cars per hour
+    private int weekDayArrivals= 100; // average number of arriving cars per hour
     private int weekendArrivals = 200; // average number of arriving cars per hour
     private int weekDayPassArrivals= 50; // average number of arriving cars per hour
     private int weekendPassArrivals = 5; // average number of arriving cars per hour
 
-    private int enterSpeed = 7; // number of cars that can enter per minute
+    private int enterSpeed = 3; // number of cars that can enter per minute
     private int paymentSpeed = 7; // number of cars that can pay per minute
     private int exitSpeed = 5; // number of cars that can leave per minute
 
@@ -218,7 +218,7 @@ public class Simulator implements Runnable {
 
     }
     private void handleEntrance(){
-        //PassCar krijgt eerste parkeerplek toegewezen
+        //PassCar gets the fist spot, as it has priority
     	carsArriving();
     	carsEntering(entrancePassQueue);
     	carsEntering(entranceCarQueue);  	
@@ -260,11 +260,11 @@ public class Simulator implements Runnable {
     			spotsAvailable() &&
     			i<enterSpeed) {
             Car car = queue.removeCar();
-            if(car.getHasToPay() == true && openAdHocSpots > 3)
+            if(car.getHasToPay() == true && openAdHocSpots > 0)
             {
                 Location freeLocation = getFirstFreeLocation();
                 setCarAt(freeLocation, car);
-            }else if(car.getHasToPay() == false && openPassSpots > 3){
+            }else if(car.getHasToPay() == false && openPassSpots > 0){
                 Location freePassLocation = getFirstFreePassLocation();
                 setCarAt(freePassLocation, car);
             }
@@ -337,9 +337,10 @@ public class Simulator implements Runnable {
             // TODO Handle payment.
             carLeavesSpot(car);
             i++;
+
     	}
     }
-    
+
     private void carsLeaving(){
         // Let cars leave.
     	int i=0;
@@ -383,7 +384,7 @@ public class Simulator implements Runnable {
     	removeCarAt(car.getLocation());
         exitCarQueue.addCar(car);
     }
-    //ALLES VAN SIMULATORVIEW-----------------------------------------
+    //SIMULATORVIEW-----------------------------------------
     public int getNumberOfOpenSpots(){
         return numberOfOpenSpots;
     }
@@ -417,7 +418,7 @@ public class Simulator implements Runnable {
                 openAdHocSpots--;
                 numberOfOpenSpots--;
                 return true;
-            }else{
+            }else if(car.getHasToPay() == false){
                 cars[location.getFloor()][location.getRow()][location.getPlace()] = car;
                 car.setLocation(location);
                 openPassSpots--;
