@@ -23,12 +23,12 @@ public class Simulator implements Runnable {
     private int tickPause = 1;
     private int tick = 0;
 
-    private int weekDayArrivals= 100; // average number of arriving cars per hour
+    private int weekDayArrivals= 1000; // average number of arriving cars per hour
     private int weekendArrivals = 200; // average number of arriving cars per hour
     private int weekDayPassArrivals= 50; // average number of arriving cars per hour
-    private int weekendPassArrivals = 6; // average number of arriving cars per hour
+    private int weekendPassArrivals = 5; // average number of arriving cars per hour
 
-    private int enterSpeed = 3; // number of cars that can enter per minute
+    private int enterSpeed = 7; // number of cars that can enter per minute
     private int paymentSpeed = 7; // number of cars that can pay per minute
     private int exitSpeed = 5; // number of cars that can leave per minute
 
@@ -37,6 +37,8 @@ public class Simulator implements Runnable {
     private int numberOfRows;
     private int numberOfPlaces;
     private int numberOfOpenSpots;
+    private int openAdHocSpots;
+    private int openPassSpots;
 
     private Car[][][] cars;
     private ArrayList<Location> locations = new ArrayList<>();
@@ -53,6 +55,8 @@ public class Simulator implements Runnable {
         this.numberOfRows = numberOfRows;
         this.numberOfPlaces = numberOfPlaces;
         this.numberOfOpenSpots =numberOfFloors*numberOfRows*numberOfPlaces;
+        this.openAdHocSpots = 2*numberOfRows*numberOfPlaces;
+        this.openPassSpots = numberOfRows*numberOfPlaces;
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
         fillLocation(numberOfFloors, numberOfRows, numberOfPlaces);
     }
@@ -250,16 +254,17 @@ public class Simulator implements Runnable {
         // Remove car from the front of the queue and assign to a parking space.
         while(spotsAvailable() == false){
             queue.driveAway();
+
         }
     	while (queue.carsInQueue()>0 &&
-    			numberOfOpenSpots>0 &&
+    			spotsAvailable() &&
     			i<enterSpeed) {
             Car car = queue.removeCar();
-            if(car.getHasToPay() == true)
+            if(car.getHasToPay() == true && openAdHocSpots > 3)
             {
                 Location freeLocation = getFirstFreeLocation();
                 setCarAt(freeLocation, car);
-            }else{
+            }else if(car.getHasToPay() == false && openPassSpots > 3){
                 Location freePassLocation = getFirstFreePassLocation();
                 setCarAt(freePassLocation, car);
             }
@@ -406,10 +411,19 @@ public class Simulator implements Runnable {
         }
         Car oldCar = getCarAt(location);
         if (oldCar == null) {
-            cars[location.getFloor()][location.getRow()][location.getPlace()] = car;
-            car.setLocation(location);
-            numberOfOpenSpots--;
-            return true;
+            if(car.getHasToPay() == true) {
+                cars[location.getFloor()][location.getRow()][location.getPlace()] = car;
+                car.setLocation(location);
+                openAdHocSpots--;
+                numberOfOpenSpots--;
+                return true;
+            }else{
+                cars[location.getFloor()][location.getRow()][location.getPlace()] = car;
+                car.setLocation(location);
+                openPassSpots--;
+                numberOfOpenSpots--;
+                return true;
+            }
         }
         return false;
     }
@@ -422,10 +436,20 @@ public class Simulator implements Runnable {
         if (car == null) {
             return null;
         }
-        cars[location.getFloor()][location.getRow()][location.getPlace()] = null;
-        car.setLocation(null);
-        numberOfOpenSpots++;
-        return car;
+        if(car.getHasToPay() == true) {
+            cars[location.getFloor()][location.getRow()][location.getPlace()] = null;
+            car.setLocation(null);
+            openAdHocSpots++;
+            numberOfOpenSpots++;
+            return car;
+        }else if(car.getHasToPay() == false){
+            cars[location.getFloor()][location.getRow()][location.getPlace()] = null;
+            car.setLocation(null);
+            openPassSpots++;
+            numberOfOpenSpots++;
+            return car;
+        }
+        return null;
     }
     //creates an ArrayList with all the locations used
     public void fillLocation(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
