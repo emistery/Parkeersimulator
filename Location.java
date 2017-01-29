@@ -68,9 +68,6 @@ public class Location {
     }
 
     public boolean checkPassLocation(){
-        if(floor == 2){
-            return true;
-        }
-        return false;
+        return floor == 2;
     }
 }

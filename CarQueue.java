@@ -3,7 +3,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class CarQueue {
-    private Queue<Car> queue = new LinkedList<>();
+    private Queue<Car> queue = new LinkedList<Car>();
 
     public boolean addCar(Car car) {
         return queue.add(car);

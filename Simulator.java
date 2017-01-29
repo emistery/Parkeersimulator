@@ -41,8 +41,8 @@ public class Simulator implements Runnable {
     private int openPassSpots;
 
     private Car[][][] cars;
-    private ArrayList<Location> locations = new ArrayList<>();
-    private ArrayList<AbstrView> views = new ArrayList<>();
+    private ArrayList<Location> locations = new ArrayList<Location>();
+    private ArrayList<AbstrView> views = new ArrayList<AbstrView>();
 
     public Simulator(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
         entranceCarQueue = new CarQueue();
@@ -252,7 +252,7 @@ public class Simulator implements Runnable {
     private void carsEntering(CarQueue queue){
         int i=0;
         // Remove car from the front of the queue and assign to a parking space.
-        while(spotsAvailable() == false){
+        while(!spotsAvailable()){
             queue.driveAway();
 
         }
@@ -273,10 +273,7 @@ public class Simulator implements Runnable {
     }
 
     private boolean openSpots(){
-        if(numberOfOpenSpots <= 0){
-            return false;
-        }
-        return true;
+        return numberOfOpenSpots > 0;
     }
 
     public boolean spotsAvailable(){
@@ -486,10 +483,7 @@ public class Simulator implements Runnable {
         int floor = location.getFloor();
         int row = location.getRow();
         int place = location.getPlace();
-        if (floor < 0 || floor >= numberOfFloors || row < 0 || row > numberOfRows || place < 0 || place > numberOfPlaces) {
-            return false;
-        }
-        return true;
+        return !(floor < 0 || floor >= numberOfFloors || row < 0 || row > numberOfRows || place < 0 || place > numberOfPlaces);
     }
 
 
