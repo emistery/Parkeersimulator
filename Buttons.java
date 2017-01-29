@@ -44,9 +44,9 @@ public class Buttons extends JPanel implements ActionListener {
         honderdStep.setBounds(100, 10, 50, 30);
         duizendStep.setBounds(175, 10, 50, 30);
         setVisible(true);
-        delayEen = simulator.getTickPause() * 1 + 100;
-        delayHonderd = simulator.getTickPause() * 100 + 100;
-        delayDuizend = simulator.getTickPause() * 1000 + 100;
+        delayEen = simulator.getTickPause() * 1 + 200;
+        delayHonderd = simulator.getTickPause() * 100 + 200;
+        delayDuizend = simulator.getTickPause() * 1000 + 200;
 
 
 
@@ -59,6 +59,7 @@ public class Buttons extends JPanel implements ActionListener {
             eenStep.setEnabled(false);
             honderdStep.setEnabled(false);
             duizendStep.setEnabled(false);
+            textField.setEnabled(false);
             timer = new Timer(delayEen, new ActionListener(){
                 public void actionPerformed(ActionEvent evt) {
                     eenStep.setEnabled(true);
@@ -73,6 +74,7 @@ public class Buttons extends JPanel implements ActionListener {
             eenStep.setEnabled(false);
             honderdStep.setEnabled(false);
             duizendStep.setEnabled(false);
+            textField.setEnabled(false);
             timer = new Timer(delayHonderd, new ActionListener(){
                 public void actionPerformed(ActionEvent evt) {
                     eenStep.setEnabled(true);
@@ -88,6 +90,7 @@ public class Buttons extends JPanel implements ActionListener {
             eenStep.setEnabled(false);
             honderdStep.setEnabled(false);
             duizendStep.setEnabled(false);
+            textField.setEnabled(false);
             timer = new Timer(delayDuizend, new ActionListener(){
                 public void actionPerformed(ActionEvent evt) {
                     eenStep.setEnabled(true);
@@ -96,15 +99,28 @@ public class Buttons extends JPanel implements ActionListener {
                 }
             });
             timer.setRepeats(false);
-            timer.setRepeats(false);
             timer.start();
         }
         if(e.getSource() == textField) {
 
             String text = textField.getText();
             int ticker = Integer.parseInt(text);
-
             simulator.run(ticker);
+            eenStep.setEnabled(false);
+            honderdStep.setEnabled(false);
+            duizendStep.setEnabled(false);
+            textField.setEnabled(false);
+            int delayFree = simulator.getTickPause() * ticker + 200;
+            timer = new Timer(delayFree, new ActionListener(){
+                public void actionPerformed(ActionEvent evt) {
+                    eenStep.setEnabled(true);
+                    honderdStep.setEnabled(true);
+                    duizendStep.setEnabled(true);
+                    textField.setEnabled(false);
+                }
+            });
+            timer.setRepeats(false);
+            timer.start();
         }
     }
 
