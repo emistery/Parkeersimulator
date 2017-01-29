@@ -26,7 +26,7 @@ public class StatisticView implements AbstrView{
       panel.repaint();
 
       frame.pack();
-      frame.setVisible(true);
+     // frame.setVisible(true);
   }
   public JPanel createPanel() {
       //Create a yellow label to put in the content pane.
@@ -43,6 +43,9 @@ public class StatisticView implements AbstrView{
   }
 
   public void updateView(int tick, int adHocSpots, int passSpots, int cars){
+      if(!frame.isVisible()){
+          frame.setVisible(true);
+      }
       carLabel.setText("amount of open spots: " + cars);
       tickLabel.setText("amount of ticks: " + tick);
       adhocLabel.setText("amount of open Ad Hoc spots: " + adHocSpots);

@@ -18,12 +18,13 @@ public class SimulatorController {
         statisticView = new StatisticView();
         simulator.addView(carParkView);
         simulator.addView(simulatorView);
+        //simulator.addView(statisticView);
+    }
+
+    public void addView() {
         simulator.addView(statisticView);
     }
 
-    public void addView(AbstrView view) {
-        simulator.addView(view);
-    }
 
     public void removeView(AbstrView view){
         simulator.removeView(view);
@@ -35,5 +36,12 @@ public class SimulatorController {
 
     public int getOpenPassSpots() {
         return simulator.getOpenPassSpots();
+    }
+
+    public SimulatorView getSimulatorView(){
+        return (SimulatorView) simulatorView;
+    }
+    public StatisticView getStatisticView(){
+        return (StatisticView) statisticView;
     }
 }

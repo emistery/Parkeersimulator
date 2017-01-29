@@ -6,11 +6,13 @@ import java.awt.event.ActionListener;
 import javax.swing.Timer;
 
 public class Buttons extends JPanel implements ActionListener {
+    private SimulatorController controller;
     private Simulator simulator;
     private JButton eenStep;
     private JButton honderdStep;
     private JButton duizendStep;
     private JButton addView;
+    private JButton removeView;
     private JTextField textField;
 
     private Timer timer;
@@ -30,13 +32,19 @@ public class Buttons extends JPanel implements ActionListener {
         textField = new JTextField(5);
         textField.addActionListener(this);
         addView = new JButton("add Statistic View");
-       /* addView.addActionListener(e --> (
-                simulator.run(100)
-        ));*/
+        addView.addActionListener(e -> {
+            if(controller != null){controller.addView();}
+        });
+        removeView = new JButton("remove Statistic View");
+        removeView.addActionListener(e -> {
+            if(controller != null){controller.removeView(controller.getStatisticView());}
+        });
         add(eenStep);
         add(honderdStep);
         add(duizendStep);
         add(textField);
+        add(addView);
+        add(removeView);
 
         eenStep.setBounds(25, 10, 50, 30);
         honderdStep.setBounds(100, 10, 50, 30);
@@ -113,6 +121,9 @@ public class Buttons extends JPanel implements ActionListener {
         honderdStep.setEnabled(false);
         duizendStep.setEnabled(false);
         textField.setEnabled(false);
+    }
+    public void setController(SimulatorController contr){
+        controller = contr;
     }
 
 }

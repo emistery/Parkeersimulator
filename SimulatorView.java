@@ -41,5 +41,8 @@ public class SimulatorView extends JFrame implements AbstrView {
         tickLabel.setText("Tick: "+tick);
     }
 
+    public Buttons getButtons(){
+        return buttons;
+    }
 
 }

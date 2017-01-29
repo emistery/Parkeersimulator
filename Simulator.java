@@ -2,6 +2,7 @@ package Parkeersimulator;
 //-----MODEL-----
 //needs methods for views and controllers to subscribe to state changes
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 import java.lang.Runnable;
 
@@ -244,11 +245,12 @@ public class Simulator implements Runnable {
         updateViews();
     }
     public void removeView(AbstrView view){
-        int index = 0;
-        for(AbstrView bla : views){
+        Iterator it = views.iterator();
+        while(it.hasNext()){
+            AbstrView bla = (AbstrView) it.next();
             if(view == bla){
-                views.remove(index);
-            }else{index++;}
+                it.remove();
+            }
         }
     }
     private void updateViews(){
