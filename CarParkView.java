@@ -40,7 +40,9 @@ public class CarParkView extends JPanel implements AbstrView {
             g.drawImage(carParkImage, 0, 0, currentSize.width, currentSize.height, null);
         }
     }
-
+    public void updateView(int tick, int adHocSpots, int passSpots, int cars) {
+        updateView();
+    }
     public void updateView() {
         // Create a new car park image if the size has changed.
         if (!size.equals(getSize())) {
@@ -55,7 +57,9 @@ public class CarParkView extends JPanel implements AbstrView {
                 }
         repaint();
     }
+    public void disableView() {
 
+    }
     /**
      * Paint a place on this car park view in a given color.
      */

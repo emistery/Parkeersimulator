@@ -113,6 +113,15 @@ public class Simulator implements Runnable {
         return exitSpeed;
     }
 
+    public int getOpenAdHocSpots() {
+        return openAdHocSpots;
+    }
+
+    public int getOpenPassSpots() {
+        return openPassSpots;
+    }
+
+
     //Set methods
 
     public void setDay(int day){
@@ -232,10 +241,19 @@ public class Simulator implements Runnable {
     public void addView(AbstrView view)
     {
         views.add(view);
+        updateViews();
+    }
+    public void removeView(AbstrView view){
+        int index = 0;
+        for(AbstrView bla : views){
+            if(view == bla){
+                views.remove(index);
+            }else{index++;}
+        }
     }
     private void updateViews(){
         for(AbstrView view : views){
-            view.updateView();
+            view.updateView(tick, openAdHocSpots, openPassSpots, numberOfOpenSpots);
         }
         // Update the car park view.
 

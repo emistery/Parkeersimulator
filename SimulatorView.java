@@ -19,24 +19,27 @@ public class SimulatorView extends JFrame implements AbstrView {
         contentPane.add(tickLabel, BorderLayout.NORTH);
         contentPane.add(buttons, BorderLayout.SOUTH);
         contentPane.add(carParkView, BorderLayout.CENTER);
+
         //automatically terminates jvm when closing window
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         pack();
         setVisible(true);
 
         carParkView.updateView();
-        updateView();
+        updateView(0,0,0,0);
     }
 
-    public void updateView() {
+    public void updateView(int tick, int adHocSpots, int passSpots, int cars) {
         tickLabel.repaint();
-        tick(simulator.getTick());
+        tick(tick);
+    }
+    public void disableView(){
+        setVisible(false);
+
     }
     public void tick(int tick) {
         tickLabel.setText("Tick: "+tick);
     }
-
-
 
 
 }

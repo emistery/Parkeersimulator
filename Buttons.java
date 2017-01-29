@@ -10,6 +10,7 @@ public class Buttons extends JPanel implements ActionListener {
     private JButton eenStep;
     private JButton honderdStep;
     private JButton duizendStep;
+    private JButton addView;
     private JTextField textField;
 
     private Timer timer;
@@ -28,7 +29,10 @@ public class Buttons extends JPanel implements ActionListener {
         duizendStep.addActionListener(this);
         textField = new JTextField(5);
         textField.addActionListener(this);
-
+        addView = new JButton("add Statistic View");
+       /* addView.addActionListener(e --> (
+                simulator.run(100)
+        ));*/
         add(eenStep);
         add(honderdStep);
         add(duizendStep);
@@ -44,6 +48,7 @@ public class Buttons extends JPanel implements ActionListener {
         delayHonderd = simulator.getTickPause() * 100 + 200;
         delayDuizend = simulator.getTickPause() * 1000 + 200;
     }
+
     //public Dimension setPreferredSize() {return new Dimension(250, 250);}
 
     public void actionPerformed(ActionEvent e) {

@@ -5,28 +5,52 @@ package Parkeersimulator;
 import javax.swing.*;
 import java.awt.*;
 
-public class StatisticView {
-    private SimulatorController controller;
-
+public class StatisticView implements AbstrView{
     private JFrame frame;
-    private JTextPane textPane = new JTextPane();
 
-    private JLabel tickLabel = new JLabel("tick: 0");
+    private JLabel tickLabel = new JLabel("tick: ");
+    private JLabel carLabel = new JLabel("amount of cars : ");
+    private JLabel adhocLabel = new JLabel("free Ad Hoc Spots: ");
+    private JLabel passLabel = new JLabel("free Pass Spots: ");
 
   public StatisticView() {
-      //controller = contr;
-
       frame = new JFrame();
       Container contentPane = frame.getContentPane();
-      contentPane.setLayout(new FlowLayout());
-      contentPane.add(textPane);
-      contentPane.add(tickLabel);
+      JPanel panel = createPanel();
+      contentPane.add(panel, BorderLayout.CENTER);
+      panel.setBackground(Color.LIGHT_GRAY);
+      panel.add(carLabel);
+      panel.add(tickLabel);
+      panel.add(adhocLabel);
+      panel.add(passLabel);
+      panel.repaint();
 
       frame.pack();
       frame.setVisible(true);
   }
-    public static void main(String[] args)
-    {
-        StatisticView view = new StatisticView();
-    }
+  public JPanel createPanel() {
+      //Create a yellow label to put in the content pane.
+      JPanel panel = new JPanel();
+      FlowLayout layout = new FlowLayout(FlowLayout.LEADING);
+      panel.setLayout(layout);
+      panel.setComponentOrientation(
+              ComponentOrientation.LEFT_TO_RIGHT);
+
+      panel.setOpaque(true);
+      panel.setBackground(new Color(248, 213, 131));
+      panel.setPreferredSize(new Dimension(200, 180));
+      return panel;
+  }
+
+  public void updateView(int tick, int adHocSpots, int passSpots, int cars){
+      carLabel.setText("amount of open spots: " + cars);
+      tickLabel.setText("amount of ticks: " + tick);
+      adhocLabel.setText("amount of open Ad Hoc spots: " + adHocSpots);
+      passLabel.setText("amount of open Pass spots: " + passSpots);
+      frame.repaint();
+  }
+  public void disableView(){
+      frame.setVisible(false);
+  }
+
 }

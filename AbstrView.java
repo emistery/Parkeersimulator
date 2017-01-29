@@ -4,5 +4,6 @@
 package Parkeersimulator;
 public interface AbstrView {
 
-    void updateView();
+    void updateView(int tick, int adHocSpots, int passSpots, int cars);
+    void disableView();
 }
