@@ -2,6 +2,8 @@
  * Created by Lenovo T420 on 27-1-2017.
  */
 package Parkeersimulator.Views;
+import Parkeersimulator.Simulator;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -15,9 +17,12 @@ public class StatisticView implements AbstrView{
     private JLabel passLabel = new JLabel("free Pass Spots: ");
     private JLabel earningsLabel = new JLabel("Total earnings: ");
     public static String newline = System.getProperty("line.separator");
+    private Simulator simulator;
 
 
-  public StatisticView() {
+  public StatisticView(Simulator simulator) {
+      this.simulator = simulator;
+
       frame = new JFrame();
       //Container contentPane = frame.getContentPane();
 

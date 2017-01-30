@@ -37,7 +37,7 @@ public class Buttons extends JPanel implements ActionListener {
         textField = new JTextField(5);
         textField.addActionListener(this);
         addView = new JButton("add Statistic View");
-        AbstrView statView = new StatisticView();
+        AbstrView statView = new StatisticView(simulator);
         addView.addActionListener(e -> {
             if(controller != null){controller.addView(statView);}
         });

@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Random;
 import javax.swing.*;
 
+
 @SuppressWarnings("serial")
 public class DrawGraph extends JPanel {
     private static final int MAX_SCORE = 20;
@@ -99,10 +100,11 @@ public class DrawGraph extends JPanel {
         return new Dimension(PREF_W, PREF_H);
     }
 
+
     public static DrawGraph createAndShowGui() {
         List<Integer> scores = new ArrayList<Integer>();
-        Random random = new Random();
-        int maxDataPoints = 16;
+            Random random = new Random();
+        int maxDataPoints = 100;
         int maxScore = 20;
         for (int i = 0; i < maxDataPoints; i++) {
             scores.add(random.nextInt(maxScore));

@@ -130,6 +130,9 @@ public class Simulator implements Runnable {
         return openPassSpots;
     }
 
+    public int getTotalPlaces(){
+        return numberOfFloors*numberOfRows*numberOfPlaces;
+    }
 
     //Set methods
 

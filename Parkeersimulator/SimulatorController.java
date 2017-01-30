@@ -20,7 +20,7 @@ public class SimulatorController {
 
         carParkView = new CarParkView(simulator);
         simulatorView = new SimulatorView(simulator, (CarParkView) carParkView);
-        statisticView = new StatisticView();
+        statisticView = new StatisticView(simulator);
         simulator.addView(carParkView);
         simulator.addView(simulatorView);
         //simulator.addView(statisticView);
