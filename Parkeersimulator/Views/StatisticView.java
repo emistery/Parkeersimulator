@@ -16,16 +16,22 @@ public class StatisticView implements AbstrView{
     private JLabel earningsLabel = new JLabel("Total earnings: ");
     public static String newline = System.getProperty("line.separator");
 
+
   public StatisticView() {
       frame = new JFrame();
       //Container contentPane = frame.getContentPane();
 
       JPanel panel = createPanel();
-      JPanel chartPanel = newChartView();
+
+      DrawGraph mainPanel = DrawGraph.createAndShowGui();
+
+
       JTabbedPane tabbedPane = new JTabbedPane();
       frame.add(tabbedPane);
+
       tabbedPane.addTab("Statistics", panel);
-      tabbedPane.addTab("Chart", chartPanel);
+      tabbedPane.addTab("Chart", mainPanel);
+
       GridLayout grid = new GridLayout(0,1);
       grid.setVgap(0);
       panel.setLayout(grid);
@@ -80,13 +86,7 @@ public class StatisticView implements AbstrView{
         return panel;
     }
 
-    public ChartView newChartView(){
-      ChartView chartView = new ChartView();
-      return chartView;
 
-
-
-    }
 
 }
 
