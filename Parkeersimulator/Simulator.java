@@ -1,6 +1,8 @@
 package Parkeersimulator;
 //-----MODEL-----
 //needs methods for views and controllers to subscribe to state changes
+import Parkeersimulator.Views.AbstrView;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;

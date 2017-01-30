@@ -3,6 +3,11 @@
  */
 package Parkeersimulator;
 
+import Parkeersimulator.Views.AbstrView;
+import Parkeersimulator.Views.CarParkView;
+import Parkeersimulator.Views.SimulatorView;
+import Parkeersimulator.Views.StatisticView;
+
 public class SimulatorController {
     private Simulator simulator;
     private AbstrView carParkView;

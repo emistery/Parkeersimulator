@@ -1,7 +1,7 @@
 /**
  * Created by Lenovo T420 on 27-1-2017.
  */
-package Parkeersimulator;
+package Parkeersimulator.Views;
 import javax.swing.*;
 import java.awt.*;
 
