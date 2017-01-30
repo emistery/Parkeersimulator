@@ -23,6 +23,7 @@ public class SimulatorView extends JFrame implements AbstrView {
         //automatically terminates jvm when closing window
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         pack();
+
         setVisible(true);
 
         carParkView.updateView();

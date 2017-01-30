@@ -15,6 +15,7 @@ public class CarParkView extends JPanel implements AbstrView {
     public CarParkView(Simulator simulator) {
         size = new Dimension(0, 0);
         this.simulator = simulator;
+        setBackground(Color.GREEN);
     }
 
     /**

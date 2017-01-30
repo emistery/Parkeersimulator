@@ -30,14 +30,14 @@ public class SimulatorController {
         simulator.removeView(view);
         view.disableView();
     }
-    public int getOpenAdHocSpots() {
+  /*  public int getOpenAdHocSpots() {
         return simulator.getOpenAdHocSpots();
     }
 
     public int getOpenPassSpots() {
         return simulator.getOpenPassSpots();
     }
-
+*/
     public SimulatorView getSimulatorView(){
         return (SimulatorView) simulatorView;
     }

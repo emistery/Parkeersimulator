@@ -1,6 +1,7 @@
 package Parkeersimulator;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
@@ -50,6 +51,7 @@ public class Buttons extends JPanel implements ActionListener {
         honderdStep.setBounds(100, 10, 50, 30);
         duizendStep.setBounds(175, 10, 50, 30);
 
+        setBackground(Color.black);
         setVisible(true);
 
         delayEen = simulator.getTickPause() * 1 + 200;
