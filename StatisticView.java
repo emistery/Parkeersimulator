@@ -52,7 +52,7 @@ public class StatisticView implements AbstrView{
       tickLabel.setText("amount of ticks: " + tick);
       adhocLabel.setText("amount of open Ad Hoc spots: " + adHocSpots);
       passLabel.setText("amount of open Pass spots: " + passSpots);
-      earningsLabel.setText("Total earnings :" + earnings);
+      earningsLabel.setText("Total earnings : € " + earnings);
       frame.repaint();
   }
   public void disableView(){
