@@ -14,15 +14,21 @@ public class StatisticView implements AbstrView{
     private JLabel adhocLabel = new JLabel("free Ad Hoc Spots: ");
     private JLabel passLabel = new JLabel("free Pass Spots: ");
     private JLabel earningsLabel = new JLabel("Total earnings: ");
+    public static String newline = System.getProperty("line.separator");
 
   public StatisticView() {
       frame = new JFrame();
       //Container contentPane = frame.getContentPane();
 
       JPanel panel = createPanel();
+      JPanel chartPanel = newChartView();
       JTabbedPane tabbedPane = new JTabbedPane();
       frame.add(tabbedPane);
-      tabbedPane.addTab("Panel", panel);
+      tabbedPane.addTab("Statistics", panel);
+      tabbedPane.addTab("Chart", chartPanel);
+      GridLayout grid = new GridLayout(0,1);
+      grid.setVgap(0);
+      panel.setLayout(grid);
       panel.setBackground(Color.LIGHT_GRAY);
       panel.add(carLabel);
       panel.add(tickLabel);
@@ -45,7 +51,7 @@ public class StatisticView implements AbstrView{
 
       panel.setOpaque(true);
       panel.setBackground(new Color(248, 213, 131));
-      panel.setPreferredSize(new Dimension(200, 180));
+      panel.setPreferredSize(new Dimension(400, 360));
       return panel;
   }
 
@@ -53,7 +59,7 @@ public class StatisticView implements AbstrView{
       if(!frame.isVisible()){
           frame.setVisible(true);
       }
-      carLabel.setText("amount of open spots: " + cars);
+      carLabel.setText("amount of open spots: " + cars + newline);
       tickLabel.setText("amount of ticks: " + tick);
       adhocLabel.setText("amount of open Ad Hoc spots: " + adHocSpots);
       passLabel.setText("amount of open Pass spots: " + passSpots);
@@ -72,6 +78,14 @@ public class StatisticView implements AbstrView{
         panel.setLayout(new GridLayout(1, 1));
         panel.add(filler);
         return panel;
+    }
+
+    public ChartView newChartView(){
+      ChartView chartView = new ChartView();
+      return chartView;
+
+
+
     }
 
 }
