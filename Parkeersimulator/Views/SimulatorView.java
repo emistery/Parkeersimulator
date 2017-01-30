@@ -1,6 +1,5 @@
 package Parkeersimulator.Views;
 
-import Parkeersimulator.Buttons;
 import Parkeersimulator.Simulator;
 
 import javax.swing.*;
