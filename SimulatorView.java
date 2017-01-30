@@ -26,10 +26,10 @@ public class SimulatorView extends JFrame implements AbstrView {
         setVisible(true);
 
         carParkView.updateView();
-        updateView(0,0,0,0);
+        updateView(0,0,0,0,0.0);
     }
 
-    public void updateView(int tick, int adHocSpots, int passSpots, int cars) {
+    public void updateView(int tick, int adHocSpots, int passSpots, int cars, double earnings) {
         tickLabel.repaint();
         tick(tick);
     }

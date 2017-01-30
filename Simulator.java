@@ -45,6 +45,9 @@ public class Simulator implements Runnable {
     private ArrayList<Location> locations = new ArrayList<Location>();
     private ArrayList<AbstrView> views = new ArrayList<AbstrView>();
 
+    private double earnings;
+    private double price = 0.03;
+
     public Simulator(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
         entranceCarQueue = new CarQueue();
         entrancePassQueue = new CarQueue();
@@ -255,7 +258,7 @@ public class Simulator implements Runnable {
     }
     private void updateViews(){
         for(AbstrView view : views){
-            view.updateView(tick, openAdHocSpots, openPassSpots, numberOfOpenSpots);
+            view.updateView(tick, openAdHocSpots, openPassSpots, numberOfOpenSpots, earnings);
         }
         // Update the car park view.
 
@@ -351,7 +354,7 @@ public class Simulator implements Runnable {
     	int i=0;
     	while (paymentCarQueue.carsInQueue()>0 && i < paymentSpeed){
             Car car = paymentCarQueue.removeCar();
-            // TODO Handle payment.
+            handlePayment(car);
             carLeavesSpot(car);
             i++;
 
@@ -504,6 +507,17 @@ public class Simulator implements Runnable {
         int row = location.getRow();
         int place = location.getPlace();
         return !(floor < 0 || floor >= numberOfFloors || row < 0 || row > numberOfRows || place < 0 || place > numberOfPlaces);
+    }
+
+    private void handlePayment(Car car){
+        int totalMinutes = car.getTotalMinutes();
+        double profit = totalMinutes * price;
+        earnings += profit;
+
+    }
+
+    public double getEarnings(){
+        return earnings;
     }
 
 

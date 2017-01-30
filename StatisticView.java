@@ -12,6 +12,7 @@ public class StatisticView implements AbstrView{
     private JLabel carLabel = new JLabel("amount of cars : ");
     private JLabel adhocLabel = new JLabel("free Ad Hoc Spots: ");
     private JLabel passLabel = new JLabel("free Pass Spots: ");
+    private JLabel earningsLabel = new JLabel("Total earnings: ");
 
   public StatisticView() {
       frame = new JFrame();
@@ -23,6 +24,7 @@ public class StatisticView implements AbstrView{
       panel.add(tickLabel);
       panel.add(adhocLabel);
       panel.add(passLabel);
+      panel.add(earningsLabel);
       panel.repaint();
 
       frame.pack();
@@ -42,7 +44,7 @@ public class StatisticView implements AbstrView{
       return panel;
   }
 
-  public void updateView(int tick, int adHocSpots, int passSpots, int cars){
+  public void updateView(int tick, int adHocSpots, int passSpots, int cars, double earnings){
       if(!frame.isVisible()){
           frame.setVisible(true);
       }
@@ -50,6 +52,7 @@ public class StatisticView implements AbstrView{
       tickLabel.setText("amount of ticks: " + tick);
       adhocLabel.setText("amount of open Ad Hoc spots: " + adHocSpots);
       passLabel.setText("amount of open Pass spots: " + passSpots);
+      earningsLabel.setText("Total earnings :" + earnings);
       frame.repaint();
   }
   public void disableView(){

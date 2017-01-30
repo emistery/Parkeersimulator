@@ -40,7 +40,7 @@ public class CarParkView extends JPanel implements AbstrView {
             g.drawImage(carParkImage, 0, 0, currentSize.width, currentSize.height, null);
         }
     }
-    public void updateView(int tick, int adHocSpots, int passSpots, int cars) {
+    public void updateView(int tick, int adHocSpots, int passSpots, int cars, double earnings) {
         updateView();
     }
     public void updateView() {

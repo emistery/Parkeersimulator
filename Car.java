@@ -8,6 +8,7 @@ public abstract class Car {
     private int minutesLeft;
     private boolean isPaying;
     private boolean hasToPay;
+    private int totalMinutes;
 
     /**
      * Constructor for objects of class Car
@@ -30,10 +31,15 @@ public abstract class Car {
 
     public void setMinutesLeft(int minutesLeft) {
         this.minutesLeft = minutesLeft;
+        totalMinutes = minutesLeft;
     }
     
     public boolean getIsPaying() {
         return isPaying;
+    }
+
+    public int getTotalMinutes(){
+        return totalMinutes;
     }
 
     public void setIsPaying(boolean isPaying) {
@@ -51,6 +57,6 @@ public abstract class Car {
     public void tick() {
         minutesLeft--;
     }
-    
+
     public abstract Color getColor();
 }
