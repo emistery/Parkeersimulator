@@ -513,11 +513,21 @@ public class Simulator implements Runnable {
         int totalMinutes = car.getTotalMinutes();
         double profit = totalMinutes * price;
         earnings += profit;
+        earnings = round(earnings, 2);
 
     }
 
     public double getEarnings(){
         return earnings;
+    }
+
+    public static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        long factor = (long) Math.pow(10, places);
+        value = value * factor;
+        long tmp = Math.round(value);
+        return (double) tmp / factor;
     }
 
 
