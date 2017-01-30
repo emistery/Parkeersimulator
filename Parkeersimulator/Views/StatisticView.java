@@ -4,10 +4,11 @@
 package Parkeersimulator.Views;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 
 public class StatisticView implements AbstrView{
     private JFrame frame;
-
+    private JTabbedPane tabbedPane;
     private JLabel tickLabel = new JLabel("tick: ");
     private JLabel carLabel = new JLabel("amount of cars : ");
     private JLabel adhocLabel = new JLabel("free Ad Hoc Spots: ");
@@ -16,9 +17,12 @@ public class StatisticView implements AbstrView{
 
   public StatisticView() {
       frame = new JFrame();
-      Container contentPane = frame.getContentPane();
+      //Container contentPane = frame.getContentPane();
+
       JPanel panel = createPanel();
-      contentPane.add(panel, BorderLayout.CENTER);
+      JTabbedPane tabbedPane = new JTabbedPane();
+      frame.add(tabbedPane);
+      tabbedPane.addTab("Panel", panel);
       panel.setBackground(Color.LIGHT_GRAY);
       panel.add(carLabel);
       panel.add(tickLabel);
@@ -33,6 +37,7 @@ public class StatisticView implements AbstrView{
   public JPanel createPanel() {
       //Create a yellow label to put in the content pane.
       JPanel panel = new JPanel();
+
       FlowLayout layout = new FlowLayout(FlowLayout.LEADING);
       panel.setLayout(layout);
       panel.setComponentOrientation(
@@ -59,4 +64,16 @@ public class StatisticView implements AbstrView{
       frame.setVisible(false);
   }
 
+
+    protected Component makeTextPanel(String text) {
+        JPanel panel = new JPanel(false);
+        JLabel filler = new JLabel(text);
+        filler.setHorizontalAlignment(JLabel.CENTER);
+        panel.setLayout(new GridLayout(1, 1));
+        panel.add(filler);
+        return panel;
+    }
+
 }
+
+

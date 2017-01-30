@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.Timer;
 
 public class Buttons extends JPanel implements ActionListener {
+    private StatisticView statView;
     private SimulatorController controller;
     private Simulator simulator;
     private JButton eenStep;
@@ -36,8 +37,9 @@ public class Buttons extends JPanel implements ActionListener {
         textField = new JTextField(5);
         textField.addActionListener(this);
         addView = new JButton("add Statistic View");
+        AbstrView statView = new StatisticView();
         addView.addActionListener(e -> {
-            if(controller != null){controller.addView();}
+            if(controller != null){controller.addView(statView);}
         });
         removeView = new JButton("remove Statistic View");
         removeView.addActionListener(e -> {
@@ -73,6 +75,7 @@ public class Buttons extends JPanel implements ActionListener {
                     enableButtons();
                 }
             });
+            timer.setRepeats(false);
             timer.start();
         }
         if(e.getSource() == honderdStep){

@@ -30,6 +30,10 @@ public class SimulatorController {
         simulator.addView(statisticView);
     }
 
+    public void addView(AbstrView view){
+        simulator.addView(view);
+    }
+
 
     public void removeView(AbstrView view){
         simulator.removeView(view);
