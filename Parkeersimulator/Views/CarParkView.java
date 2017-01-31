@@ -65,6 +65,9 @@ public class CarParkView extends JPanel implements AbstrView {
     public void disableView() {
 
     }
+    public void enableView(){
+
+    }
     /**
      * Paint a place on this car park view in a given color.
      */

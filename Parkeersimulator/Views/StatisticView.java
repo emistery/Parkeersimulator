@@ -72,9 +72,6 @@ public class StatisticView implements AbstrView{
   }
 
   public void updateView(int tick, int adHocSpots, int passSpots, int cars, double earnings){
-      if(!frame.isVisible()){
-          frame.setVisible(true);
-      }
       carLabel.setText("amount of open spots: " + cars + newline);
       tickLabel.setText("amount of ticks: " + tick);
       adhocLabel.setText("amount of open Ad Hoc spots: " + adHocSpots);
@@ -92,6 +89,9 @@ public class StatisticView implements AbstrView{
   }
   public void disableView(){
       frame.setVisible(false);
+  }
+  public void enableView(){
+      frame.setVisible(true);
   }
 
 

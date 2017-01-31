@@ -42,7 +42,9 @@ public class SimulatorView extends JFrame implements AbstrView {
     }
     public void disableView(){
         setVisible(false);
-
+    }
+    public void enableView(){
+        setVisible(true);
     }
     public void tick(int tick) {
         tickLabel.setText("Tick: "+tick);

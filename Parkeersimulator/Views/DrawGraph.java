@@ -144,4 +144,7 @@ public class DrawGraph extends JPanel implements AbstrView {
     public void disableView(){
 
     }
+    public void enableView(){
+
+    }
 }

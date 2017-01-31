@@ -34,6 +34,7 @@ public class SimulatorController {
 
     public void addView(AbstrView view){
         simulator.addView(view);
+        view.enableView();
     }
 
     public void removeView(AbstrView view){

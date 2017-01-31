@@ -45,7 +45,7 @@ public class Buttons extends JPanel implements ActionListener {
         });
         removeView = new JButton("remove Statistic View");
         removeView.addActionListener(e -> {
-            if(controller != null){controller.removeView(controller.getStatisticView());}
+            if(controller != null){controller.removeView(statView);}
         });
         add(eenStep);
         add(honderdStep);
