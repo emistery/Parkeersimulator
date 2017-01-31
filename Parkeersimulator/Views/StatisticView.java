@@ -18,6 +18,8 @@ public class StatisticView implements AbstrView{
     private JLabel adhocLabel = new JLabel("free Ad Hoc Spots: ");
     private JLabel passLabel = new JLabel("free Pass Spots: ");
     private JLabel earningsLabel = new JLabel("Total earnings: ");
+    private JLabel missedEarningsLabel = new JLabel("Missed earnings: ");
+    private JLabel missedCarsLabel = new JLabel("Missed Cars: ");
     public static String newline = System.getProperty("line.separator");
     private Simulator simulator;
     private DrawGraph mainPanel;
@@ -51,6 +53,9 @@ public class StatisticView implements AbstrView{
       panel.add(adhocLabel);
       panel.add(passLabel);
       panel.add(earningsLabel);
+      panel.add(missedEarningsLabel);
+      panel.add(missedCarsLabel);
+
       panel.repaint();
 
       frame.pack();
@@ -71,12 +76,14 @@ public class StatisticView implements AbstrView{
       return panel;
   }
 
-  public void updateView(int tick, int adHocSpots, int passSpots, int cars, double earnings){
+  public void updateView(int tick, int adHocSpots, int passSpots, int cars, double earnings, double missedEarnings, int missedCars){
       carLabel.setText("amount of open spots: " + cars + newline);
       tickLabel.setText("amount of ticks: " + tick);
       adhocLabel.setText("amount of open Ad Hoc spots: " + adHocSpots);
       passLabel.setText("amount of open Pass spots: " + passSpots);
       earningsLabel.setText("Total earnings : € " + earnings);
+      missedEarningsLabel.setText("Missed earnings : € " + simulator.calculateMissedEarnings());
+      missedCarsLabel.setText("Missed cars: " + missedCars);
       if(scores.size()>100){
           scores.remove(0);
       }if((tick%25)==0) {
