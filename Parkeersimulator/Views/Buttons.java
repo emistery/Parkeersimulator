@@ -123,7 +123,9 @@ public class Buttons extends JPanel implements ActionListener {
         }
         if(e.getSource() == tickPause) {
             int time = Integer.parseInt(tickPause.getText());
-            simulator.setTickPause(time);
+            if(time>0) {
+                simulator.setTickPause(time);
+            }
         }
     }
 
