@@ -22,9 +22,6 @@ public class Buttons extends JPanel implements ActionListener {
     private JTextField tickPause;
 
     private Timer timer;
-    private final int delayEen;
-    private final int delayHonderd;
-    private final int delayDuizend;
 
     public Buttons(Simulator simulator) {
         this.simulator = simulator;
@@ -64,10 +61,6 @@ public class Buttons extends JPanel implements ActionListener {
 
         setBackground(Color.black);
         setVisible(true);
-
-        delayEen = simulator.getTickPause() * 1 + 200;
-        delayHonderd = simulator.getTickPause() * 100 + 200;
-        delayDuizend = simulator.getTickPause() * 1000 + 200;
     }
     public JTextField getTickPause(){
         return tickPause;
@@ -78,7 +71,7 @@ public class Buttons extends JPanel implements ActionListener {
         if(e.getSource() == eenStep){
             simulator.run(1);
             disableButtons();
-            timer = new Timer(delayEen, new ActionListener(){
+            timer = new Timer( simulator.getTickPause() * 1 + 200, new ActionListener(){
                 public void actionPerformed(ActionEvent evt) {
                     enableButtons();
                 }
@@ -89,7 +82,7 @@ public class Buttons extends JPanel implements ActionListener {
         if(e.getSource() == honderdStep){
             simulator.run(100);
             disableButtons();
-            timer = new Timer(delayHonderd, new ActionListener(){
+            timer = new Timer(simulator.getTickPause() * 100 + 200, new ActionListener(){
                 public void actionPerformed(ActionEvent evt) {
                     enableButtons();
                 }
@@ -100,7 +93,7 @@ public class Buttons extends JPanel implements ActionListener {
         if(e.getSource() == duizendStep){
             simulator.run(1000);
             disableButtons();
-            timer = new Timer(delayDuizend, new ActionListener(){
+            timer = new Timer(simulator.getTickPause() * 1000 + 200, new ActionListener(){
                 public void actionPerformed(ActionEvent evt) {
                     enableButtons();
                 }

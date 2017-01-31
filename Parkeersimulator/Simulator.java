@@ -29,12 +29,12 @@ public class Simulator implements Runnable {
     private int tickPause = 10;
     private int tick = 0;
 
-    private int weekDayArrivals= 500; // average number of arriving cars per hour
+    private int weekDayArrivals= 100; // average number of arriving cars per hour
     private int weekendArrivals = 200; // average number of arriving cars per hour
     private int weekDayPassArrivals= 50; // average number of arriving cars per hour
     private int weekendPassArrivals = 5; // average number of arriving cars per hour
 
-    private int enterSpeed = 5; // number of cars that can enter per minute
+    private int enterSpeed = 3; // number of cars that can enter per minute
     private int paymentSpeed = 7; // number of cars that can pay per minute
     private int exitSpeed = 5; // number of cars that can leave per minute
 
@@ -402,8 +402,6 @@ public class Simulator implements Runnable {
     	case AD_HOC:
     	    if(entranceCarQueue.carsInQueue() >= entranceCarQueue.getSize()) {
                     missedCars.add(new AdHocCar());
-                    System.out.println(missedCars.size());
-                    System.out.println("DE FUCKING QUEUE ZIT VOL GODVERDOMME");
             } else {
                 for (int i = 0; i < numberOfCars; i++) {
                     entranceCarQueue.addCar(new AdHocCar());
@@ -526,7 +524,6 @@ public class Simulator implements Runnable {
         return !(floor < 0 || floor >= numberOfFloors || row < 0 || row > numberOfRows || place < 0 || place > numberOfPlaces);
     }
 
-
     private void handlePayment(Car car){
         int totalMinutes = car.getTotalMinutes();
         double profit = totalMinutes * price;
@@ -557,7 +554,7 @@ public class Simulator implements Runnable {
         missedEarnings = round(missedEarnings, 2);
         System.out.println(missedEarnings);
     }
-    
+
     public void calculateMissedEarnings(){
         for(Car car : missedCars){
             missedEarnings(car);

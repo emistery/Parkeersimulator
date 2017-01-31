@@ -21,7 +21,7 @@ import javax.swing.*;
 
 @SuppressWarnings("serial")
 public class DrawGraph extends JPanel implements AbstrView {
-    private static final int MAX_SCORE = 20;
+    private static final int MAX_SCORE = 560;
     private static final int PREF_W = 800;
     private static final int PREF_H = 650;
     private static final int BORDER_GAP = 30;
@@ -33,15 +33,9 @@ public class DrawGraph extends JPanel implements AbstrView {
     private List<Integer> scores;
     private Simulator simulator;
 
-    private int maxDataPoints = 100;
-    private int maxScore;
 
-
-
-    public DrawGraph(Simulator simulator) {
-        scores = new ArrayList<Integer>();
-        this.simulator = simulator;
-        maxScore = simulator.getTotalPlaces();
+    public DrawGraph(ArrayList<Integer> scores) {
+        this.scores = scores;
     }
 
     @Override
@@ -111,14 +105,29 @@ public class DrawGraph extends JPanel implements AbstrView {
     }
 
 
-    public DrawGraph createAndShowGui() {
-
+    public DrawGraph createAndShowGui(ArrayList<Integer> bla) {
+        /*
+        this.simulator = simulator;
         //    Random random = new Random();
+        int maxDataPoints = 100;
+        int maxScore = simulator.getNumberOfPlaces();
 
+        for (int i = 0; i < maxDataPoints; i++) {
+            if(i >= maxDataPoints){
+                clearGraph();
+            }
+            int filledSpots = simulator.getNumberOfPlaces() - simulator.getNumberOfOpenSpots();
+            scores.add(filledSpots);
+            */
 
+       /* Random random = new Random();
+        int maxDataPoints = 16;
+        int maxScore = 20;
+        for (int i = 0; i < maxDataPoints ; i++) {
+            scores.add(random.nextInt(maxScore));
+        }*/
 
-
-        DrawGraph mainPanel = new DrawGraph(simulator);
+        DrawGraph mainPanel = new DrawGraph(bla);
         return mainPanel;
     }
 
@@ -134,16 +143,5 @@ public class DrawGraph extends JPanel implements AbstrView {
 
     public void disableView(){
 
-    }
-
-    public void addData(){
-
-        for (int i = 0; i < maxDataPoints; i++) {
-            if(i >= maxDataPoints){
-                clearGraph();
-            }
-            int filledSpots = simulator.getNumberOfPlaces() - simulator.getNumberOfOpenSpots();
-            scores.add(filledSpots);
-        }
     }
 }
