@@ -36,12 +36,13 @@ public class StatisticView implements AbstrView {
 
     public static String newline = System.getProperty("line.separator");
     private Simulator simulator;
-    private DrawGraph2 mainPanel;
+    private DrawGraph mainPanel;
     private ArrayList<ChartPanel> chartPanel;
 
     private ArrayList<Integer> adHocs;
     private ArrayList<Integer> pPass;
-
+    private static final int GRAPH_POINTS = 25;
+    private static final int GRAPH_UPDATE_FREQUENCY = 60;
     private double[][] values;
     private String[] names;
 
@@ -63,7 +64,7 @@ public class StatisticView implements AbstrView {
 
 
       JPanel panel = createPanel();
-      mainPanel = new DrawGraph2(adHocs, pPass);
+      mainPanel = new DrawGraph(adHocs, pPass);
       mainPanel.createAndShowGui(adHocs, pPass);
       //for the bar chart
       values = new double[][]{{0,0,0,0,0,0,0}, {0,0,0,0,0,0,0}, {0,0,0,0,0,0,0}, {0,0,0,0,0,0,0}, {0,0,0,0,0,0,0}};
@@ -189,11 +190,11 @@ public class StatisticView implements AbstrView {
       saturdayLabel.get(index).setText("€" + round(values[index][5],2));
       sundayLabel.get(index).setText("€" + round(values[index][6],2));
 
-      while(adHocs.size()>=100){
+      while(adHocs.size()>=GRAPH_POINTS){
           adHocs.remove(0);
           pPass.remove(0);
       }
-      if((tick%10)==0 ||adHocs.size()==0) {
+      if((tick%GRAPH_UPDATE_FREQUENCY)==0 ||adHocs.size()==0) {
           adHocs.add(controller.getAdHocCars());
           pPass.add(simulator.getPassCars());
       }

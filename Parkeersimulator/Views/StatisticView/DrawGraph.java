@@ -22,7 +22,7 @@ import javax.swing.*;
 @SuppressWarnings("serial")
 public class DrawGraph extends JPanel implements AbstrView {
     //hoogte van grafiek
-    private static final int MAX_SCORE = 560;
+    private static final int MAX_SCORE = 400;
     //grootte van het veld
     private static final int PREF_W = 800;
     private static final int PREF_H = 650;
