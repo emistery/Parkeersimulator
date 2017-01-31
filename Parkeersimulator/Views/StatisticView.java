@@ -106,8 +106,6 @@ public class StatisticView implements AbstrView{
       chartMainPanel.add(textPanel);
       chartMainPanel.add(chartPanel);
 
-
-
       JTabbedPane tabbedPane = new JTabbedPane();
       frame.add(tabbedPane);
 
