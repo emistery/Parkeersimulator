@@ -3,6 +3,7 @@
  */
 package Parkeersimulator.Views;
 import Parkeersimulator.Simulator;
+import Parkeersimulator.SimulatorController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,6 +13,7 @@ import java.awt.event.KeyEvent;
 
 public class StatisticView implements AbstrView{
     private JFrame frame;
+    private SimulatorController controller;
     private JTabbedPane tabbedPane;
     private JLabel tickLabel = new JLabel("tick: ");
     private JLabel carLabel = new JLabel("amount of cars : ");
@@ -98,6 +100,9 @@ public class StatisticView implements AbstrView{
       frame.setVisible(false);
   }
   public void enableView(){
+      Point point = controller.getSimulatorView().getLocation();
+      point.x = controller.getSimulatorView().getWidth();
+      frame.setLocation(point);
       frame.setVisible(true);
   }
 
@@ -110,7 +115,9 @@ public class StatisticView implements AbstrView{
         panel.add(filler);
         return panel;
     }
-
+    public void setController(SimulatorController contr){
+      controller = contr;
+    }
 
 
 }
