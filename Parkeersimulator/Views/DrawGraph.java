@@ -129,7 +129,7 @@ public class DrawGraph extends JPanel implements AbstrView {
     }
 
     public void updateView(int tick, int adHocSpots, int passSpots, int cars, double earnings){
-    paintComponent();
+    
 
 
     }
