@@ -3,6 +3,8 @@ package Parkeersimulator.Views;
 /**
  * Created by Emiel on 30-1-2017.
  */
+import Parkeersimulator.Simulator;
+
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -18,7 +20,7 @@ import javax.swing.*;
 
 
 @SuppressWarnings("serial")
-public class DrawGraph extends JPanel {
+public class DrawGraph extends JPanel implements AbstrView {
     private static final int MAX_SCORE = 20;
     private static final int PREF_W = 800;
     private static final int PREF_H = 650;
@@ -29,6 +31,7 @@ public class DrawGraph extends JPanel {
     private static final int GRAPH_POINT_WIDTH = 12;
     private static final int Y_HATCH_CNT = 10;
     private List<Integer> scores;
+    private Simulator simulator;
 
     public DrawGraph(List<Integer> scores) {
         this.scores = scores;
@@ -101,17 +104,37 @@ public class DrawGraph extends JPanel {
     }
 
 
-    public static DrawGraph createAndShowGui() {
-        List<Integer> scores = new ArrayList<Integer>();
-            Random random = new Random();
+    public DrawGraph createAndShowGui(Simulator simulator) {
+        this.simulator = simulator;
+        //    Random random = new Random();
         int maxDataPoints = 100;
-        int maxScore = 20;
+        int maxScore = simulator.getNumberOfPlaces();
+
         for (int i = 0; i < maxDataPoints; i++) {
-            scores.add(random.nextInt(maxScore));
+            if(i >= maxDataPoints){
+                clearGraph();
+            }
+            int filledSpots = simulator.getNumberOfPlaces() - simulator.getNumberOfOpenSpots();
+            scores.add(filledSpots);
         }
+
         DrawGraph mainPanel = new DrawGraph(scores);
         return mainPanel;
 
+
+    }
+
+    private void clearGraph(){
+        scores.clear();
+    }
+
+    public void updateView(int tick, int adHocSpots, int passSpots, int cars, double earnings){
+    paintComponent();
+
+
+    }
+
+    public void disableView(){
 
     }
 }

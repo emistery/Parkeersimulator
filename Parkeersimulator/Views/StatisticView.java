@@ -7,6 +7,7 @@ import Parkeersimulator.Simulator;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.*;
 
 public class StatisticView implements AbstrView{
     private JFrame frame;
@@ -27,8 +28,9 @@ public class StatisticView implements AbstrView{
       //Container contentPane = frame.getContentPane();
 
       JPanel panel = createPanel();
-
-      DrawGraph mainPanel = DrawGraph.createAndShowGui();
+      java.util.List<Integer> scores = new ArrayList<Integer>();
+      DrawGraph mainPanel = new DrawGraph(scores);
+      mainPanel.createAndShowGui(simulator);
 
 
       JTabbedPane tabbedPane = new JTabbedPane();
