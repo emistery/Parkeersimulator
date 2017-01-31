@@ -13,12 +13,14 @@ public class SimulatorController {
     private AbstrView carParkView;
     private AbstrView simulatorView;
     private AbstrView statisticView;
+    private AbstrView DrawGraph;
 
     public SimulatorController()
     {
         simulator = new Simulator(3, 6, 30);
 
         carParkView = new CarParkView(simulator);
+
         simulatorView = new SimulatorView(simulator, (CarParkView) carParkView);
         statisticView = new StatisticView(simulator);
         simulator.addView(carParkView);

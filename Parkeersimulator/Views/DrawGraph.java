@@ -33,8 +33,11 @@ public class DrawGraph extends JPanel implements AbstrView {
     private List<Integer> scores;
     private Simulator simulator;
 
-    public DrawGraph(List<Integer> scores) {
-        this.scores = scores;
+
+
+    public DrawGraph() {
+        scores = new ArrayList<Integer>();
+
     }
 
     @Override
@@ -107,18 +110,11 @@ public class DrawGraph extends JPanel implements AbstrView {
     public DrawGraph createAndShowGui(Simulator simulator) {
         this.simulator = simulator;
         //    Random random = new Random();
-        int maxDataPoints = 100;
-        int maxScore = simulator.getNumberOfPlaces();
 
-        for (int i = 0; i < maxDataPoints; i++) {
-            if(i >= maxDataPoints){
-                clearGraph();
-            }
-            int filledSpots = simulator.getNumberOfPlaces() - simulator.getNumberOfOpenSpots();
-            scores.add(filledSpots);
-        }
 
-        DrawGraph mainPanel = new DrawGraph(scores);
+
+
+        DrawGraph mainPanel = new DrawGraph();
         return mainPanel;
     }
 
@@ -127,12 +123,24 @@ public class DrawGraph extends JPanel implements AbstrView {
     }
 
     public void updateView(int tick, int adHocSpots, int passSpots, int cars, double earnings){
-    
+
 
 
     }
 
     public void disableView(){
 
+    }
+
+    public void addData(){
+        int maxDataPoints = 100;
+        int maxScore = simulator.getTotalPlaces();
+        for (int i = 0; i < maxDataPoints; i++) {
+            if(i >= maxDataPoints){
+                clearGraph();
+            }
+            int filledSpots = simulator.getNumberOfPlaces() - simulator.getNumberOfOpenSpots();
+            scores.add(filledSpots);
+        }
     }
 }

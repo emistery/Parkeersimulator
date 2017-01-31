@@ -19,6 +19,7 @@ public class StatisticView implements AbstrView{
     private JLabel earningsLabel = new JLabel("Total earnings: ");
     public static String newline = System.getProperty("line.separator");
     private Simulator simulator;
+    private DrawGraph mainPanel;
 
 
   public StatisticView(Simulator simulator) {
@@ -28,8 +29,8 @@ public class StatisticView implements AbstrView{
       //Container contentPane = frame.getContentPane();
 
       JPanel panel = createPanel();
-      java.util.List<Integer> scores = new ArrayList<Integer>();
-      DrawGraph mainPanel = new DrawGraph(scores);
+      //java.util.List<Integer> scores = new ArrayList<Integer>();
+      mainPanel = new DrawGraph();
       mainPanel.createAndShowGui(simulator);
 
 
@@ -77,6 +78,8 @@ public class StatisticView implements AbstrView{
       adhocLabel.setText("amount of open Ad Hoc spots: " + adHocSpots);
       passLabel.setText("amount of open Pass spots: " + passSpots);
       earningsLabel.setText("Total earnings : € " + earnings);
+      mainPanel.addData();
+      mainPanel.repaint();
       frame.repaint();
   }
   public void disableView(){
