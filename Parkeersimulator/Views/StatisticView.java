@@ -30,8 +30,8 @@ public class StatisticView implements AbstrView{
 
       JPanel panel = createPanel();
       //java.util.List<Integer> scores = new ArrayList<Integer>();
-      mainPanel = new DrawGraph();
-      mainPanel.createAndShowGui(simulator);
+      mainPanel = new DrawGraph(simulator);
+      mainPanel.createAndShowGui();
 
 
       JTabbedPane tabbedPane = new JTabbedPane();
