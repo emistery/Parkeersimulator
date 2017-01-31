@@ -34,7 +34,7 @@ public class StatisticView implements AbstrView{
 
     public static String newline = System.getProperty("line.separator");
     private Simulator simulator;
-    private DrawGraph mainPanel;
+    private DrawGraph2 mainPanel;
     private ChartPanel chartPanel;
 
     private ArrayList<Integer> adHocs;
@@ -61,7 +61,7 @@ public class StatisticView implements AbstrView{
 
 
       JPanel panel = createPanel();
-      mainPanel = new DrawGraph(adHocs, pPass);
+      mainPanel = new DrawGraph2(adHocs, pPass);
       mainPanel.createAndShowGui(adHocs, pPass);
       //for the bar chart
       values = new double[7];
@@ -170,7 +170,7 @@ public class StatisticView implements AbstrView{
           adHocs.remove(0);
           pPass.remove(0);
       }
-      if((tick%60)==0) {
+      if((tick%10)==0 ||adHocs.size()==0) {
           adHocs.add(controller.getAdHocCars());
           pPass.add(simulator.getPassCars());
       }

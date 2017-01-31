@@ -1,8 +1,5 @@
 package Parkeersimulator.Views;
 
-/**
- * Created by Emiel on 30-1-2017.
- */
 import Parkeersimulator.Simulator;
 
 import java.awt.BasicStroke;
@@ -20,33 +17,33 @@ import javax.swing.*;
 
 
 @SuppressWarnings("serial")
-public class DrawGraph extends JPanel implements AbstrView {
+public class DrawGraph2 extends JPanel implements AbstrView {
     //hoogte van grafiek
-    private static final int MAX_SCORE = 560;
+    private static final int MAX_SCORE = 280;
     //grootte van het veld
     private static final int PREF_W = 800;
-    private static final int PREF_H = 650;
+    private static final int PREF_H = 450;
     //border gap
     private static final int BORDER_GAP = 30;
     //kleuren voor de graphs en points
     private static final Color ADHOC_GRAPH_COLOR = Color.red;
     private static final Color PASS_GRAPH_COLOR = Color.BLUE;
-    private static final Color GRAPH_POINT_COLOR = Color.black;
+    private static final Color GRAPH_POINT_COLOR = Color.white;
     //de graphs
     private static final Stroke ADHOC_GRAPH_STROKE = new BasicStroke(3f);
     private static final Stroke PASS_GRAPH_STROKE = new BasicStroke(3f);
     //breedte van de points
-    private static final int GRAPH_POINT_WIDTH = 6;
+    private static final int GRAPH_POINT_WIDTH = 12;
     //NOT SURE hoogte van de balkjes op de y-as
     private static final int Y_HATCH_CNT = 10;
     //interval tussen de points
-    private int pointInterval = 1;
+    private int pointInterval = 6;
     private List<Integer> adHocCars;
     private List<Integer> passCars;
     private Simulator simulator;
 
 
-    public DrawGraph(ArrayList<Integer> scores, ArrayList<Integer> passList) {
+    public DrawGraph2(ArrayList<Integer> scores, ArrayList<Integer> passList) {
         adHocCars = scores;
         passCars = passList;
     }
@@ -58,7 +55,7 @@ public class DrawGraph extends JPanel implements AbstrView {
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         int bug =1;
         if(adHocCars.size()==0){
-             bug = 0;
+            bug = 0;
         }
         double xScale = ((double) getWidth() - 2 * BORDER_GAP) / (adHocCars.size() - bug);
         double yScale = ((double) getHeight() - 2 * BORDER_GAP) / (MAX_SCORE - bug);
@@ -131,6 +128,7 @@ public class DrawGraph extends JPanel implements AbstrView {
             int y1 = graphPoints.get(i).y;
             int x2 = graphPoints.get(i + 1).x;
             int y2 = graphPoints.get(i + 1).y;
+
             g2.drawLine(x1, y1, x2, y2);
         }
     }
@@ -144,6 +142,28 @@ public class DrawGraph extends JPanel implements AbstrView {
                 int y = graphPoints.get(i).y - GRAPH_POINT_WIDTH / 2;
                 int ovalW = GRAPH_POINT_WIDTH;
                 int ovalH = GRAPH_POINT_WIDTH;
+                switch (i/10){
+                    case(0): g2.setColor(Color.white);
+                        break;
+                    case(1): g2.setColor(Color.black);
+                        break;
+                    case(2): g2.setColor(Color.CYAN);
+                        break;
+                    case(3): g2.setColor(Color.green);
+                        break;
+                    case(4): g2.setColor(Color.black);
+                        break;
+                    case(5): g2.setColor(Color.RED);
+                        break;
+                    case(6): g2.setColor(Color.magenta);
+                        break;
+                    case(7): g2.setColor(Color.orange);
+                        break;
+                    case(8): g2.setColor(Color.YELLOW);
+                        break;
+                    case(9): g2.setColor(Color.green);
+                        break;
+                }
 
                 g2.fillOval(x, y, ovalW, ovalH);
             }
