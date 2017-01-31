@@ -33,15 +33,9 @@ public class DrawGraph extends JPanel implements AbstrView {
     private List<Integer> scores;
     private Simulator simulator;
 
-    private int maxDataPoints = 100;
-    private int maxScore;
 
-
-
-    public DrawGraph(Simulator simulator) {
+    public DrawGraph() {
         scores = new ArrayList<Integer>();
-        this.simulator = simulator;
-        maxScore = simulator.getTotalPlaces();
     }
 
     @Override
@@ -111,14 +105,28 @@ public class DrawGraph extends JPanel implements AbstrView {
     }
 
 
-    public DrawGraph createAndShowGui() {
-
+    public DrawGraph createAndShowGui(Simulator simulator) {
+        /*
+        this.simulator = simulator;
         //    Random random = new Random();
+        int maxDataPoints = 100;
+        int maxScore = simulator.getNumberOfPlaces();
 
+        for (int i = 0; i < maxDataPoints; i++) {
+            if(i >= maxDataPoints){
+                clearGraph();
+            }
+            int filledSpots = simulator.getNumberOfPlaces() - simulator.getNumberOfOpenSpots();
+            scores.add(filledSpots);
+            */
+        Random random = new Random();
+        int maxDataPoints = 16;
+        int maxScore = 20;
+        for (int i = 0; i < maxDataPoints ; i++) {
+            scores.add(random.nextInt(maxScore));
+        }
 
-
-
-        DrawGraph mainPanel = new DrawGraph(simulator);
+        DrawGraph mainPanel = new DrawGraph();
         return mainPanel;
     }
 
@@ -134,16 +142,5 @@ public class DrawGraph extends JPanel implements AbstrView {
 
     public void disableView(){
 
-    }
-
-    public void addData(){
-
-        for (int i = 0; i < maxDataPoints; i++) {
-            if(i >= maxDataPoints){
-                clearGraph();
-            }
-            int filledSpots = simulator.getNumberOfPlaces() - simulator.getNumberOfOpenSpots();
-            scores.add(filledSpots);
-        }
     }
 }
