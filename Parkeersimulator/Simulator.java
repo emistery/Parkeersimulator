@@ -49,8 +49,10 @@ public class Simulator implements Runnable {
     private Car[][][] cars;
     private ArrayList<Location> locations = new ArrayList<Location>();
     private ArrayList<AbstrView> views = new ArrayList<AbstrView>();
+    private ArrayList<Car> missedCars = new ArrayList<>();
 
     private double earnings;
+    private double missedEarnings;
     private double price = 0.03;
 
     public Simulator(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
@@ -58,6 +60,10 @@ public class Simulator implements Runnable {
         entrancePassQueue = new CarQueue();
         paymentCarQueue = new CarQueue();
         exitCarQueue = new CarQueue();
+
+        entranceCarQueue.setSize(10);
+
+
         this.numberOfFloors = numberOfFloors;
         this.numberOfRows = numberOfRows;
         this.numberOfPlaces = numberOfPlaces;
@@ -393,10 +399,13 @@ public class Simulator implements Runnable {
     private void addArrivingCars(int numberOfCars, String type){
         // Add the cars to the back of the queue.
     	switch(type) {
-    	case AD_HOC: 
-            for (int i = 0; i < numberOfCars; i++) {
-            	entranceCarQueue.addCar(new AdHocCar());
-            }
+    	case AD_HOC:
+    	    if(entranceCarQueue.carsInQueue() >= entranceCarQueue.getSize()) {
+                    missedCars.add(new AdHocCar());
+            } else {
+                for (int i = 0; i < numberOfCars; i++) {
+                    entranceCarQueue.addCar(new AdHocCar());
+                }}
             break;
     	case PASS:
             for (int i = 0; i < numberOfCars; i++) {
@@ -535,6 +544,24 @@ public class Simulator implements Runnable {
         long tmp = Math.round(value);
         return (double) tmp / factor;
     }
+
+    //Calculates the money which could have been earned if the queue wasn't too long.
+
+    public void missedEarnings(Car car){
+        int totalMinutes = car.getTotalMinutes();
+        double profit = totalMinutes * price;
+        missedEarnings += profit;
+        missedEarnings = round(missedEarnings, 2);
+        System.out.println(missedEarnings);
+    }
+
+    public void calculateMissedEarnings(){
+        for(Car car : missedCars){
+            missedEarnings(car);
+        }
+    }
+
+    //comment2push
 
 
 
