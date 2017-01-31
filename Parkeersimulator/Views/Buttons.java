@@ -19,6 +19,7 @@ public class Buttons extends JPanel implements ActionListener {
     private JButton addView;
     private JButton removeView;
     private JTextField textField;
+    private JTextField tickPause;
 
     private Timer timer;
     private final int delayEen;
@@ -34,8 +35,12 @@ public class Buttons extends JPanel implements ActionListener {
         honderdStep.addActionListener(this);
         duizendStep = new JButton("1000 ticks");
         duizendStep.addActionListener(this);
+
         textField = new JTextField(5);
         textField.addActionListener(this);
+        tickPause = new JTextField(4);
+        tickPause.addActionListener(this);
+
         addView = new JButton("add Statistic View");
         AbstrView statView = new StatisticView(simulator);
         addView.addActionListener(e -> {
@@ -49,6 +54,7 @@ public class Buttons extends JPanel implements ActionListener {
         add(honderdStep);
         add(duizendStep);
         add(textField);
+        add(tickPause);
         add(addView);
         add(removeView);
 
@@ -114,6 +120,10 @@ public class Buttons extends JPanel implements ActionListener {
             });
             timer.setRepeats(false);
             timer.start();
+        }
+        if(e.getSource() == tickPause) {
+            int time = Integer.parseInt(tickPause.getText());
+            simulator.setTickPause(time);
         }
     }
 
