@@ -156,4 +156,6 @@ public class StatisticView implements AbstrView{
 
 }
 
+//comment2push
+
 
