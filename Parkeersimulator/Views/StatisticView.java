@@ -27,6 +27,7 @@ public class StatisticView implements AbstrView{
       //Container contentPane = frame.getContentPane();
 
       JPanel panel = createPanel();
+      panel.setPreferredSize(new Dimension(500, 200));
 
       DrawGraph mainPanel = DrawGraph.createAndShowGui();
 

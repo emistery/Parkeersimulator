@@ -3,7 +3,6 @@
  */
 package Parkeersimulator.Views;
 public interface AbstrView {
-
     void updateView(int tick, int adHocSpots, int passSpots, int cars, double earnings);
     void disableView();
 }

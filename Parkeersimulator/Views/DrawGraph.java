@@ -111,7 +111,5 @@ public class DrawGraph extends JPanel {
         }
         DrawGraph mainPanel = new DrawGraph(scores);
         return mainPanel;
-
-
     }
 }
