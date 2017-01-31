@@ -26,18 +26,20 @@ public class StatisticView implements AbstrView{
     private Simulator simulator;
     private DrawGraph mainPanel;
 
-    private ArrayList<Integer> scores;
+    private ArrayList<Integer> adHocs;
+    private ArrayList<Integer> pPass;
 
 
   public StatisticView(Simulator simulator) {
       this.simulator = simulator;
-      scores = new ArrayList<>();
+      adHocs = new ArrayList<>();
+      pPass = new ArrayList<>();
       frame = new JFrame();
       //Container contentPane = frame.getContentPane();
 
       JPanel panel = createPanel();
-      mainPanel = new DrawGraph(scores);
-      mainPanel.createAndShowGui(scores);
+      mainPanel = new DrawGraph(adHocs, pPass);
+      mainPanel.createAndShowGui(adHocs, pPass);
 
 
       JTabbedPane tabbedPane = new JTabbedPane();
@@ -86,12 +88,17 @@ public class StatisticView implements AbstrView{
       earningsLabel.setText("Total earnings : € " + earnings);
       missedEarningsLabel.setText("Missed earnings : € " + simulator.calculateMissedEarnings());
       missedCarsLabel.setText("Missed cars: " + missedCars);
-      if(scores.size()>100){
-          scores.remove(0);
+      if(adHocs.size()>100){
+          adHocs.remove(0);
       }if((tick%25)==0) {
-          scores.add(540 - cars);
+          adHocs.add(controller.getAdHocCars());
       }
-      mainPanel.createAndShowGui(scores);
+      if(pPass.size()>100){
+          pPass.remove(0);
+      }if((tick%25)==0) {
+          pPass.add(simulator.getPassCars());
+      }
+      mainPanel.createAndShowGui(adHocs, pPass);
       //mainPanel.addData();
       //mainPanel.repaint();
       frame.repaint();

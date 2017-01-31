@@ -31,7 +31,7 @@ public class Simulator implements Runnable {
 
     private int weekDayArrivals= 100; // average number of arriving cars per hour
     private int weekendArrivals = 200; // average number of arriving cars per hour
-    private int weekDayPassArrivals= 3; // average number of arriving cars per hour
+    private int weekDayPassArrivals= 50; // average number of arriving cars per hour
     private int weekendPassArrivals = 5; // average number of arriving cars per hour
 
     private int enterSpeed = 7; // number of cars that can enter per minute
@@ -63,7 +63,6 @@ public class Simulator implements Runnable {
         exitCarQueue = new CarQueue();
 
         entranceCarQueue.setSize(10);
-
 
         this.numberOfFloors = numberOfFloors;
         this.numberOfRows = numberOfRows;
@@ -137,6 +136,12 @@ public class Simulator implements Runnable {
 
     public int getTotalPlaces(){
         return numberOfFloors*numberOfRows*numberOfPlaces;
+    }
+    public int getAdHocCars(){
+        return (2*numberOfRows*numberOfPlaces) - openAdHocSpots;
+    }
+    public int getPassCars(){
+        return numberOfRows * numberOfPlaces - openPassSpots;
     }
 
     //Set methods

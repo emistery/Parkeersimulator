@@ -25,8 +25,7 @@ public class SimulatorController {
         statisticView = new StatisticView(simulator);
         simulator.addView(carParkView);
         simulator.addView(simulatorView);
-        simulator.addView(statisticView);
-    }
+        }
 
     public void addView(AbstrView view){
         view.enableView();
@@ -35,11 +34,20 @@ public class SimulatorController {
     public void removeView(AbstrView view){
         view.disableView();
     }
-
+    public Simulator getSimulator(){
+        return simulator;
+    }
     public SimulatorView getSimulatorView(){
         return (SimulatorView) simulatorView;
     }
     public StatisticView getStatisticView(){
         return (StatisticView) statisticView;
+    }
+
+    public int getAdHocCars(){
+        return simulator.getAdHocCars();
+    }
+    public int getPassCars(){
+        return simulator.getPassCars();
     }
 }
