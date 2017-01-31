@@ -86,10 +86,12 @@ public class StatisticView implements AbstrView{
 
       values[6] = 0;
       names[6] = "Zondag";
+      JPanel chartMainPanel = new JPanel();
       JPanel textPanel = new JPanel();
+      GridLayout textGrid = new GridLayout(1,0);
+      textGrid.setHgap(9);
+      textPanel.setLayout(textGrid);
 
-      chartPanel = new ChartPanel(values, names, "Inkomen per dag");
-      chartPanel.add(textPanel);
       textPanel.add(mondayLabel);
       textPanel.add(tuesdayLabel);
       textPanel.add(wednesdayLabel);
@@ -98,12 +100,20 @@ public class StatisticView implements AbstrView{
       textPanel.add(saturdayLabel);
       textPanel.add(sundayLabel);
 
+      GridLayout mainGrid = new GridLayout(2,1);
+      chartMainPanel.setLayout(mainGrid);
+      chartPanel = new ChartPanel(values, names, "Inkomen per dag");
+      chartMainPanel.add(textPanel);
+      chartMainPanel.add(chartPanel);
+
+
+
       JTabbedPane tabbedPane = new JTabbedPane();
       frame.add(tabbedPane);
 
       tabbedPane.addTab("Statistics", panel);
       tabbedPane.addTab("Chart", mainPanel);
-      tabbedPane.addTab("BarChart", chartPanel);
+      tabbedPane.addTab("BarChart", chartMainPanel);
 
       GridLayout grid = new GridLayout(0,1);
       grid.setVgap(0);
