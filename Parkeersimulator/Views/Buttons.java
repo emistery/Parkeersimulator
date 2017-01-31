@@ -69,7 +69,9 @@ public class Buttons extends JPanel implements ActionListener {
         delayHonderd = simulator.getTickPause() * 100 + 200;
         delayDuizend = simulator.getTickPause() * 1000 + 200;
     }
-
+    public JTextField getTickPause(){
+        return tickPause;
+    }
     //public Dimension setPreferredSize() {return new Dimension(250, 250);}
 
     public void actionPerformed(ActionEvent e) {

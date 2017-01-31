@@ -22,6 +22,10 @@ public class SimulatorView extends JFrame implements AbstrView {
         contentPane.add(buttons, BorderLayout.SOUTH);
         contentPane.add(carParkView, BorderLayout.CENTER);
 
+        JPanel eastPanel = new JPanel();
+        eastPanel.add(buttons.getTickPause());
+        contentPane.add(eastPanel, BorderLayout.EAST);
+
         //automatically terminates jvm when closing window
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         pack();
