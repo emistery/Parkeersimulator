@@ -39,13 +39,13 @@ public class Buttons extends JPanel implements ActionListener {
         tickPause.addActionListener(this);
 
         addView = new JButton("add Statistic View");
-        AbstrView statView = new StatisticView(simulator);
+
         addView.addActionListener(e -> {
-            if(controller != null){controller.addView(statView);}
+            if(controller != null){controller.addView(controller.getStatisticView());}
         });
         removeView = new JButton("remove Statistic View");
         removeView.addActionListener(e -> {
-            if(controller != null){controller.removeView(statView);}
+            if(controller != null){controller.removeView(controller.getStatisticView());}
         });
         add(eenStep);
         add(honderdStep);
