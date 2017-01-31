@@ -15,7 +15,7 @@ public class Buttons extends JPanel implements ActionListener {
     private Simulator simulator;
     private JButton eenDag;
     private JButton eenWeek;
-    private JButton duizendStep;
+    private JButton eentick;
     private JButton addView;
     private JButton removeView;
     private JTextField textField;
@@ -30,8 +30,8 @@ public class Buttons extends JPanel implements ActionListener {
         eenDag.addActionListener(this);
         eenWeek = new JButton("1week");
         eenWeek.addActionListener(this);
-        duizendStep = new JButton("1000 minuten");
-        duizendStep.addActionListener(this);
+        eentick = new JButton("1 minuut");
+        eentick.addActionListener(this);
 
         textField = new JTextField(5);
         textField.addActionListener(this);
@@ -49,7 +49,7 @@ public class Buttons extends JPanel implements ActionListener {
         });
         add(eenDag);
         add(eenWeek);
-        add(duizendStep);
+        add(eentick);
         add(textField);
         add(tickPause);
         add(addView);
@@ -57,7 +57,7 @@ public class Buttons extends JPanel implements ActionListener {
 
         eenDag.setBounds(25, 10, 50, 30);
         eenWeek.setBounds(100, 10, 50, 30);
-        duizendStep.setBounds(175, 10, 50, 30);
+        eentick.setBounds(175, 10, 50, 30);
 
         setBackground(Color.black);
         setVisible(true);
@@ -65,13 +65,13 @@ public class Buttons extends JPanel implements ActionListener {
     public JTextField getTickPause(){
         return tickPause;
     }
-    //public Dimension setPreferredSize() {return new Dimension(250, 250);}
+    public Dimension getPreferredSize() {return new Dimension(235, 35);}
 
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == eenDag){
             simulator.run(1440);
             disableButtons();
-            timer = new Timer( simulator.getTickPause() * 1 + 200, new ActionListener(){
+            timer = new Timer( simulator.getTickPause() * 1440 + 200, new ActionListener(){
                 public void actionPerformed(ActionEvent evt) {
                     enableButtons();
                 }
@@ -82,7 +82,7 @@ public class Buttons extends JPanel implements ActionListener {
         if(e.getSource() == eenWeek){
             simulator.run(10080);
             disableButtons();
-            timer = new Timer(simulator.getTickPause() * 100 + 200, new ActionListener(){
+            timer = new Timer(simulator.getTickPause() * 10080 + 200, new ActionListener(){
                 public void actionPerformed(ActionEvent evt) {
                     enableButtons();
                 }
@@ -90,10 +90,10 @@ public class Buttons extends JPanel implements ActionListener {
             timer.setRepeats(false);
             timer.start();
         }
-        if(e.getSource() == duizendStep){
-            simulator.run(1000);
+        if(e.getSource() == eentick){
+            simulator.run(1);
             disableButtons();
-            timer = new Timer(simulator.getTickPause() * 1000 + 200, new ActionListener(){
+            timer = new Timer(simulator.getTickPause() * 1 + 200, new ActionListener(){
                 public void actionPerformed(ActionEvent evt) {
                     enableButtons();
                 }
@@ -127,14 +127,14 @@ public class Buttons extends JPanel implements ActionListener {
     private void enableButtons(){
         eenDag.setEnabled(true);
         eenWeek.setEnabled(true);
-        duizendStep.setEnabled(true);
+        eentick.setEnabled(true);
         textField.setEnabled(true);
     }
 
     private void disableButtons(){
         eenDag.setEnabled(false);
         eenWeek.setEnabled(false);
-        duizendStep.setEnabled(false);
+        eentick.setEnabled(false);
         textField.setEnabled(false);
     }
     public void setController(SimulatorController contr){

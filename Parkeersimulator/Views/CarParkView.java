@@ -3,9 +3,12 @@ package Parkeersimulator.Views;
 import Parkeersimulator.Cars.Car;
 import Parkeersimulator.Location;
 import Parkeersimulator.Simulator;
+import java.awt.event.*;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
+
 
 public class CarParkView extends JPanel implements AbstrView {
 
@@ -20,12 +23,16 @@ public class CarParkView extends JPanel implements AbstrView {
         size = new Dimension(0, 0);
         this.simulator = simulator;
         setBackground(Color.GREEN);
+        setBorder(BorderFactory.createTitledBorder("De parkeergarage"));
+
     }
+
+
 
     /**
      * Overridden. Tell the GUI manager how big we would like to be.
      */
-    public Dimension getPreferredSize() {return new Dimension(800, 500);}
+    public Dimension getPreferredSize() {return new Dimension(800, 400);}
 
     /**
      * Overriden. The car park view component needs to be redisplayed. Copy the
@@ -74,12 +81,12 @@ public class CarParkView extends JPanel implements AbstrView {
     private void drawPlace(Graphics graphics, Location location, Color color) {
         graphics.setColor(color);
         graphics.fillRect(
-                location.getFloor() * 260 + (1 + (int)Math.floor(location.getRow() * 0.5)) * 75 + (location.getRow() % 2) * 20,
-                60 + location.getPlace() * 10,
-                20 - 1,
-                10 - 1); // TODO use dynamic size or constants
-    }
+ //ruimte tussen 1e vakje van elke verdieping       //ruimte tussen de rijen                       //net iets breder dan een blokje
+                location.getFloor() * (getWidth()/3) + (1 + (int)Math.floor(location.getRow() * 0.5)) *(getWidth()/11) + (location.getRow() % 2) * (getWidth()/40),
+                60 + location.getPlace() * (getHeight()/40),
+                getWidth()/40 - 1,
+                getHeight()/40 - 1); // TODO use dynamic size or constants
 
-    //moest van compiler
+    }
 
 }
