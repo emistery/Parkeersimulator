@@ -47,9 +47,12 @@ public class DrawGraph extends JPanel implements AbstrView {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-        double xScale = ((double) getWidth() - 2 * BORDER_GAP) / (adHocCars.size() - 1);
-        double yScale = ((double) getHeight() - 2 * BORDER_GAP) / (MAX_SCORE - 1);
+        int bug =1;
+        if(adHocCars.size()==0){
+             bug = 0;
+        }
+        double xScale = ((double) getWidth() - 2 * BORDER_GAP) / (adHocCars.size() - bug);
+        double yScale = ((double) getHeight() - 2 * BORDER_GAP) / (MAX_SCORE - bug);
 
         //een lijst met punten van de adHoc auto's
         List<Point> graphPoints = new ArrayList<Point>();
@@ -101,6 +104,7 @@ public class DrawGraph extends JPanel implements AbstrView {
             ;
             int ovalW = GRAPH_POINT_WIDTH;
             int ovalH = GRAPH_POINT_WIDTH;
+
             g2.fillOval(x, y, ovalW, ovalH);
         }
 

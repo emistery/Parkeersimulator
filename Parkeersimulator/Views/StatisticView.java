@@ -126,8 +126,6 @@ public class StatisticView implements AbstrView{
           pPass.add(simulator.getPassCars());
       }
       mainPanel.createAndShowGui(adHocs, pPass);
-      //mainPanel.addData();
-      //mainPanel.repaint();
       frame.repaint();
   }
   public void disableView(){
