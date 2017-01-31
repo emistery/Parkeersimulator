@@ -13,8 +13,8 @@ public class Buttons extends JPanel implements ActionListener {
     private StatisticView statView;
     private SimulatorController controller;
     private Simulator simulator;
-    private JButton eenStep;
-    private JButton honderdStep;
+    private JButton eenDag;
+    private JButton eenWeek;
     private JButton duizendStep;
     private JButton addView;
     private JButton removeView;
@@ -26,11 +26,11 @@ public class Buttons extends JPanel implements ActionListener {
     public Buttons(Simulator simulator) {
         this.simulator = simulator;
 
-        eenStep = new JButton("1 tick");
-        eenStep.addActionListener(this);
-        honderdStep = new JButton("100 ticks");
-        honderdStep.addActionListener(this);
-        duizendStep = new JButton("1000 ticks");
+        eenDag = new JButton("1 dag");
+        eenDag.addActionListener(this);
+        eenWeek = new JButton("1week");
+        eenWeek.addActionListener(this);
+        duizendStep = new JButton("1000 minuten");
         duizendStep.addActionListener(this);
 
         textField = new JTextField(5);
@@ -38,25 +38,25 @@ public class Buttons extends JPanel implements ActionListener {
         tickPause = new JTextField(4);
         tickPause.addActionListener(this);
 
-        addView = new JButton("add Statistic View");
+        addView = new JButton("Meer informatie");
 
         addView.addActionListener(e -> {
             if(controller != null){controller.addView(controller.getStatisticView());}
         });
-        removeView = new JButton("remove Statistic View");
+        removeView = new JButton("Minder informatie");
         removeView.addActionListener(e -> {
             if(controller != null){controller.removeView(controller.getStatisticView());}
         });
-        add(eenStep);
-        add(honderdStep);
+        add(eenDag);
+        add(eenWeek);
         add(duizendStep);
         add(textField);
         add(tickPause);
         add(addView);
         add(removeView);
 
-        eenStep.setBounds(25, 10, 50, 30);
-        honderdStep.setBounds(100, 10, 50, 30);
+        eenDag.setBounds(25, 10, 50, 30);
+        eenWeek.setBounds(100, 10, 50, 30);
         duizendStep.setBounds(175, 10, 50, 30);
 
         setBackground(Color.black);
@@ -68,8 +68,8 @@ public class Buttons extends JPanel implements ActionListener {
     //public Dimension setPreferredSize() {return new Dimension(250, 250);}
 
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == eenStep){
-            simulator.run(1);
+        if(e.getSource() == eenDag){
+            simulator.run(1440);
             disableButtons();
             timer = new Timer( simulator.getTickPause() * 1 + 200, new ActionListener(){
                 public void actionPerformed(ActionEvent evt) {
@@ -79,8 +79,8 @@ public class Buttons extends JPanel implements ActionListener {
             timer.setRepeats(false);
             timer.start();
         }
-        if(e.getSource() == honderdStep){
-            simulator.run(100);
+        if(e.getSource() == eenWeek){
+            simulator.run(10080);
             disableButtons();
             timer = new Timer(simulator.getTickPause() * 100 + 200, new ActionListener(){
                 public void actionPerformed(ActionEvent evt) {
@@ -125,15 +125,15 @@ public class Buttons extends JPanel implements ActionListener {
     }
 
     private void enableButtons(){
-        eenStep.setEnabled(true);
-        honderdStep.setEnabled(true);
+        eenDag.setEnabled(true);
+        eenWeek.setEnabled(true);
         duizendStep.setEnabled(true);
         textField.setEnabled(true);
     }
 
     private void disableButtons(){
-        eenStep.setEnabled(false);
-        honderdStep.setEnabled(false);
+        eenDag.setEnabled(false);
+        eenWeek.setEnabled(false);
         duizendStep.setEnabled(false);
         textField.setEnabled(false);
     }
