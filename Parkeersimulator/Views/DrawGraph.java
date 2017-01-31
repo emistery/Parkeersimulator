@@ -25,9 +25,10 @@ public class DrawGraph extends JPanel implements AbstrView {
     private static final int PREF_W = 800;
     private static final int PREF_H = 650;
     private static final int BORDER_GAP = 30;
-    private static final Color GRAPH_COLOR = Color.pink;
-    private static final Color GRAPH_POINT_COLOR = new Color(150, 50, 50, 180);
-    private static final Stroke GRAPH_STROKE = new BasicStroke(3f);
+    private static final Color ADHOC_GRAPH_COLOR = Color.red;
+    private static final Color PASS_GRAPH_COLOR = Color.BLUE;
+    private static final Color GRAPH_POINT_COLOR = Color.black;
+    private static final Stroke ADHOC_GRAPH_STROKE = new BasicStroke(3f);
     private static final Stroke PASS_GRAPH_STROKE = new BasicStroke(3f);
     private static final int GRAPH_POINT_WIDTH = 6;
     private static final int Y_HATCH_CNT = 10;
@@ -82,8 +83,8 @@ public class DrawGraph extends JPanel implements AbstrView {
 
         //tekent de grafiek van adHoc auto's
         Stroke oldStroke = g2.getStroke();
-        g2.setColor(GRAPH_COLOR);
-        g2.setStroke(GRAPH_STROKE);
+        g2.setColor(ADHOC_GRAPH_COLOR);
+        g2.setStroke(ADHOC_GRAPH_STROKE);
         for (int i = 0; i < graphPoints.size() - 1; i++) {
             int x1 = graphPoints.get(i).x;
             int y1 = graphPoints.get(i).y;
@@ -114,7 +115,7 @@ public class DrawGraph extends JPanel implements AbstrView {
 
         //tekent de grafiek van ParkingPass auto's
         Stroke oldsStroke = g2.getStroke();
-        g2.setColor(Color.BLUE);
+        g2.setColor(PASS_GRAPH_COLOR);
         g2.setStroke(PASS_GRAPH_STROKE);
         for (int i = 0; i < graphPoints.size() - 1; i++) {
             int x1 = graphPoints.get(i).x;
