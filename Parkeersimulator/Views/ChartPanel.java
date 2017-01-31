@@ -30,7 +30,7 @@ public class ChartPanel extends JPanel {
         if (values == null || values.length == 0)
             return;
         double minValue = 0;
-        double maxValue = 0;
+        double maxValue = 10000;
         for (int i = 0; i < values.length; i++) {
             if (minValue > values[i])
                 minValue = values[i];

@@ -31,6 +31,9 @@ public class StatisticView implements AbstrView{
     private ArrayList<Integer> adHocs;
     private ArrayList<Integer> pPass;
 
+    private double[] values;
+    private String[] names;
+
 
   public StatisticView(Simulator simulator) {
       this.simulator = simulator;
@@ -43,8 +46,8 @@ public class StatisticView implements AbstrView{
       mainPanel = new DrawGraph(adHocs, pPass);
       mainPanel.createAndShowGui(adHocs, pPass);
       //for the bar chart
-      double[] values = new double[7];
-      String[] names = new String[7];
+      values = new double[7];
+      names = new String[7];
       values[0] = 0;
       names[0] = "Maandag";
 
@@ -116,6 +119,9 @@ public class StatisticView implements AbstrView{
       missedEarningsLabel.setText("Missed earnings : € " + simulator.calculateMissedEarnings());
       missedCarsLabel.setText("Missed cars: " + missedCars);
       dayLabel.setText(simulator.displayDay());
+      int day = simulator.getDay();
+      values[day] = simulator.getMissedDayEarnings();
+
 
       while(adHocs.size()>=100){
           adHocs.remove(0);

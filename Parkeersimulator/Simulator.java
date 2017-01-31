@@ -54,6 +54,7 @@ public class Simulator implements Runnable {
 
     private double earnings;
     private double missedEarnings;
+    private double missedDayEarnings;
     private int totalMissedCars;
     private double price = 0.03;
     private String displayTime;
@@ -239,6 +240,7 @@ public class Simulator implements Runnable {
             hour++;
         }
         while (hour > 23) {
+            missedDayEarnings = 0.00;
             hour -= 24;
             day++;
         }
@@ -251,6 +253,11 @@ public class Simulator implements Runnable {
         displayDay();
 
     }
+
+    public double getMissedDayEarnings(){
+        return missedDayEarnings;
+    }
+
     private void handleEntrance(){
         //PassCar gets the fist spot, as it has priority
     	carsArriving();
@@ -536,6 +543,7 @@ public class Simulator implements Runnable {
     private void handlePayment(Car car){
         int totalMinutes = car.getTotalMinutes();
         double profit = totalMinutes * price;
+        missedDayEarnings += profit;
         earnings += profit;
         earnings = round(earnings, 2);
 
