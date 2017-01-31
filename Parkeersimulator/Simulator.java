@@ -21,7 +21,6 @@ public class Simulator implements Runnable {
     private CarQueue entrancePassQueue;
     private CarQueue paymentCarQueue;
     private CarQueue exitCarQueue;
-    private CarQueue missedCars;
 
     private int day = 0;
     private int hour = 0;
@@ -50,6 +49,7 @@ public class Simulator implements Runnable {
     private Car[][][] cars;
     private ArrayList<Location> locations = new ArrayList<Location>();
     private ArrayList<AbstrView> views = new ArrayList<AbstrView>();
+    private ArrayList<Car> missedCars = new ArrayList<>();
 
     private double earnings;
     private double missedEarnings;
@@ -60,7 +60,6 @@ public class Simulator implements Runnable {
         entrancePassQueue = new CarQueue();
         paymentCarQueue = new CarQueue();
         exitCarQueue = new CarQueue();
-        missedCars = new CarQueue();
 
         entranceCarQueue.setSize(10);
 
@@ -402,13 +401,13 @@ public class Simulator implements Runnable {
     	switch(type) {
     	case AD_HOC:
     	    if(entranceCarQueue.carsInQueue() >= entranceCarQueue.getSize()) {
-                    missedCars.addCar(new AdHocCar());
-                    System.out.println(missedCars.carsInQueue());
+                    missedCars.add(new AdHocCar());
+                    System.out.println(missedCars.size());
                     System.out.println("DE FUCKING QUEUE ZIT VOL GODVERDOMME");
-                }
+            } else {
                 for (int i = 0; i < numberOfCars; i++) {
                     entranceCarQueue.addCar(new AdHocCar());
-                }
+                }}
             break;
     	case PASS:
             for (int i = 0; i < numberOfCars; i++) {
@@ -549,11 +548,20 @@ public class Simulator implements Runnable {
         return (double) tmp / factor;
     }
 
-    public void missedProfit(Car car){
+    //Calculates the money which could have been earned if the queue wasn't too long.
+
+    public void missedEarnings(Car car){
         int totalMinutes = car.getTotalMinutes();
         double profit = totalMinutes * price;
         missedEarnings += profit;
         missedEarnings = round(missedEarnings, 2);
+        System.out.println(missedEarnings);
+    }
+    
+    public void calculateMissedEarnings(){
+        for(Car car : missedCars){
+            missedEarnings(car);
+        }
     }
 
 
