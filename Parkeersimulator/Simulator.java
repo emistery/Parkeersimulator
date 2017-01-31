@@ -29,9 +29,9 @@ public class Simulator implements Runnable {
     private int tickPause = 10;
     private int tick = 0;
 
-    private int weekDayArrivals= 1000; // average number of arriving cars per hour
+    private int weekDayArrivals= 100; // average number of arriving cars per hour
     private int weekendArrivals = 200; // average number of arriving cars per hour
-    private int weekDayPassArrivals= 50; // average number of arriving cars per hour
+    private int weekDayPassArrivals= 3; // average number of arriving cars per hour
     private int weekendPassArrivals = 5; // average number of arriving cars per hour
 
     private int enterSpeed = 7; // number of cars that can enter per minute
@@ -560,7 +560,6 @@ public class Simulator implements Runnable {
         for(Car car : missedCars){
             missedEarnings(car);
             totalMissedCars++;
-            System.out.println(totalMissedCars);
         }
         missedCars.clear();
 
