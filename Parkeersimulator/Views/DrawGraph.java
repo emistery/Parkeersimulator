@@ -28,7 +28,7 @@ public class DrawGraph extends JPanel implements AbstrView {
     private static final Color GRAPH_COLOR = Color.green;
     private static final Color GRAPH_POINT_COLOR = new Color(150, 50, 50, 180);
     private static final Stroke GRAPH_STROKE = new BasicStroke(3f);
-    private static final int GRAPH_POINT_WIDTH = 12;
+    private static final int GRAPH_POINT_WIDTH = 6;
     private static final int Y_HATCH_CNT = 10;
     private List<Integer> scores;
     private Simulator simulator;
