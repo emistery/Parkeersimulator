@@ -9,8 +9,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 public class ChartPanel extends JPanel {
     private double[] values;
@@ -76,9 +75,11 @@ public class ChartPanel extends JPanel {
             g.setColor(Color.red);
             g.fillRect(valueX, valueY, barWidth - 2, height);
             g.setColor(Color.black);
+            JLabel testLabel = new JLabel("Test");
             g.drawRect(valueX, valueY, barWidth - 2, height);
             int labelWidth = labelFontMetrics.stringWidth(names[i]);
             x = i * barWidth + (barWidth - labelWidth) / 2;
+
             g.drawString(names[i], x, y);
         }
 

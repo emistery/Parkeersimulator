@@ -23,6 +23,15 @@ public class StatisticView implements AbstrView{
     private JLabel missedEarningsLabel = new JLabel("Missed earnings: ");
     private JLabel missedCarsLabel = new JLabel("Missed Cars: ");
     private JLabel dayLabel = new JLabel("Current day: ");
+
+    private JLabel mondayLabel;
+    private JLabel tuesdayLabel;
+    private JLabel wednesdayLabel;
+    private JLabel thursdayLabel;
+    private JLabel fridayLabel;
+    private JLabel saturdayLabel;
+    private JLabel sundayLabel;
+
     public static String newline = System.getProperty("line.separator");
     private Simulator simulator;
     private DrawGraph mainPanel;
@@ -41,6 +50,15 @@ public class StatisticView implements AbstrView{
       pPass = new ArrayList<>();
       frame = new JFrame();
       //Container contentPane = frame.getContentPane();
+
+      mondayLabel = new JLabel("€" + 0.00);
+      tuesdayLabel = new JLabel("€" + 0.00);
+      wednesdayLabel = new JLabel("€" + 0.00);
+      thursdayLabel = new JLabel("€" + 0.00);
+      fridayLabel = new JLabel("€" + 0.00);
+      saturdayLabel = new JLabel("€" + 0.00);
+      sundayLabel = new JLabel("€" + 0.00);
+
 
       JPanel panel = createPanel();
       mainPanel = new DrawGraph(adHocs, pPass);
@@ -68,7 +86,17 @@ public class StatisticView implements AbstrView{
 
       values[6] = 0;
       names[6] = "Zondag";
+      JPanel textPanel = new JPanel();
+
       chartPanel = new ChartPanel(values, names, "Inkomen per dag");
+      chartPanel.add(textPanel);
+      textPanel.add(mondayLabel);
+      textPanel.add(tuesdayLabel);
+      textPanel.add(wednesdayLabel);
+      textPanel.add(thursdayLabel);
+      textPanel.add(fridayLabel);
+      textPanel.add(saturdayLabel);
+      textPanel.add(sundayLabel);
 
       JTabbedPane tabbedPane = new JTabbedPane();
       frame.add(tabbedPane);
@@ -120,8 +148,15 @@ public class StatisticView implements AbstrView{
       missedCarsLabel.setText("Missed cars: " + missedCars);
       dayLabel.setText(simulator.displayDay());
       int day = simulator.getDay();
-      values[day] = simulator.getMissedDayEarnings();
+      values[day] = simulator.getDayEarnings();
 
+      mondayLabel.setText("$" + round(values[0],2));
+      tuesdayLabel.setText("$" + round(values[1],2));
+      wednesdayLabel.setText("$" + round(values[2],2));
+      thursdayLabel.setText("$" + round(values[3],2));
+      fridayLabel.setText("$" + round(values[4],2));
+      saturdayLabel.setText("$" + round(values[5],2));
+      sundayLabel.setText("$" + round(values[6],2));
 
       while(adHocs.size()>=100){
           adHocs.remove(0);
@@ -161,7 +196,14 @@ public class StatisticView implements AbstrView{
       controller = contr;
     }
 
+    public static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
 
+        long factor = (long) Math.pow(10, places);
+        value = value * factor;
+        long tmp = Math.round(value);
+        return (double) tmp / factor;
+    }
 }
 
 //comment2push
