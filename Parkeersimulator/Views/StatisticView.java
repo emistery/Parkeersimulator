@@ -25,6 +25,7 @@ public class StatisticView implements AbstrView{
     public static String newline = System.getProperty("line.separator");
     private Simulator simulator;
     private DrawGraph mainPanel;
+    private ChartPanel chartPanel;
 
     private ArrayList<Integer> adHocs;
     private ArrayList<Integer> pPass;
@@ -40,13 +41,25 @@ public class StatisticView implements AbstrView{
       JPanel panel = createPanel();
       mainPanel = new DrawGraph(adHocs, pPass);
       mainPanel.createAndShowGui(adHocs, pPass);
+      double[] values = new double[3];
+      String[] names = new String[3];
+      values[0] = 1;
+      names[0] = "Item 1";
 
+      values[1] = 2;
+      names[1] = "Item 2";
+
+      values[2] = 4;
+      names[2] = "Item 3";
+
+      chartPanel = new ChartPanel(values, names, "Ik wil kaas");
 
       JTabbedPane tabbedPane = new JTabbedPane();
       frame.add(tabbedPane);
 
       tabbedPane.addTab("Statistics", panel);
       tabbedPane.addTab("Chart", mainPanel);
+      tabbedPane.addTab("BarChart", chartPanel);
 
       GridLayout grid = new GridLayout(0,1);
       grid.setVgap(0);
