@@ -81,6 +81,7 @@ public class ChartPanel extends JPanel {
             x = i * barWidth + (barWidth - labelWidth) / 2;
             g.drawString(names[i], x, y);
         }
+
     }
 /*
     public static void main(String[] argv) {
