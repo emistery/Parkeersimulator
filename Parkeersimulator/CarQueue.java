@@ -5,6 +5,8 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class CarQueue {
+
+    private int queueSize;
     private Queue<Car> queue = new LinkedList<Car>();
 
     public boolean addCar(Car car) {
@@ -17,6 +19,14 @@ public class CarQueue {
 
     public int carsInQueue(){
     	return queue.size();
+    }
+
+    public void setSize(int queueSize) {
+        this.queueSize = queueSize;
+    }
+
+    public int getSize(){
+        return queueSize;
     }
 
     public void driveAway(){

@@ -21,6 +21,7 @@ public class Simulator implements Runnable {
     private CarQueue entrancePassQueue;
     private CarQueue paymentCarQueue;
     private CarQueue exitCarQueue;
+    private CarQueue missedCars;
 
     private int day = 0;
     private int hour = 0;
@@ -29,12 +30,12 @@ public class Simulator implements Runnable {
     private int tickPause = 10;
     private int tick = 0;
 
-    private int weekDayArrivals= 100; // average number of arriving cars per hour
+    private int weekDayArrivals= 500; // average number of arriving cars per hour
     private int weekendArrivals = 200; // average number of arriving cars per hour
     private int weekDayPassArrivals= 50; // average number of arriving cars per hour
     private int weekendPassArrivals = 5; // average number of arriving cars per hour
 
-    private int enterSpeed = 3; // number of cars that can enter per minute
+    private int enterSpeed = 5; // number of cars that can enter per minute
     private int paymentSpeed = 7; // number of cars that can pay per minute
     private int exitSpeed = 5; // number of cars that can leave per minute
 
@@ -51,6 +52,7 @@ public class Simulator implements Runnable {
     private ArrayList<AbstrView> views = new ArrayList<AbstrView>();
 
     private double earnings;
+    private double missedEarnings;
     private double price = 0.03;
 
     public Simulator(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
@@ -58,6 +60,9 @@ public class Simulator implements Runnable {
         entrancePassQueue = new CarQueue();
         paymentCarQueue = new CarQueue();
         exitCarQueue = new CarQueue();
+        missedCars = new CarQueue();
+
+        entranceCarQueue.setSize(10);
 
 
         this.numberOfFloors = numberOfFloors;
@@ -395,10 +400,15 @@ public class Simulator implements Runnable {
     private void addArrivingCars(int numberOfCars, String type){
         // Add the cars to the back of the queue.
     	switch(type) {
-    	case AD_HOC: 
-            for (int i = 0; i < numberOfCars; i++) {
-            	entranceCarQueue.addCar(new AdHocCar());
-            }
+    	case AD_HOC:
+    	    if(entranceCarQueue.carsInQueue() >= entranceCarQueue.getSize()) {
+                    missedCars.addCar(new AdHocCar());
+                    System.out.println(missedCars.carsInQueue());
+                    System.out.println("DE FUCKING QUEUE ZIT VOL GODVERDOMME");
+                }
+                for (int i = 0; i < numberOfCars; i++) {
+                    entranceCarQueue.addCar(new AdHocCar());
+                }
             break;
     	case PASS:
             for (int i = 0; i < numberOfCars; i++) {
@@ -517,6 +527,7 @@ public class Simulator implements Runnable {
         return !(floor < 0 || floor >= numberOfFloors || row < 0 || row > numberOfRows || place < 0 || place > numberOfPlaces);
     }
 
+
     private void handlePayment(Car car){
         int totalMinutes = car.getTotalMinutes();
         double profit = totalMinutes * price;
@@ -536,6 +547,13 @@ public class Simulator implements Runnable {
         value = value * factor;
         long tmp = Math.round(value);
         return (double) tmp / factor;
+    }
+
+    public void missedProfit(Car car){
+        int totalMinutes = car.getTotalMinutes();
+        double profit = totalMinutes * price;
+        missedEarnings += profit;
+        missedEarnings = round(missedEarnings, 2);
     }
 
 
