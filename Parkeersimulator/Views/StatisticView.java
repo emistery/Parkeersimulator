@@ -82,8 +82,9 @@ public class StatisticView implements AbstrView{
       earningsLabel.setText("Total earnings : € " + earnings);
       if(scores.size()>100){
           scores.remove(0);
+      }if((tick%25)==0) {
+          scores.add(540 - cars);
       }
-      scores.add(540-cars);
       mainPanel.createAndShowGui(scores);
       //mainPanel.addData();
       //mainPanel.repaint();
