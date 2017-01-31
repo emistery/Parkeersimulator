@@ -160,13 +160,13 @@ public class StatisticView implements AbstrView{
       int day = simulator.getDay();
       values[day] = simulator.getDayEarnings();
 
-      mondayLabel.setText("$" + round(values[0],2));
-      tuesdayLabel.setText("$" + round(values[1],2));
-      wednesdayLabel.setText("$" + round(values[2],2));
-      thursdayLabel.setText("$" + round(values[3],2));
-      fridayLabel.setText("$" + round(values[4],2));
-      saturdayLabel.setText("$" + round(values[5],2));
-      sundayLabel.setText("$" + round(values[6],2));
+      mondayLabel.setText("€" + round(values[0],2));
+      tuesdayLabel.setText("€" + round(values[1],2));
+      wednesdayLabel.setText("€" + round(values[2],2));
+      thursdayLabel.setText("€" + round(values[3],2));
+      fridayLabel.setText("€" + round(values[4],2));
+      saturdayLabel.setText("€" + round(values[5],2));
+      sundayLabel.setText("€" + round(values[6],2));
 
       while(adHocs.size()>=100){
           adHocs.remove(0);
