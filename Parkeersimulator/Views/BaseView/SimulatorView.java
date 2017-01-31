@@ -2,6 +2,7 @@ package Parkeersimulator.Views.BaseView;
 
 import Parkeersimulator.Simulator;
 import Parkeersimulator.Views.AbstrView;
+import Parkeersimulator.Views.Time;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,7 +12,8 @@ public class SimulatorView extends JFrame implements AbstrView {
     private CarParkView carParkView;
     private Simulator simulator;
 
-    private JLabel tickLabel = new JLabel("0");
+    private JLabel tickLabel = new JLabel("0, Happy opening!");
+
 
     public SimulatorView(Simulator simulator, CarParkView carParkView) {
         this.carParkView = carParkView;
@@ -38,8 +40,8 @@ public class SimulatorView extends JFrame implements AbstrView {
     }
 
     public void updateView(int tick, int adHocSpots, int passSpots, int cars, double earnings, double missedEarnings, int missedCars, String displayTime) {
-        tickLabel.repaint();
-        tick(tick);
+       String date = Time.getDate(tick);
+        tickLabel.setText("Tick: "+tick + date);
     }
     public void disableView(){
         setVisible(false);
@@ -47,10 +49,6 @@ public class SimulatorView extends JFrame implements AbstrView {
     public void enableView(){
         setVisible(true);
     }
-    public void tick(int tick) {
-        tickLabel.setText("Tick: "+tick);
-    }
-
     public Buttons getButtons(){
         return buttons;
     }
