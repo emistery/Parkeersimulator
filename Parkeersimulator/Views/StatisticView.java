@@ -41,17 +41,29 @@ public class StatisticView implements AbstrView{
       JPanel panel = createPanel();
       mainPanel = new DrawGraph(adHocs, pPass);
       mainPanel.createAndShowGui(adHocs, pPass);
-      double[] values = new double[3];
-      String[] names = new String[3];
+      //for the bar chart
+      double[] values = new double[7];
+      String[] names = new String[7];
       values[0] = 1;
-      names[0] = "Item 1";
+      names[0] = "Maandag";
 
       values[1] = 2;
-      names[1] = "Item 2";
+      names[1] = "Dinsdag";
 
       values[2] = 4;
-      names[2] = "Item 3";
+      names[2] = "Woensdag";
 
+      values[3] = 3;
+      names[3] = "Donderdag";
+
+      values[4] = 5;
+      names[4] = "Vrijdag";
+
+      values[5] = 9;
+      names[5] = "Zaterdag";
+
+      values[6] = 7;
+      names[6] = "Zondag";
       chartPanel = new ChartPanel(values, names, "Ik wil kaas");
 
       JTabbedPane tabbedPane = new JTabbedPane();
