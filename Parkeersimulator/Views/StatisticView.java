@@ -27,9 +27,9 @@ public class StatisticView implements AbstrView{
       //Container contentPane = frame.getContentPane();
 
       JPanel panel = createPanel();
-      panel.setPreferredSize(new Dimension(500, 200));
-
-      DrawGraph mainPanel = DrawGraph.createAndShowGui();
+      java.util.List<Integer> scores = new ArrayList<Integer>();
+      DrawGraph mainPanel = new DrawGraph(scores);
+      mainPanel.createAndShowGui(simulator);
 
 
       JTabbedPane tabbedPane = new JTabbedPane();
