@@ -23,13 +23,13 @@ public class StatisticView implements AbstrView {
     private JLabel missedCarsLabel = new JLabel("Missed Cars: ");
     private JLabel dayLabel = new JLabel("Current day: ");
 
-    private JLabel mondayLabel[];
-    private JLabel tuesdayLabel[];
-    private JLabel wednesdayLabel[];
-    private JLabel thursdayLabel[];
-    private JLabel fridayLabel[];
-    private JLabel saturdayLabel[];
-    private JLabel sundayLabel[];
+    private ArrayList<JLabel> mondayLabel = new ArrayList<>();
+    private ArrayList<JLabel> tuesdayLabel = new ArrayList<>();
+    private ArrayList<JLabel> wednesdayLabel = new ArrayList<>();
+    private ArrayList<JLabel> thursdayLabel = new ArrayList<>();
+    private ArrayList<JLabel> fridayLabel = new ArrayList<>();
+    private ArrayList<JLabel> saturdayLabel = new ArrayList<>();
+    private ArrayList<JLabel> sundayLabel = new ArrayList<>();
 
     private JPanel textPanel[] = new JPanel[5];
     private JTabbedPane weekTabs;
@@ -43,7 +43,6 @@ public class StatisticView implements AbstrView {
     private ArrayList<Integer> pPass;
 
     private double[][] values;
-
     private String[] names;
 
 
@@ -54,13 +53,13 @@ public class StatisticView implements AbstrView {
       frame = new JFrame();
       //Container contentPane = frame.getContentPane();
 
-      mondayLabel = new JLabel[]{new JLabel("€" + 0.00), new JLabel("€" + 0.00), new JLabel("€" + 0.00), new JLabel("€" + 0.00), new JLabel("€" + 0.00)};
-      tuesdayLabel = new JLabel[]{new JLabel("€" + 0.00), new JLabel("€" + 0.00), new JLabel("€" + 0.00), new JLabel("€" + 0.00), new JLabel("€" + 0.00)};
-      wednesdayLabel = new JLabel[]{new JLabel("€" + 0.00), new JLabel("€" + 0.00), new JLabel("€" + 0.00), new JLabel("€" + 0.00), new JLabel("€" + 0.00)};
-      thursdayLabel = new JLabel[]{new JLabel("€" + 0.00), new JLabel("€" + 0.00), new JLabel("€" + 0.00), new JLabel("€" + 0.00), new JLabel("€" + 0.00)};
-      fridayLabel = new JLabel[]{new JLabel("€" + 0.00), new JLabel("€" + 0.00), new JLabel("€" + 0.00), new JLabel("€" + 0.00), new JLabel("€" + 0.00)};
-      saturdayLabel = new JLabel[]{new JLabel("€" + 0.00), new JLabel("€" + 0.00), new JLabel("€" + 0.00), new JLabel("€" + 0.00), new JLabel("€" + 0.00)};
-      sundayLabel = new JLabel[]{new JLabel("€" + 0.00), new JLabel("€" + 0.00), new JLabel("€" + 0.00), new JLabel("€" + 0.00), new JLabel("€" + 0.00)};
+      mondayLabel.add(new JLabel("€" + 0.00));
+      tuesdayLabel.add(new JLabel("€" + 0.00));
+      wednesdayLabel.add(new JLabel("€" + 0.00));
+      thursdayLabel.add(new JLabel("€" + 0.00));
+      fridayLabel.add(new JLabel("€" + 0.00));
+      saturdayLabel.add(new JLabel("€" + 0.00));
+      sundayLabel.add(new JLabel("€" + 0.00));
 
 
       JPanel panel = createPanel();
@@ -68,13 +67,6 @@ public class StatisticView implements AbstrView {
       mainPanel.createAndShowGui(adHocs, pPass);
       //for the bar chart
       values = new double[][]{{0,0,0,0,0,0,0}, {0,0,0,0,0,0,0}, {0,0,0,0,0,0,0}, {0,0,0,0,0,0,0}, {0,0,0,0,0,0,0}};
-      for(double[] array : values){
-          for(double doubl : array ){
-              System.out.println(doubl);
-          }
-          System.out.println(" new array" );
-      }
-      System.out.println(values);
 
       names = new String[]{"Maandag", "Dinsdag", "Woensdag", "Donderdag", "Vrijdag", "Zaterdag", "Zondag"};
 
@@ -84,13 +76,13 @@ public class StatisticView implements AbstrView {
       textGrid.setHgap(9);
       textPanel[0].setLayout(textGrid);
 
-      textPanel[0].add(mondayLabel[0]);
-      textPanel[0].add(tuesdayLabel[0]);
-      textPanel[0].add(wednesdayLabel[0]);
-      textPanel[0].add(thursdayLabel[0]);
-      textPanel[0].add(fridayLabel[0]);
-      textPanel[0].add(saturdayLabel[0]);
-      textPanel[0].add(sundayLabel[0]);
+      textPanel[0].add(mondayLabel.get(0));
+      textPanel[0].add(tuesdayLabel.get(0));
+      textPanel[0].add(wednesdayLabel.get(0));
+      textPanel[0].add(thursdayLabel.get(0));
+      textPanel[0].add(fridayLabel.get(0));
+      textPanel[0].add(saturdayLabel.get(0));
+      textPanel[0].add(sundayLabel.get(0));
 
       GridLayout mainGrid = new GridLayout(2,1);
       chartMainPanel.setLayout(mainGrid);
@@ -101,7 +93,7 @@ public class StatisticView implements AbstrView {
                     tab.setLayout(mainGrid);
                     tab.add(textPanel[0]);
                     tab.add(chartPanel.get(0));
-             weekTabs.add(tab);
+             weekTabs.addTab("week 1", tab);
       chartMainPanel.add(weekTabs);
 
       JTabbedPane tabbedPane = new JTabbedPane();
@@ -149,20 +141,28 @@ public class StatisticView implements AbstrView {
       textGrid.setHgap(9);
       textPanel[index].setLayout(textGrid);
 
-      textPanel[index].add(mondayLabel[index]);
-      textPanel[index].add(tuesdayLabel[index]);
-      textPanel[index].add(wednesdayLabel[index]);
-      textPanel[index].add(thursdayLabel[index]);
-      textPanel[index].add(fridayLabel[index]);
-      textPanel[index].add(saturdayLabel[index]);
-      textPanel[index].add(sundayLabel[index]);
+      mondayLabel.add(new JLabel("€" + 0.00));
+      tuesdayLabel.add(new JLabel("€" + 0.00));
+      wednesdayLabel.add(new JLabel("€" + 0.00));
+      thursdayLabel.add(new JLabel("€" + 0.00));
+      fridayLabel.add(new JLabel("€" + 0.00));
+      saturdayLabel.add(new JLabel("€" + 0.00));
+      sundayLabel.add(new JLabel("€" + 0.00));
+
+      textPanel[index].add(mondayLabel.get(index));
+      textPanel[index].add(tuesdayLabel.get(index));
+      textPanel[index].add(wednesdayLabel.get(index));
+      textPanel[index].add(thursdayLabel.get(index));
+      textPanel[index].add(fridayLabel.get(index));
+      textPanel[index].add(saturdayLabel.get(index));
+      textPanel[index].add(sundayLabel.get(index));
       JPanel tab = new JPanel();
       GridLayout mainGrid = new GridLayout(2,1);
       chartPanel.add(new ChartPanel(values[index], names, "Inkomen per dag"));
       tab.setLayout(mainGrid);
       tab.add(textPanel[index]);
       tab.add(chartPanel.get(index));
-      weekTabs.add(tab);
+      weekTabs.addTab(("week "+(index+1)),tab);
   }
   public void updateView(int tick, int adHocSpots, int passSpots, int cars, double earnings, double missedEarnings, int missedCars, String displayTime){
       carLabel.setText("amount of open spots: " + cars + newline);
@@ -181,13 +181,13 @@ public class StatisticView implements AbstrView {
           newChart(index);
       }
 
-      mondayLabel[index].setText("€" + round(values[index][0],2));
-      tuesdayLabel[index].setText("€" + round(values[index][1],2));
-      wednesdayLabel[index].setText("€" + round(values[index][2],2));
-      thursdayLabel[index].setText("€" + round(values[index][3],2));
-      fridayLabel[index].setText("€" + round(values[index][4],2));
-      saturdayLabel[index].setText("€" + round(values[index][5],2));
-      sundayLabel[index].setText("€" + round(values[index][6],2));
+      mondayLabel.get(index).setText("€" + round(values[index][0],2));
+      tuesdayLabel.get(index).setText("€" + round(values[index][1],2));
+      wednesdayLabel.get(index).setText("€" + round(values[index][2],2));
+      thursdayLabel.get(index).setText("€" + round(values[index][3],2));
+      fridayLabel.get(index).setText("€" + round(values[index][4],2));
+      saturdayLabel.get(index).setText("€" + round(values[index][5],2));
+      sundayLabel.get(index).setText("€" + round(values[index][6],2));
 
       while(adHocs.size()>=100){
           adHocs.remove(0);
