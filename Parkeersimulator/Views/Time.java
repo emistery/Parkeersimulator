@@ -9,6 +9,8 @@ public class Time{
     public static String getDate(int tick){
         int week=tick/10080;
         int dag= (tick%10080)/1440;
+        int uur = ((tick%10080)%1440)/60;
+        int minuut = ((tick%10080)%1440)%60;
         String day;
         switch(dag){
             case(0): day = "maandag ";
@@ -27,8 +29,6 @@ public class Time{
                 break;
             default:day ="swag-- day could not be found";
         }
-        int uur = ((tick%10080)%1440)/60;
-        int minuut = (((tick%10080)%1440)%60);
         String date = " week: " +week+" " +day+" " + uur+ ":" + minuut;
         return date;
     }
