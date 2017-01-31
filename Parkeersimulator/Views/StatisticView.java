@@ -113,16 +113,15 @@ public class StatisticView implements AbstrView{
       earningsLabel.setText("Total earnings : € " + earnings);
       missedEarningsLabel.setText("Missed earnings : € " + simulator.calculateMissedEarnings());
       missedCarsLabel.setText("Missed cars: " + missedCars);
-      if(adHocs.size()>100){
+      while(adHocs.size()>=100){
           adHocs.remove(0);
-      }if((tick%25)==0) {
-          adHocs.add(controller.getAdHocCars());
-      }
-      if(pPass.size()>100){
           pPass.remove(0);
-      }if((tick%25)==0) {
+      }
+      if((tick%60)==0) {
+          adHocs.add(controller.getAdHocCars());
           pPass.add(simulator.getPassCars());
       }
+
       mainPanel.createAndShowGui(adHocs, pPass);
       //mainPanel.addData();
       //mainPanel.repaint();
