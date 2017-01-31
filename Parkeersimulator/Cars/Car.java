@@ -1,4 +1,4 @@
-package Parkeersimulator.Car;
+package Parkeersimulator.Cars;
 
 import Parkeersimulator.Location;
 
@@ -13,7 +13,7 @@ public abstract class Car {
     private int totalMinutes;
 
     /**
-     * Constructor for objects of class Car
+     * Constructor for objects of class Cars
      */
     public Car() {
 

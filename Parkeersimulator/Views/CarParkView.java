@@ -1,6 +1,6 @@
 package Parkeersimulator.Views;
 
-import Parkeersimulator.Car.Car;
+import Parkeersimulator.Cars.Car;
 import Parkeersimulator.Location;
 import Parkeersimulator.Simulator;
 

@@ -1,9 +1,9 @@
 package Parkeersimulator;
 //-----MODEL-----
 //needs methods for views and controllers to subscribe to state changes
-import Parkeersimulator.Car.AdHocCar;
-import Parkeersimulator.Car.Car;
-import Parkeersimulator.Car.ParkingPassCar;
+import Parkeersimulator.Cars.AdHocCar;
+import Parkeersimulator.Cars.Car;
+import Parkeersimulator.Cars.ParkingPassCar;
 import Parkeersimulator.Views.AbstrView;
 
 import java.util.ArrayList;
