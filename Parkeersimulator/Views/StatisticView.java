@@ -126,13 +126,10 @@ public class StatisticView implements AbstrView{
           pPass.add(simulator.getPassCars());
       }
       mainPanel.createAndShowGui(adHocs, pPass);
-<<<<<<< Updated upstream
-=======
 
 
       //mainPanel.addData();
       //mainPanel.repaint();
->>>>>>> Stashed changes
       frame.repaint();
   }
   public void disableView(){
