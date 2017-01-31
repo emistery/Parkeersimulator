@@ -6,6 +6,7 @@ import Parkeersimulator.Simulator;
 
 import javax.swing.*;
 import java.awt.*;
+import java.lang.reflect.Array;
 import java.util.*;
 import java.awt.event.KeyEvent;
 
@@ -21,17 +22,18 @@ public class StatisticView implements AbstrView{
     private Simulator simulator;
     private DrawGraph mainPanel;
 
+    private ArrayList<Integer> scores;
+
 
   public StatisticView(Simulator simulator) {
       this.simulator = simulator;
-
+      scores = new ArrayList<>();
       frame = new JFrame();
       //Container contentPane = frame.getContentPane();
 
       JPanel panel = createPanel();
-      //java.util.List<Integer> scores = new ArrayList<Integer>();
-      mainPanel = new DrawGraph();
-      mainPanel.createAndShowGui(simulator);
+      mainPanel = new DrawGraph(scores);
+      mainPanel.createAndShowGui(scores);
 
 
       JTabbedPane tabbedPane = new JTabbedPane();
@@ -78,8 +80,13 @@ public class StatisticView implements AbstrView{
       adhocLabel.setText("amount of open Ad Hoc spots: " + adHocSpots);
       passLabel.setText("amount of open Pass spots: " + passSpots);
       earningsLabel.setText("Total earnings : € " + earnings);
+      if(scores.size()>100){
+          scores.remove(0);
+      }
+      scores.add(540-cars);
+      mainPanel.createAndShowGui(scores);
       //mainPanel.addData();
-      mainPanel.repaint();
+      //mainPanel.repaint();
       frame.repaint();
   }
   public void disableView(){

@@ -21,7 +21,7 @@ import javax.swing.*;
 
 @SuppressWarnings("serial")
 public class DrawGraph extends JPanel implements AbstrView {
-    private static final int MAX_SCORE = 20;
+    private static final int MAX_SCORE = 560;
     private static final int PREF_W = 800;
     private static final int PREF_H = 650;
     private static final int BORDER_GAP = 30;
@@ -34,8 +34,8 @@ public class DrawGraph extends JPanel implements AbstrView {
     private Simulator simulator;
 
 
-    public DrawGraph() {
-        scores = new ArrayList<Integer>();
+    public DrawGraph(ArrayList<Integer> scores) {
+        this.scores = scores;
     }
 
     @Override
@@ -105,7 +105,7 @@ public class DrawGraph extends JPanel implements AbstrView {
     }
 
 
-    public DrawGraph createAndShowGui(Simulator simulator) {
+    public DrawGraph createAndShowGui(ArrayList<Integer> bla) {
         /*
         this.simulator = simulator;
         //    Random random = new Random();
@@ -119,14 +119,15 @@ public class DrawGraph extends JPanel implements AbstrView {
             int filledSpots = simulator.getNumberOfPlaces() - simulator.getNumberOfOpenSpots();
             scores.add(filledSpots);
             */
-        Random random = new Random();
+
+       /* Random random = new Random();
         int maxDataPoints = 16;
         int maxScore = 20;
         for (int i = 0; i < maxDataPoints ; i++) {
             scores.add(random.nextInt(maxScore));
-        }
+        }*/
 
-        DrawGraph mainPanel = new DrawGraph();
+        DrawGraph mainPanel = new DrawGraph(bla);
         return mainPanel;
     }
 
