@@ -101,11 +101,11 @@ public class StatisticView implements AbstrView{
       textPanel.add(sundayLabel);
 
       GridLayout mainGrid = new GridLayout(2,1);
-      chartMainPanel.setLayout();
+      chartMainPanel.setLayout(mainGrid);
       chartPanel = new ChartPanel(values, names, "Inkomen per dag");
       chartMainPanel.add(textPanel);
       chartMainPanel.add(chartPanel);
-      
+
       JTabbedPane tabbedPane = new JTabbedPane();
       frame.add(tabbedPane);
 
