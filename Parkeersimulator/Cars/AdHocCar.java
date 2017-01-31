@@ -8,6 +8,7 @@ public class AdHocCar extends Car {
 	
     public AdHocCar() {
     	Random random = new Random();
+    	//auto blijft minimaal 15 minuten, maximaal 3:15 uur(3*60 minuten + 15) random.nextFloat() geeft een getal tussen 0.0 en 1.0
     	int stayMinutes = (int) (15 + random.nextFloat() * 3 * 60);
         this.setMinutesLeft(stayMinutes);
         this.setHasToPay(true);
