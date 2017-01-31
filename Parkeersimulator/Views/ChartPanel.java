@@ -82,7 +82,7 @@ public class ChartPanel extends JPanel {
             g.drawString(names[i], x, y);
         }
     }
-
+/*
     public static void main(String[] argv) {
         JFrame f = new JFrame();
         f.setSize(400, 300);
@@ -107,5 +107,6 @@ public class ChartPanel extends JPanel {
         f.addWindowListener(wndCloser);
         f.setVisible(true);
     }
+    */
 }
 
