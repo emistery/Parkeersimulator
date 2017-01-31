@@ -1,17 +1,16 @@
 /**
  * Created by Lenovo T420 on 27-1-2017.
  */
-package Parkeersimulator.Views;
+package Parkeersimulator.Views.StatisticView;
 import Parkeersimulator.Simulator;
 import Parkeersimulator.SimulatorController;
+import Parkeersimulator.Views.AbstrView;
 
 import javax.swing.*;
 import java.awt.*;
-import java.lang.reflect.Array;
 import java.util.*;
-import java.awt.event.KeyEvent;
 
-public class StatisticView implements AbstrView{
+public class StatisticView implements AbstrView {
     private JFrame frame;
     private SimulatorController controller;
     private JTabbedPane tabbedPane;

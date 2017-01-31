@@ -4,9 +4,9 @@
 package Parkeersimulator;
 
 import Parkeersimulator.Views.AbstrView;
-import Parkeersimulator.Views.CarParkView;
-import Parkeersimulator.Views.SimulatorView;
-import Parkeersimulator.Views.StatisticView;
+import Parkeersimulator.Views.BaseView.CarParkView;
+import Parkeersimulator.Views.BaseView.SimulatorView;
+import Parkeersimulator.Views.StatisticView.StatisticView;
 
 public class SimulatorController {
     private Simulator simulator;

@@ -1,8 +1,10 @@
-package Parkeersimulator.Views;
+package Parkeersimulator.Views.BaseView;
 
 import Parkeersimulator.Cars.Car;
 import Parkeersimulator.Location;
 import Parkeersimulator.Simulator;
+import Parkeersimulator.Views.AbstrView;
+
 import java.awt.event.*;
 
 import javax.swing.*;

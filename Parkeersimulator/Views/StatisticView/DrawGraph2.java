@@ -1,6 +1,7 @@
-package Parkeersimulator.Views;
+package Parkeersimulator.Views.StatisticView;
 
 import Parkeersimulator.Simulator;
+import Parkeersimulator.Views.AbstrView;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -12,7 +13,6 @@ import java.awt.RenderingHints;
 import java.awt.Stroke;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import javax.swing.*;
 
 

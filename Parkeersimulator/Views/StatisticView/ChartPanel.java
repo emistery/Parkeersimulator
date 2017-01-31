@@ -1,4 +1,4 @@
-package Parkeersimulator.Views;
+package Parkeersimulator.Views.StatisticView;
 
 import java.awt.Color;
 import java.awt.Dimension;

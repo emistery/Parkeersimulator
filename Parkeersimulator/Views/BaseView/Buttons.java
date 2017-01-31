@@ -1,7 +1,8 @@
-package Parkeersimulator.Views;
+package Parkeersimulator.Views.BaseView;
 
 import Parkeersimulator.Simulator;
 import Parkeersimulator.SimulatorController;
+import Parkeersimulator.Views.StatisticView.StatisticView;
 
 import javax.swing.*;
 import java.awt.*;
