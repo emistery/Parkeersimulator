@@ -29,12 +29,12 @@ public class Simulator implements Runnable {
     private int tickPause = 10;
     private int tick = 0;
 
-    private int weekDayArrivals= 100; // average number of arriving cars per hour
+    private int weekDayArrivals= 1000; // average number of arriving cars per hour
     private int weekendArrivals = 200; // average number of arriving cars per hour
     private int weekDayPassArrivals= 50; // average number of arriving cars per hour
     private int weekendPassArrivals = 5; // average number of arriving cars per hour
 
-    private int enterSpeed = 3; // number of cars that can enter per minute
+    private int enterSpeed = 7; // number of cars that can enter per minute
     private int paymentSpeed = 7; // number of cars that can pay per minute
     private int exitSpeed = 5; // number of cars that can leave per minute
 
@@ -53,6 +53,7 @@ public class Simulator implements Runnable {
 
     private double earnings;
     private double missedEarnings;
+    private int totalMissedCars;
     private double price = 0.03;
 
     public Simulator(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
@@ -270,7 +271,7 @@ public class Simulator implements Runnable {
     }
     private void updateViews(){
         for(AbstrView view : views){
-            view.updateView(tick, openAdHocSpots, openPassSpots, numberOfOpenSpots, earnings);
+            view.updateView(tick, openAdHocSpots, openPassSpots, numberOfOpenSpots, earnings, missedEarnings, totalMissedCars);
         }
         // Update the car park view.
 
@@ -552,13 +553,18 @@ public class Simulator implements Runnable {
         double profit = totalMinutes * price;
         missedEarnings += profit;
         missedEarnings = round(missedEarnings, 2);
-        System.out.println(missedEarnings);
+        //System.out.println(missedEarnings);
     }
 
-    public void calculateMissedEarnings(){
+    public double calculateMissedEarnings(){
         for(Car car : missedCars){
             missedEarnings(car);
+            totalMissedCars++;
+            System.out.println(totalMissedCars);
         }
+        missedCars.clear();
+
+        return missedEarnings;
     }
 
     //comment2push
