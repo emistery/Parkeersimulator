@@ -172,7 +172,7 @@ public class DrawGraph extends JPanel implements AbstrView {
         adHocCars.clear();
     }
 
-    public void updateView(int tick, int adHocSpots, int passSpots, int cars, double earnings, double missedEarnings, int missedCars){
+    public void updateView(int tick, int adHocSpots, int passSpots, int cars, double earnings, double missedEarnings, int missedCars, String displayTime){
 
 
 

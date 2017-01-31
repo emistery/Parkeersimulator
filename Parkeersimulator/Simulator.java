@@ -55,6 +55,7 @@ public class Simulator implements Runnable {
     private double missedEarnings;
     private int totalMissedCars;
     private double price = 0.03;
+    private String displayTime;
 
     public Simulator(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
         entranceCarQueue = new CarQueue();
@@ -246,6 +247,7 @@ public class Simulator implements Runnable {
         setMinute(minute);
         setHour(hour);
         setDay(day);
+        displayDay();
 
     }
     private void handleEntrance(){
@@ -276,7 +278,7 @@ public class Simulator implements Runnable {
     }
     private void updateViews(){
         for(AbstrView view : views){
-            view.updateView(tick, openAdHocSpots, openPassSpots, numberOfOpenSpots, earnings, missedEarnings, totalMissedCars);
+            view.updateView(tick, openAdHocSpots, openPassSpots, numberOfOpenSpots, earnings, missedEarnings, totalMissedCars, displayTime);
         }
         // Update the car park view.
 
@@ -571,7 +573,37 @@ public class Simulator implements Runnable {
         return missedEarnings;
     }
 
-    //comment2push
+    public String displayDay(){
+        String currentDay ="day";
+        switch(day){
+            case 00:
+                currentDay = "Maandag";
+            break;
+            case 01:
+                currentDay = "Dinsdag";
+            break;
+            case 02:
+                currentDay = "Woensdag";
+            break;
+            case 03:
+                currentDay = "Donderdag";
+            break;
+            case 04:
+                currentDay = "Vrijdag";
+            break;
+            case 05:
+                currentDay = "Zaterdag";
+            break;
+            case 06:
+                currentDay = "Zondag";
+            break;
+        }
+        Integer.toString(hour, minute);
+        displayTime = ("Dag: " + currentDay + " Tijd: " + hour + ":" + minute);
+        return displayTime;
+        //System.out.println("Dag: " + currentDay + " Tijd: " + hour + ":" + minute);
+    }
+
 
 
 
