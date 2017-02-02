@@ -110,7 +110,7 @@ public class StatisticView implements AbstrView {
       earningsLabel.setText("Total earnings : € " + earnings);
       missedEarningsLabel.setText("Missed earnings : € " + simulator.calculateMissedEarnings());
       missedCarsLabel.setText("Missed cars: " + missedCars);
-      dayLabel.setText(Time.getDate(tick));
+      dayLabel.setText(simulator.displayDay());
 
       //create new Bar Graph every week and add it to a new tab.
       int week = Time.getWeek(tick)+1;
@@ -120,7 +120,7 @@ public class StatisticView implements AbstrView {
           controller.addView(activeBarChart);
       }
       if((tick%10081==0&&tick>10080)) {
-          weekTabs.addTab("week "+week, activeBarChart);
+          weekTabs.addTab("Week "+week, activeBarChart);
       }
 
       while(adHocs.size()>=GRAPH_POINTS){
