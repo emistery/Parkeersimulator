@@ -10,15 +10,13 @@ import java.awt.*;
 public class SimulatorView extends JFrame implements AbstrView {
     private Buttons buttons;
     private CarParkView carParkView;
-    private Simulator simulator;
 
     private JLabel tickLabel = new JLabel("0, Happy opening!");
 
 
-    public SimulatorView(Simulator simulator, CarParkView carParkView) {
+    public SimulatorView(CarParkView carParkView) {
         this.carParkView = carParkView;
-        this.simulator = simulator;
-        buttons = new Buttons(simulator);
+        buttons = new Buttons();
 
         Container contentPane = getContentPane();
         contentPane.add(tickLabel, BorderLayout.NORTH);

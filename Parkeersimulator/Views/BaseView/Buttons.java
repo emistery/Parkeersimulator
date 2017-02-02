@@ -13,7 +13,6 @@ import javax.swing.Timer;
 public class Buttons extends JPanel implements ActionListener {
     private StatisticView statView;
     private SimulatorController controller;
-    private Simulator simulator;
     private JButton eenDag;
     private JButton eenWeek;
     private JButton eentick;
@@ -24,9 +23,7 @@ public class Buttons extends JPanel implements ActionListener {
 
     private Timer timer;
 
-    public Buttons(Simulator simulator) {
-        this.simulator = simulator;
-
+    public Buttons() {
         eenDag = new JButton("1 dag");
         eenDag.addActionListener(this);
         eenWeek = new JButton("1week");
@@ -70,9 +67,9 @@ public class Buttons extends JPanel implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == eenDag){
-            simulator.run(1440);
+            controller.runSimulator(1440);
             disableButtons();
-            timer = new Timer( simulator.getTickPause() * 1440 + 200, new ActionListener(){
+            timer = new Timer( controller.getTickPause() * 1440 + 200, new ActionListener(){
                 public void actionPerformed(ActionEvent evt) {
                     enableButtons();
                 }
@@ -81,9 +78,9 @@ public class Buttons extends JPanel implements ActionListener {
             timer.start();
         }
         if(e.getSource() == eenWeek){
-            simulator.run(10080);
+            controller.runSimulator(10080);
             disableButtons();
-            timer = new Timer(simulator.getTickPause() * 10080 + 200, new ActionListener(){
+            timer = new Timer(controller.getTickPause() * 10080 + 200, new ActionListener(){
                 public void actionPerformed(ActionEvent evt) {
                     enableButtons();
                 }
@@ -92,9 +89,9 @@ public class Buttons extends JPanel implements ActionListener {
             timer.start();
         }
         if(e.getSource() == eentick){
-            simulator.run(1);
+            controller.runSimulator(1);
             disableButtons();
-            timer = new Timer(simulator.getTickPause() * 1 + 200, new ActionListener(){
+            timer = new Timer(controller.getTickPause() * 1 + 200, new ActionListener(){
                 public void actionPerformed(ActionEvent evt) {
                     enableButtons();
                 }
@@ -106,9 +103,9 @@ public class Buttons extends JPanel implements ActionListener {
 
             String text = textField.getText();
             int ticker = Integer.parseInt(text);
-            simulator.run(ticker);
+            controller.runSimulator(ticker);
             disableButtons();
-            int delayFree = simulator.getTickPause() * ticker + 200;
+            int delayFree = controller.getTickPause() * ticker + 200;
             timer = new Timer(delayFree, new ActionListener(){
                 public void actionPerformed(ActionEvent evt) {
                     enableButtons();
@@ -120,7 +117,7 @@ public class Buttons extends JPanel implements ActionListener {
         if(e.getSource() == tickPause) {
             int time = Integer.parseInt(tickPause.getText());
             if(time>0) {
-                simulator.setTickPause(time);
+                controller.setTickPause(time);
             }
         }
     }

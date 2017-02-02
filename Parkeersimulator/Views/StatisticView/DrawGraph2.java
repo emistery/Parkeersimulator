@@ -40,8 +40,6 @@ public class DrawGraph2 extends JPanel implements AbstrView {
     private int pointInterval = 6;
     private List<Integer> adHocCars;
     private List<Integer> passCars;
-    private Simulator simulator;
-
 
     public DrawGraph2(ArrayList<Integer> scores, ArrayList<Integer> passList) {
         adHocCars = scores;
