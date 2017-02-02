@@ -114,7 +114,7 @@ public class RunButtons extends JPanel implements ActionListener {
         }
         if(e.getSource() == tickPause) {
             int time = Integer.parseInt(tickPause.getText());
-            if(time>0) {
+            if(time>=0) {
                 controller.setTickPause(time);
             }
         }

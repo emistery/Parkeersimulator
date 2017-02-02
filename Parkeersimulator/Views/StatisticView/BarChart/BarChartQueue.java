@@ -49,7 +49,9 @@ public class BarChartQueue extends JPanel implements AbstrView{
         add(chartPanel);
     }
     public void updateView(int tick, int adHocSpots, int passSpots, int cars, double earnings, double missedEarnings, int missedCars, String displayTime){
+        values[0] = ((double)controller.getAdHocQueue());
         values[1] = ((double)controller.getPassQueue());
+
         adHocLabel.setText("lengte: " + values[0]);
         passLabel.setText("lengte: " + values[1]);
     }

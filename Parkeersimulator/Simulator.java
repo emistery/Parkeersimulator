@@ -236,10 +236,12 @@ public class Simulator implements Runnable {
     	handleExit();
     	updateViews();
     	// Pause.
-        try {
-            Thread.sleep(tickPause);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        if(tickPause!=0) {
+            try {
+                Thread.sleep(tickPause);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     	handleEntrance();
     }
@@ -334,26 +336,24 @@ public class Simulator implements Runnable {
         addArrivingCars(numberOfCars, PASS);    	
     }
 
-    private void carsEntering(CarQueue queue){
-        int i=0;
+    private void carsEntering(CarQueue queue) {
+        int i = 0;
         // Remove car from the front of the queue and assign to a parking space.
-        while(!spotsAvailable()){
-            queue.driveAway();
+        if (spotsAvailable()) {
 
-        }
-    	while (queue.carsInQueue()>0 &&
-    			spotsAvailable() &&
-    			i<enterSpeed) {
-            Car car = queue.removeCar();
-            if(car.getHasToPay() == true && openAdHocSpots > 0)
-            {
-                Location freeLocation = getFirstFreeLocation();
-                setCarAt(freeLocation, car);
-            }else if(car.getHasToPay() == false && openPassSpots > 0){
-                Location freePassLocation = getFirstFreePassLocation();
-                setCarAt(freePassLocation, car);
+            while (queue.carsInQueue() > 0 &&
+                    spotsAvailable() &&
+                    i < enterSpeed) {
+                Car car = queue.removeCar();
+                if (car.getHasToPay() == true && openAdHocSpots > 0) {
+                    Location freeLocation = getFirstFreeLocation();
+                    setCarAt(freeLocation, car);
+                } else if (car.getHasToPay() == false && openPassSpots > 0) {
+                    Location freePassLocation = getFirstFreePassLocation();
+                    setCarAt(freePassLocation, car);
+                }
+                i++;
             }
-            i++;
         }
     }
 
