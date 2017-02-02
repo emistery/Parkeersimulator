@@ -59,4 +59,12 @@ public class SimulatorController {
     public double getDayEarnings(){
         return simulator.getDayEarnings();
     }
+
+    public int getAdHocQueue(){
+        return simulator.getAdHocQueueSize();
+    }
+
+    public int getPassQueue(){
+        return simulator.getPassQueueSize();
+    }
 }

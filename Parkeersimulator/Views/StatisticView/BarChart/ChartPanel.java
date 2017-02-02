@@ -15,10 +15,14 @@ public class ChartPanel extends JPanel {
 
     private String title;
 
-    public ChartPanel(double[] v, String[] n, String t) {
+    private double maxValue;
+
+    public ChartPanel(double[] v, String[] n, String t, double maxValue) {
         names = n;
         values = v;
         title = t;
+        this.maxValue = maxValue;
+
     }
 
     public void paintComponent(Graphics g) {
@@ -26,7 +30,7 @@ public class ChartPanel extends JPanel {
         if (values == null || values.length == 0)
             return;
         double minValue = 0;
-        double maxValue = 14000;
+        //maxValue = 14000;
         for (int i = 0; i < values.length; i++) {
             if (minValue > values[i])
                 minValue = values[i];

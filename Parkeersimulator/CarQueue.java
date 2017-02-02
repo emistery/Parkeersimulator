@@ -33,4 +33,8 @@ public class CarQueue {
         int length = queue.size();
         queue.remove(length);
     }
+
+    public int getLength(){
+        return queue.size();
+    }
 }

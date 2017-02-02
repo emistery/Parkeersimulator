@@ -39,8 +39,7 @@ public class Simulator implements Runnable {
     private int weekDayPassArrivals= 50; // average number of arriving cars per hour
     private int weekendPassArrivals = 5; // average number of arriving cars per hour
 
-    private int enterSpeed = 3
-            ; // number of cars that can enter per minute
+    private int enterSpeed = 3; // number of cars that can enter per minute
     private int paymentSpeed = 7; // number of cars that can pay per minute
     private int exitSpeed = 5; // number of cars that can leave per minute
 
@@ -70,7 +69,8 @@ public class Simulator implements Runnable {
         paymentCarQueue = new CarQueue();
         exitCarQueue = new CarQueue();
 
-        entranceCarQueue.setSize(10);
+        entranceCarQueue.setSize(15);
+        //entrancePassQueue.setSize(15);
 
         this.numberOfFloors = numberOfFloors;
         this.numberOfRows = numberOfRows;
@@ -635,6 +635,14 @@ public class Simulator implements Runnable {
         displayTime = ("Dag: " + currentDay + " Tijd: " + hour + ":" + minute);
         return displayTime;
         //System.out.println("Dag: " + currentDay + " Tijd: " + hour + ":" + minute);
+    }
+
+    public int getAdHocQueueSize(){
+        return entranceCarQueue.getLength();
+    }
+
+    public int getPassQueueSize(){
+        return entrancePassQueue.getLength();
     }
 
 

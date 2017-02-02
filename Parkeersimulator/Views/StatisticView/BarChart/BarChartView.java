@@ -57,7 +57,7 @@ public class BarChartView extends JPanel implements AbstrView{
 
         GridLayout mainGrid = new GridLayout(2,1);
         setLayout(mainGrid);
-        chartPanel = new ChartPanel(values, names, "Inkomen per dag");
+        chartPanel = new ChartPanel(values, names, "Inkomen per dag", 14000);
         JPanel tab = new JPanel();
         setLayout(mainGrid);
         add(textPanel);

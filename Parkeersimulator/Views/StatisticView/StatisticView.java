@@ -5,6 +5,7 @@ package Parkeersimulator.Views.StatisticView;
 import Parkeersimulator.Simulator;
 import Parkeersimulator.SimulatorController;
 import Parkeersimulator.Views.AbstrView;
+import Parkeersimulator.Views.StatisticView.BarChart.BarChartQueue;
 import Parkeersimulator.Views.StatisticView.BarChart.BarChartView;
 import Parkeersimulator.Views.Time;
 
@@ -37,6 +38,8 @@ public class StatisticView implements AbstrView {
     private static final int GRAPH_UPDATE_FREQUENCY = 60;
     private DrawGraph mainPanel;
 
+    private BarChartQueue queueBarChart;
+
   public StatisticView(Simulator simulator) {
       this.simulator = simulator;
       adHocs = new ArrayList<>();
@@ -51,6 +54,8 @@ public class StatisticView implements AbstrView {
       GridLayout mainGrid = new GridLayout(2,1);
       chartMainPanel.setLayout(mainGrid);
 
+      queueBarChart = new BarChartQueue();
+
       activeBarChart = new BarChartView();
       weekTabs = new JTabbedPane();
       weekTabs.addTab("Week 1", activeBarChart);
@@ -60,6 +65,7 @@ public class StatisticView implements AbstrView {
       tabbedPane.addTab("Statistics", panel);
       tabbedPane.addTab("Chart", mainPanel);
       tabbedPane.addTab("BarChart", chartMainPanel);
+      tabbedPane.addTab("Queue Bar Chart", queueBarChart);
       frame.add(tabbedPane);
 
       /* todo klasse maken*/
@@ -151,7 +157,11 @@ public class StatisticView implements AbstrView {
     public void setController(SimulatorController contr){
       controller = contr;
       activeBarChart.setController(controller);
+      queueBarChart.setController(controller);
       controller.addView(activeBarChart);
+      controller.addView(queueBarChart);
+
+
     }
 }
 
