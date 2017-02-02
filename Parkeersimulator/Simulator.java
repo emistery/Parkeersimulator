@@ -210,12 +210,15 @@ public class Simulator implements Runnable {
         }
     }
     public void run(int numberOfTick) {
-
+        Long beginTime = System.currentTimeMillis();
         (new Thread(() -> {
             for (int i = 0; i < numberOfTick; i++) {
                 tick();
             }
+            Long executionTime = System.currentTimeMillis()-beginTime;
+            System.out.println("execution of "+ numberOfTick+" steps took "+executionTime+" milliseconds with an average of "+ (executionTime/numberOfTick)+" ms/tick");
         })).start();
+
     }
 
     private void tick() {
