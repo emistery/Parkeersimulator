@@ -51,7 +51,8 @@ public class StatisticView implements AbstrView {
       mainPanel.createAndShowGui(adHocs, pPass);
 
       JPanel chartMainPanel = new JPanel();
-      GridLayout mainGrid = new GridLayout(2,1);
+      GridLayout mainGrid = new GridLayout(0,1);
+      mainGrid.setVgap(0);
       chartMainPanel.setLayout(mainGrid);
 
       queueBarChart = new BarChartQueue();

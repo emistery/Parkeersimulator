@@ -15,7 +15,7 @@ public class BarChartView extends JPanel implements AbstrView{
     private SimulatorController controller;
 
     private JPanel textPanel;
-    private JTabbedPane weekTabs;
+    //private JTabbedPane weekTabs;
 
     private ChartPanel chartPanel;
 
@@ -44,8 +44,12 @@ public class BarChartView extends JPanel implements AbstrView{
 
         textPanel = new JPanel();
         GridLayout textGrid = new GridLayout(1,0);
-        textGrid.setHgap(9);
+        textGrid.setHgap(20);
         textPanel.setLayout(textGrid);
+        Dimension tD = new Dimension(400,50);
+        textPanel.setPreferredSize(tD);
+
+
 
         textPanel.add(mondayLabel);
         textPanel.add(tuesdayLabel);
@@ -55,13 +59,32 @@ public class BarChartView extends JPanel implements AbstrView{
         textPanel.add(saturdayLabel);
         textPanel.add(sundayLabel);
 
-        GridLayout mainGrid = new GridLayout(2,1);
-        setLayout(mainGrid);
+        //setSize(400,900);
+        GridBagLayout gridBag = new GridBagLayout();
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.HORIZONTAL;
+
+        GridLayout mainGrid = new GridLayout(0,1);
+        setLayout(gridBag);
+        mainGrid.setVgap(0);
         chartPanel = new ChartPanel(values, names, "Inkomen per dag", 14000);
         JPanel tab = new JPanel();
-        setLayout(mainGrid);
-        add(textPanel);
-        add(chartPanel);
+        tab.setLayout(mainGrid);
+        c.ipady = 0;
+        c.ipadx = 400;
+        c.gridx = 0;
+        c.gridy = 0;
+        add(textPanel, c);
+        c.ipady = 500;
+        c.ipadx = 400;
+        c.gridwidth = 3;
+        c.gridx = 0;
+        c.gridy = 1;
+        add(chartPanel, c);
+
+
+
+
         }
     public void updateView(int tick, int adHocSpots, int passSpots, int cars, double earnings, double missedEarnings, int missedCars, String displayTime){
         if(tick%10080!=0 && tick!=0) {
