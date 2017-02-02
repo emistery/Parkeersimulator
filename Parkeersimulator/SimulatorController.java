@@ -83,6 +83,7 @@ public class SimulatorController {
     public int getWeekendArrivals(){return simulator.getWeekendArrivals();}
     public int getWeekDayPassArrivals(){return simulator.getWeekDayPassArrivals();}
     public int getWeekendPassArrivals(){return simulator.getWeekendPassArrivals();}
+    public int getThursdayArrivals(){return simulator.getThursdayArrivals();}
     public int getEnterSpeed(){return simulator.getEnterSpeed();}
     public int getPaymentSpeed(){return simulator.getPaymentSpeed();}
     public int getExitSpeed(){return simulator.getExitSpeed();}
@@ -91,6 +92,7 @@ public class SimulatorController {
     public void setWeekendArrivals(int newValue){simulator.setWeekendArrivals(newValue);}
     public void setWeekDayPassArrivals(int newValue){simulator.setWeekDayPassArrivals(newValue);}
     public void setWeekendPassArrivals(int newValue){simulator.setWeekendPassArrivals(newValue);}
+    public void setThursdayArrivals(int newValue){simulator.setThursdayArrivals(newValue);}
     public void setEnterSpeed(int newValue){simulator.setEnterSpeed(newValue);}
     public void setPaymentSpeed(int newValue){simulator.setPaymentSpeed(newValue);}
     public void setExitSpeed(int newValue){simulator.setExitSpeed(newValue);}

@@ -39,6 +39,8 @@ public class Simulator implements Runnable {
     private int weekendArrivals = 200; // average number of arriving cars per hour
     private int weekDayPassArrivals= 50; // average number of arriving cars per hour
     private int weekendPassArrivals = 5; // average number of arriving cars per hour
+    private int thursdayArrivals = 150;
+
 
     private int enterSpeed = 3; // number of cars that can enter per minute
     private int paymentSpeed = 7; // number of cars that can pay per minute
@@ -123,6 +125,8 @@ public class Simulator implements Runnable {
         return weekendPassArrivals;
     }
 
+    public int getThursdayArrivals() {return thursdayArrivals;}
+
     public int getEnterSpeed(){
         return enterSpeed;
     }
@@ -190,6 +194,7 @@ public class Simulator implements Runnable {
     public void setWeekendPassArrivals (int weekendPassArrivals){
         this.weekendPassArrivals = weekendPassArrivals;
     }
+    public void setThursdayArrivals(int thursdayArrivals) {this.thursdayArrivals = thursdayArrivals;}
 
     public void setEnterSpeed(int enterSpeed){
         this.enterSpeed = enterSpeed;
@@ -323,9 +328,9 @@ public class Simulator implements Runnable {
     }
     
     private void carsArriving(){
-    	int numberOfCars=getNumberOfCars(weekDayArrivals, weekendArrivals);
+    	int numberOfCars=getNumberOfCars(weekDayArrivals, weekendArrivals, thursdayArrivals);
         addArrivingCars(numberOfCars, AD_HOC);    	
-    	numberOfCars=getNumberOfCars(weekDayPassArrivals, weekendPassArrivals);
+    	numberOfCars=getNumberOfCars(weekDayPassArrivals, weekendPassArrivals, weekDayPassArrivals);
         addArrivingCars(numberOfCars, PASS);    	
     }
 
@@ -427,13 +432,16 @@ public class Simulator implements Runnable {
     	}	
     }
     
-    private int getNumberOfCars(int weekDay, int weekend){
+    private int getNumberOfCars(int weekDay, int weekend, int thursday){
         Random random = new Random();
 
         // Get the average number of cars that arrive per hour.
         int averageNumberOfCarsPerHour = day < 5
                 ? weekDay
                 : weekend;
+        if(day==3){
+            averageNumberOfCarsPerHour=thursday;
+        }
 
         // Calculate the number of cars that arrive this minute.
         double standardDeviation = averageNumberOfCarsPerHour * 0.3;

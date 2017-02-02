@@ -16,6 +16,7 @@ public class SettingLabels extends JPanel implements AbstrView{
     private JLabel weekendArrivals;
     private JLabel weekDayPassArrivals;
     private JLabel weekendPassArrivals;
+    private JLabel thursdayArrivals;
 
     private JLabel enterSpeed;
     private JLabel paymentSpeed;
@@ -25,6 +26,7 @@ public class SettingLabels extends JPanel implements AbstrView{
     private JTextField setWeekendArrivals;
     private JTextField setWeekDayPassArrivals;
     private JTextField setWeekendPassArrivals;
+    private JTextField setThursdayArrivals;
     private JTextField setEnterSpeed;
     private JTextField setPaymentSpeed;
     private JTextField setExitSpeed;
@@ -53,6 +55,9 @@ public class SettingLabels extends JPanel implements AbstrView{
         add(setPaymentSpeed);
         add(exitSpeed);
         add(setExitSpeed);
+        add(thursdayArrivals);
+        add(setThursdayArrivals);
+
 
         setVisible(true);
     }
@@ -69,8 +74,9 @@ public class SettingLabels extends JPanel implements AbstrView{
         weekendArrivals.setText("weekendArrivals "+controller.getWeekendArrivals());
         weekDayPassArrivals.setText("weekDayPassArrivals "+controller.getWeekDayPassArrivals());
         weekendPassArrivals.setText("weekendPassArrivals "+controller.getWeekendPassArrivals());
+        thursdayArrivals.setText("thursdayArrivals "+controller.getThursdayArrivals());
 
-        enterSpeed.setText(" enterSpeed"+ controller.getEnterSpeed());
+        enterSpeed.setText("enterSpeed"+ controller.getEnterSpeed());
         paymentSpeed.setText("paymentSpeed"+ controller.getPaymentSpeed());
         exitSpeed.setText("exitSpeed"+ controller.getExitSpeed());
     }
@@ -83,6 +89,8 @@ public class SettingLabels extends JPanel implements AbstrView{
         weekDayPassArrivals.setForeground(new Color(169, 183, 198));
         weekendPassArrivals = new JLabel();
         weekendPassArrivals.setForeground(new Color(169, 183, 198));
+        thursdayArrivals = new JLabel();
+        thursdayArrivals.setForeground(new Color(169, 183, 198));
         enterSpeed = new JLabel();
         enterSpeed.setForeground(new Color(169, 183, 198));
         paymentSpeed = new JLabel();
@@ -97,6 +105,7 @@ public class SettingLabels extends JPanel implements AbstrView{
                 int value = Integer.parseInt(setWeekDayArrivals.getText());
                 if (value > 0) {
                     controller.setWeekDayArrivals(value);
+                    updateView();
                 }
             }
         });
@@ -106,6 +115,7 @@ public class SettingLabels extends JPanel implements AbstrView{
                 int value = Integer.parseInt(setWeekendArrivals.getText());
                 if (value > 0) {
                     controller.setWeekendArrivals(value);
+                    updateView();
                 }
             }
         });
@@ -115,6 +125,7 @@ public class SettingLabels extends JPanel implements AbstrView{
                 int value = Integer.parseInt(setWeekDayPassArrivals.getText());
                 if (value > 0) {
                     controller.setWeekDayPassArrivals(value);
+                    updateView();
                 }
             }
         });
@@ -124,6 +135,17 @@ public class SettingLabels extends JPanel implements AbstrView{
                 int value = Integer.parseInt(setWeekendPassArrivals.getText());
                 if (value > 0) {
                     controller.setWeekendPassArrivals(value);
+                    updateView();
+                }
+            }
+        });
+        setThursdayArrivals = new JTextField(4);
+        setThursdayArrivals.addActionListener(e -> {
+            if(controller != null) {
+                int value = Integer.parseInt(setThursdayArrivals.getText());
+                if (value > 0) {
+                    controller.setThursdayArrivals(value);
+                    updateView();
                 }
             }
         });
@@ -135,6 +157,7 @@ public class SettingLabels extends JPanel implements AbstrView{
                 int value = Integer.parseInt(setEnterSpeed.getText());
                 if (value > 0) {
                     controller.setEnterSpeed(value);
+                    updateView();
                 }
             }
         });
@@ -144,6 +167,7 @@ public class SettingLabels extends JPanel implements AbstrView{
                 int value = Integer.parseInt(setPaymentSpeed.getText());
                 if (value > 0) {
                     controller.setPaymentSpeed(value);
+                    updateView();
                 }
             }
         });
@@ -153,6 +177,7 @@ public class SettingLabels extends JPanel implements AbstrView{
                 int value = Integer.parseInt(setExitSpeed.getText());
                 if (value > 0) {
                     controller.setExitSpeed(value);
+                    updateView();
                 }
             }
         });
