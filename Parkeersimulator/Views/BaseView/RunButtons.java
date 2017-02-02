@@ -1,6 +1,5 @@
 package Parkeersimulator.Views.BaseView;
 
-import Parkeersimulator.Simulator;
 import Parkeersimulator.SimulatorController;
 import Parkeersimulator.Views.StatisticView.StatisticView;
 
@@ -10,8 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
 
-public class Buttons extends JPanel implements ActionListener {
-    private StatisticView statView;
+public class RunButtons extends JPanel implements ActionListener {
     private SimulatorController controller;
     private JButton eenDag;
     private JButton eenWeek;
@@ -23,7 +21,7 @@ public class Buttons extends JPanel implements ActionListener {
 
     private Timer timer;
 
-    public Buttons() {
+    public RunButtons() {
         eenDag = new JButton("1 dag");
         eenDag.addActionListener(this);
         eenWeek = new JButton("1week");

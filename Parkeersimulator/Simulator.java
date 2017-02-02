@@ -12,6 +12,7 @@ import java.util.Iterator;
 import java.util.Random;
 import java.lang.Runnable;
 
+
 public class Simulator implements Runnable {
     //is something running?
     private boolean running;
@@ -31,7 +32,7 @@ public class Simulator implements Runnable {
     private int hour = 0;
     private int minute = 0;
 
-    private int tickPause = 10;
+    private int tickPause = 1;
     private int tick = 0;
 
     private int weekDayArrivals= 100; // average number of arriving cars per hour
