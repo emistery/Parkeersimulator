@@ -441,7 +441,9 @@ public class Simulator implements Runnable {
     	switch(type) {
     	case AD_HOC:
     	    if(entranceCarQueue.carsInQueue() >= entranceCarQueue.getSize()) {
+                for (int i = 0; i < numberOfCars; i++) {
                     missedCars.add(new AdHocCar());
+                }
             } else {
                 for (int i = 0; i < numberOfCars; i++) {
                     entranceCarQueue.addCar(new AdHocCar());
