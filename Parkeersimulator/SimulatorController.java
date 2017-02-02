@@ -26,17 +26,23 @@ public class SimulatorController {
         simulator.addView(carParkView);
         simulator.addView(simulatorView);
         }
-
     public void addView(AbstrView view){
-        view.enableView();
+        simulator.addView(view);
+    }
+    public void removeView(AbstrView view){
+        simulator.removeView(view);
     }
 
-    public void removeView(AbstrView view){
+    public void enableView(AbstrView view){
+        view.enableView();
+    }
+    public void disableView(AbstrView view){
         view.disableView();
     }
     public Simulator getSimulator(){
         return simulator;
     }
+
     public SimulatorView getSimulatorView(){
         return (SimulatorView) simulatorView;
     }
@@ -49,5 +55,8 @@ public class SimulatorController {
     }
     public int getPassCars(){
         return simulator.getPassCars();
+    }
+    public double getDayEarnings(){
+        return simulator.getDayEarnings();
     }
 }

@@ -42,11 +42,11 @@ public class Buttons extends JPanel implements ActionListener {
         addView = new JButton("Meer informatie");
 
         addView.addActionListener(e -> {
-            if(controller != null){controller.addView(controller.getStatisticView());}
+            if(controller != null){controller.enableView(controller.getStatisticView());}
         });
         removeView = new JButton("Minder informatie");
         removeView.addActionListener(e -> {
-            if(controller != null){controller.removeView(controller.getStatisticView());}
+            if(controller != null){controller.disableView(controller.getStatisticView());}
         });
         add(eenDag);
         add(eenWeek);

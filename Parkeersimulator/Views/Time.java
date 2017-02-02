@@ -7,12 +7,29 @@ public class Time{
     private Time(){}
 
     public static String getDate(int tick){
+        String date = " week: " +getWeek(tick)+" " +getDay(tick)+" " + getHour(tick)+ ":" + getMinute(tick);
+        return date;
+    }
+    public static int getWeek(int tick){
         int week=tick/10080;
-        int dag= (tick%10080)/1440;
+        return week;
+    }
+    public static int getDayNumber(int tick){
+        int day= (tick%10080)/1440;
+        return day;
+    }
+
+    public static int getHour(int tick){
         int uur = ((tick%10080)%1440)/60;
+        return uur;
+    }
+    public static int getMinute(int tick){
         int minuut = ((tick%10080)%1440)%60;
+        return minuut;
+    }
+    public static String getDay(int tick){
         String day;
-        switch(dag){
+        switch(getDayNumber(tick)){
             case(0): day = "maandag ";
                 break;
             case(1):day = "dinsdag ";
@@ -29,7 +46,6 @@ public class Time{
                 break;
             default:day ="swag-- day could not be found";
         }
-        String date = " week: " +week+" " +day+" " + uur+ ":" + minuut;
-        return date;
+        return day;
     }
 }

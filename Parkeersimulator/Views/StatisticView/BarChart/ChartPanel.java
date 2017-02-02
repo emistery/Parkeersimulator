@@ -1,13 +1,10 @@
-package Parkeersimulator.Views.StatisticView;
+package Parkeersimulator.Views.StatisticView.BarChart;
 
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 
 import javax.swing.*;
 
@@ -29,7 +26,7 @@ public class ChartPanel extends JPanel {
         if (values == null || values.length == 0)
             return;
         double minValue = 0;
-        double maxValue = 10000;
+        double maxValue = 14000;
         for (int i = 0; i < values.length; i++) {
             if (minValue > values[i])
                 minValue = values[i];
@@ -58,6 +55,7 @@ public class ChartPanel extends JPanel {
         if (maxValue == minValue)
             return;
         double scale = (clientHeight - top - bottom) / (maxValue - minValue);
+
         y = clientHeight - labelFontMetrics.getDescent();
         g.setFont(labelFont);
 
@@ -85,6 +83,7 @@ public class ChartPanel extends JPanel {
         }
 
     }
+
 /*
     public static void main(String[] argv) {
         JFrame f = new JFrame();

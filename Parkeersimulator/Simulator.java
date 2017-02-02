@@ -5,6 +5,7 @@ import Parkeersimulator.Cars.AdHocCar;
 import Parkeersimulator.Cars.Car;
 import Parkeersimulator.Cars.ParkingPassCar;
 import Parkeersimulator.Views.AbstrView;
+import javax.swing.*;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -12,6 +13,10 @@ import java.util.Random;
 import java.lang.Runnable;
 
 public class Simulator implements Runnable {
+    //is something running?
+    private boolean running;
+
+
     //types of cars
 	private static final String AD_HOC = "1";
 	private static final String PASS = "2";
@@ -272,25 +277,44 @@ public class Simulator implements Runnable {
     }
     public void addView(AbstrView view)
     {
-        views.add(view);
-        updateViews();
+        (new Thread(() -> {
+            while(running == true) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            views.add(view);
+
+        })).start();
+
     }
     public void removeView(AbstrView view){
-        Iterator it = views.iterator();
-        while(it.hasNext()){
-            AbstrView bla = (AbstrView) it.next();
-            if(view == bla){
-                it.remove();
+        (new Thread(() -> {
+
+            while(running == true) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
-        }
+            Iterator it = views.iterator();
+            while (it.hasNext()) {
+                AbstrView bla = (AbstrView) it.next();
+                if (view == bla) {
+                    it.remove();
+                }
+            }
+        })).start();
     }
-    private void updateViews(){
+    private void updateViews() {
+        running=true;
         for(AbstrView view : views){
             view.updateView(tick, openAdHocSpots, openPassSpots, numberOfOpenSpots, earnings, missedEarnings, totalMissedCars, displayTime);
         }
-        // Update the car park view.
-
-
+        running=false;
     }
     
     private void carsArriving(){
