@@ -39,7 +39,7 @@ public class Simulator implements Runnable {
     private int weekendArrivals = 200; // average number of arriving cars per hour
     private int weekDayPassArrivals= 50; // average number of arriving cars per hour
     private int weekendPassArrivals = 5; // average number of arriving cars per hour
-    private int thursdayArrivals = 150;
+    private int thursdayArrivals = 195;
 
 
     private int enterSpeed = 3; // number of cars that can enter per minute
