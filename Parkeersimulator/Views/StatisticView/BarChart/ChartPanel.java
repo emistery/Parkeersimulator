@@ -85,6 +85,7 @@ public class ChartPanel extends JPanel {
 
             g.drawString(names[i], x, y);
         }
+    }
 
     }
 
@@ -114,5 +115,5 @@ public class ChartPanel extends JPanel {
         f.setVisible(true);
     }
     */
-}
+
 

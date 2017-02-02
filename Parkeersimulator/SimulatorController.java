@@ -78,6 +78,22 @@ public class SimulatorController {
     }
     public ArrayList<Location> getLocations(){return simulator.getLocations();}
     public Car getCarAt(Location location){return simulator.getCarAt(location);}
+    
+    public int getWeekDayArrivals(){return simulator.getWeekDayArrivals();}
+    public int getWeekendArrivals(){return simulator.getWeekendArrivals();}
+    public int getWeekDayPassArrivals(){return simulator.getWeekDayPassArrivals();}
+    public int getWeekendPassArrivals(){return simulator.getWeekendPassArrivals();}
+    public int getEnterSpeed(){return simulator.getEnterSpeed();}
+    public int getPaymentSpeed(){return simulator.getPaymentSpeed();}
+    public int getExitSpeed(){return simulator.getExitSpeed();}
+
+    public void setWeekDayArrivals(int newValue){simulator.setWeekDayArrivals(newValue);}
+    public void setWeekendArrivals(int newValue){simulator.setWeekendArrivals(newValue);}
+    public void setWeekDayPassArrivals(int newValue){simulator.setWeekDayPassArrivals(newValue);}
+    public void setWeekendPassArrivals(int newValue){simulator.setWeekendPassArrivals(newValue);}
+    public void setEnterSpeed(int newValue){simulator.setEnterSpeed(newValue);}
+    public void setPaymentSpeed(int newValue){simulator.setPaymentSpeed(newValue);}
+    public void setExitSpeed(int newValue){simulator.setExitSpeed(newValue);}
 
     public void setTickPause(int tickPause){simulator.setTickPause(tickPause);}
 

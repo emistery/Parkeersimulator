@@ -29,8 +29,6 @@ public class CarParkView extends JPanel implements AbstrView {
 
     }
 
-
-
     /**
      * Overridden. Tell the GUI manager how big we would like to be.
      */

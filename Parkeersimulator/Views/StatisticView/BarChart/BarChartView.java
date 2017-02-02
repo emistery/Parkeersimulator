@@ -49,8 +49,6 @@ public class BarChartView extends JPanel implements AbstrView{
         Dimension tD = new Dimension(400,50);
         textPanel.setPreferredSize(tD);
 
-
-
         textPanel.add(mondayLabel);
         textPanel.add(tuesdayLabel);
         textPanel.add(wednesdayLabel);
@@ -81,10 +79,6 @@ public class BarChartView extends JPanel implements AbstrView{
         c.gridx = 0;
         c.gridy = 1;
         add(chartPanel, c);
-
-
-
-
         }
     public void updateView(int tick, int adHocSpots, int passSpots, int cars, double earnings, double missedEarnings, int missedCars, String displayTime){
         if(tick%10080!=0 && tick!=0) {
