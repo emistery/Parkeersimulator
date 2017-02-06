@@ -5,7 +5,7 @@ public class Location {
     private int floor;
     private int row;
     private int place;
-
+    private boolean isReserved;
     /**
      * Constructor for objects of class Location
      */
@@ -13,6 +13,7 @@ public class Location {
         this.floor = floor;
         this.row = row;
         this.place = place;
+        isReserved = false;
     }
 
     /**
@@ -69,5 +70,13 @@ public class Location {
 
     public boolean checkPassLocation(){
         return floor == 2;
+    }
+
+    public boolean getIsReserved(){
+        return isReserved;
+    }
+
+    public void setIsReserved(boolean isReserved){
+        this.isReserved = isReserved;
     }
 }

@@ -64,7 +64,24 @@ public class CarParkView extends JPanel implements AbstrView {
         Graphics graphics = carParkImage.getGraphics();
         for(Location location : simulator.getLocations()){
                     Car car = simulator.getCarAt(location);
-                    Color color = car == null ? Color.white : car.getColor();
+                    Color color;
+                    if(car == null && !location.getIsReserved()){
+                        color = Color.white;
+                    }else if(location.getIsReserved()){
+                        color = Color.black;
+                    }else{
+                        color = car.getColor();
+                    }
+
+
+
+
+                    //Color color = car == null ? Color.white : car.getColor();
+                    /**
+                    if(location.getIsReserved()) {
+                        color = Color.black;
+                    }
+                     */
                     drawPlace(graphics, location, color);
                 }
         repaint();

@@ -45,7 +45,7 @@ public class Simulator implements Runnable {
     private int weekendArrivals = 200; // average number of arriving cars per hour
     private int weekDayPassArrivals= 50; // average number of arriving cars per hour
     private int weekendPassArrivals = 5; // average number of arriving cars per hour
-    private int weekDayReserveArrivals = 30;
+    private int weekDayReserveArrivals = 20;
     private int weekendReserveArrivals = 50;
     private int thursdayArrivals = 150;
 
@@ -265,6 +265,7 @@ public class Simulator implements Runnable {
         this.tick++;
         tickker();
     	advanceTime();
+        carsReserving();
     	handleExit();
     	updateViews();
     	// Pause.
@@ -320,9 +321,10 @@ public class Simulator implements Runnable {
      */
     private void handleEntrance(){
         //PassCar gets the fist spot, as it has priority
+
     	carsArriving();
     	carsEntering(entrancePassQueue);
-    	carsEntering(entranceCarQueue);  	
+    	carsEntering(entranceCarQueue);
     }
 
     /**
@@ -388,9 +390,20 @@ public class Simulator implements Runnable {
         running=false;
     }
 
+    private void carsReserving(){
+        int reservations = getNumberOfCars(weekDayReserveArrivals, weekendReserveArrivals, weekDayReserveArrivals);
+        for(int i = 0; i < reservations; i++){
+            Location reserveLocation = getFirstFreePassLocation();
+            reserveLocation.setIsReserved(true);
+            i++;
+
+        }
+    }
+
     /**
      * gets the amount of cars arriving this minute and adds them to the simulation
      */
+
     private void carsArriving(){
     	int numberOfCars=getNumberOfCars(weekDayArrivals, weekendArrivals, thursdayArrivals);
         addArrivingCars(numberOfCars, AD_HOC);
@@ -416,15 +429,16 @@ public class Simulator implements Runnable {
                     spotsAvailable() &&
                     i < enterSpeed) {
                 Car car = queue.removeCar();
-                if (car instanceof AdHocCar && openAdHocSpots > 3) {
+                if (car instanceof AdHocCar && openAdHocSpots > 0) {
                     Location freeLocation = getFirstFreeLocation();
                     setCarAt(freeLocation, car);
-                } else if (car instanceof ParkingPassCar && openPassSpots > 3) {
+                } else if (car instanceof ParkingPassCar && openPassSpots > 0) {
                     Location freePassLocation = getFirstFreePassLocation();
                     setCarAt(freePassLocation, car);
-                } else if (car instanceof ReservationCar && openPassSpots > 3){
-                    Location freePassLocation = getFirstFreePassLocation();
-                    setCarAt(freePassLocation, car);
+                } else if (car instanceof ReservationCar && openPassSpots > 0){
+                    Location freeReservedLocation = getFirstReservedLocation();
+                    setCarAt(freeReservedLocation, car);
+
                 }
                 i++;
             }
@@ -467,7 +481,18 @@ public class Simulator implements Runnable {
      */
     public Location getFirstFreePassLocation(){
         for(Location location : locations){
-            if (getCarAt(location) == null && location.checkPassLocation() ) {
+            if (getCarAt(location) == null && location.checkPassLocation() && !location.getIsReserved() ) {
+                return location;
+            }
+        }
+        return null;
+    }
+
+    public Location getFirstReservedLocation(){
+        for(Location location : locations){
+            if (location.checkPassLocation() && location.getIsReserved()) {
+                return location;
+            }else if(location.checkPassLocation()){
                 return location;
             }
         }
@@ -641,18 +666,17 @@ public class Simulator implements Runnable {
             if(car instanceof AdHocCar) {
                 cars[location.getFloor()][location.getRow()][location.getPlace()] = car;
                 car.setLocation(location);
-                openAdHocSpots--;
-                numberOfOpenSpots--;
-                return true;
-            }else if(car instanceof ParkingPassCar){
+            }else if(car instanceof ParkingPassCar && !location.getIsReserved()){
                 cars[location.getFloor()][location.getRow()][location.getPlace()] = car;
                 car.setLocation(location);
                 openPassSpots--;
                 numberOfOpenSpots--;
                 return true;
-            }else if(car instanceof ReservationCar){
+            }else if(car instanceof ReservationCar && location.getIsReserved()){
+                location.setIsReserved(false);
                 cars[location.getFloor()][location.getRow()][location.getPlace()] = car;
                 car.setLocation(location);
+
                 openPassSpots--;
                 numberOfOpenSpots--;
                 return true;
