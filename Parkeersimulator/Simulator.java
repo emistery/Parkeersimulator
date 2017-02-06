@@ -397,7 +397,9 @@ public class Simulator implements Runnable {
         if (random.nextInt(10) == random.nextInt(10)) {
             Location reserveLocation = getFirstFreePassLocation();
             reserveLocation.setIsReserved(true);
+
             int timeOfArrival = tick + random.nextInt(100);
+
             makeReservation(new ReservationCar(), reserveLocation, timeOfArrival);
         }
     }
@@ -421,7 +423,7 @@ public class Simulator implements Runnable {
     private void carsEntering(CarQueue queue) {
         int i = 0;
         // Remove car from the front of the queue and assign to a parking space.
-        //if (spotsAvailable()) {
+        if (spotsAvailable()) {
 
             while (queue.carsInQueue() > 0 &&
                     spotsAvailable() &&
@@ -433,12 +435,13 @@ public class Simulator implements Runnable {
                 } else if (car instanceof ParkingPassCar && openPassSpots > 0) {
                     Location freePassLocation = getFirstFreePassLocation();
                     setCarAt(freePassLocation, car);
-                } else if (car instanceof ReservationCar && openPassSpots > 0){
+                } else if (car instanceof ReservationCar /*&& openPassSpots > 0*/) {
                     Location freeReservedLocation = getFirstReservedLocation();
-                    setCarAt(freeReservedLocation, car);
+                    setCarAt(car.getLocation(), car);
                 }
                 i++;
             }
+        }
     }
 
     private boolean openSpots(){
@@ -656,6 +659,8 @@ public class Simulator implements Runnable {
             if(car instanceof AdHocCar) {
                 cars[location.getFloor()][location.getRow()][location.getPlace()] = car;
                 car.setLocation(location);
+                openAdHocSpots--;
+                numberOfOpenSpots--;
             }else if(car instanceof ParkingPassCar && !location.getIsReserved()){
                 cars[location.getFloor()][location.getRow()][location.getPlace()] = car;
                 car.setLocation(location);
@@ -666,7 +671,6 @@ public class Simulator implements Runnable {
                 location.setIsReserved(false);
                 cars[location.getFloor()][location.getRow()][location.getPlace()] = car;
                 car.setLocation(location);
-
                 openPassSpots--;
                 numberOfOpenSpots--;
                 return true;

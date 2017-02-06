@@ -13,6 +13,7 @@ public class Reservation {
     public Reservation(Car car, Location location, int timeOfArrival){
         this.car = car;
         this.location = location;
+        car.setLocation(location);
         this.timeOfArrival = timeOfArrival;
     }
     public Car getCar() {
