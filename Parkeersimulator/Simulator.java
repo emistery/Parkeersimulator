@@ -169,8 +169,7 @@ public class Simulator implements Runnable {
     }
 
     public int getMissedPassCars(){
-        int missedPassCar = missedPassCars.size();
-        return missedPassCar;
+        return missedPassCars.size();
     }
 
     //Set methods
