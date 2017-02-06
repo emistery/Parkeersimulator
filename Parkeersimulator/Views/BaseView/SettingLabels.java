@@ -1,7 +1,7 @@
 package Parkeersimulator.Views.BaseView;
 import Parkeersimulator.SimulatorController;
 import Parkeersimulator.Views.AbstrView;
-import com.sun.webkit.ColorChooser;
+//import com.sun.webkit.ColorChooser;
 
 
 import javax.swing.*;

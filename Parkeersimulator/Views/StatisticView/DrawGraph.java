@@ -81,6 +81,7 @@ public class DrawGraph extends JPanel implements AbstrView {
             int y0 = getHeight() - (((i + 1) * (getHeight() - BORDER_GAP * 2)) / Y_HATCH_CNT + BORDER_GAP);
             int y1 = y0;
             g2.drawLine(x0, y0, x1, y1);
+
         }
 
         // and for x axis
@@ -90,6 +91,7 @@ public class DrawGraph extends JPanel implements AbstrView {
             int y0 = getHeight() - BORDER_GAP;
             int y1 = y0 - GRAPH_POINT_WIDTH;
             g2.drawLine(x0, y0, x1, y1);
+
         }
 
         //tekent de grafiek van adHoc auto's

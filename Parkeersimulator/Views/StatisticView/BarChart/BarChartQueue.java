@@ -36,17 +36,35 @@ public class BarChartQueue extends JPanel implements AbstrView{
         GridLayout textGrid = new GridLayout(1,0);
         textGrid.setHgap(9);
         textPanel.setLayout(textGrid);
+        Dimension d = new Dimension(400,50);
+        textPanel.setPreferredSize(d);
 
         textPanel.add(adHocLabel);
         textPanel.add(passLabel);
 
+        GridBagLayout gridBag = new GridBagLayout();
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.HORIZONTAL;
+
+
+
+
         GridLayout mainGrid = new GridLayout(2,1);
-        setLayout(mainGrid);
+        setLayout(gridBag);
         chartPanel = new ChartPanel(values, names, "Wachtrijen",100);
         JPanel tab = new JPanel();
-        setLayout(mainGrid);
-        add(textPanel);
-        add(chartPanel);
+
+        c.ipady = 0;
+        c.ipadx = 400;
+        c.gridx = 0;
+        c.gridy = 0;
+        add(textPanel,c);
+        c.ipady = 500;
+        c.ipadx = 400;
+        c.gridwidth = 3;
+        c.gridx = 0;
+        c.gridy = 1;
+        add(chartPanel,c);
     }
     public void updateView(int tick, int adHocSpots, int passSpots, int cars, double earnings, double missedEarnings, int missedCars, String displayTime){
         values[0] = ((double)controller.getAdHocQueue());
