@@ -411,8 +411,7 @@ public class Simulator implements Runnable {
         addArrivingCars(numberOfCars, AD_HOC);
     	numberOfCars=getNumberOfCars(weekDayPassArrivals, weekendPassArrivals, weekDayPassArrivals);
         addArrivingCars(numberOfCars, PASS);
-        numberOfCars=getNumberOfCars(weekDayReserveArrivals, weekendPassArrivals, weekDayPassArrivals);
-        addArrivingCars(numberOfCars, RESERVE);
+        addArrivingCars(0, RESERVE);
     }
 
     /**
@@ -611,16 +610,6 @@ public class Simulator implements Runnable {
     	            entrancePassQueue.addCar(reservation.getCar());
                 }
             }
-    	    /*
-            if(entrancePassQueue.carsInQueue() >= entrancePassQueue.getMaxSize()) {
-                for (int i = 0; i < numberOfCars; i++) {
-                    missedPassCars.add(new ReservationCar());
-                }
-            }else {
-                for (int i = 0; i < numberOfCars; i++) {
-                    entrancePassQueue.addCar(new ReservationCar());
-                }}*/
-
     	}
     }
 
