@@ -548,25 +548,27 @@ public class Simulator implements Runnable {
      * @param type
      */
     private void addArrivingCars(int numberOfCars, String type){
+        int amountOfCars = numberOfCars;
         // Add the cars to the back of the queue.
     	switch(type) {
     	case AD_HOC:
+    	    while(entranceCarQueue.carsInQueue() <= entranceCarQueue.getMaxSize() && amountOfCars>0){
+    	        entranceCarQueue.addCar(new AdHocCar());
+    	        amountOfCars--;
+            }
     	    if(entranceCarQueue.carsInQueue() >= entranceCarQueue.getMaxSize()) {
-                for (int i = 0; i < numberOfCars; i++) {
+                for (int i = 0; i < amountOfCars; i++) {
                     missedCars.add(new AdHocCar());
                 }
-            } else {
-                for (int i = 0; i < numberOfCars; i++) {
-                    entranceCarQueue.addCar(new AdHocCar());
-                }}
+            }
             break;
     	case PASS:
-    	    if(entrancePassQueue.carsInQueue() >= entranceCarQueue.getMaxSize()) {
-    	        for (int i = 0; i < numberOfCars; i++) {
+    	    if(entrancePassQueue.carsInQueue() >= entrancePassQueue.getMaxSize()) {
+    	        for (int i = 0; i < amountOfCars; i++) {
     	            missedPassCars.add(new ParkingPassCar());
                 }
             } else {
-            for (int i = 0; i < numberOfCars; i++) {
+            for (int i = 0; i < amountOfCars; i++) {
             	entrancePassQueue.addCar(new ParkingPassCar());
             }}
             break;	            
