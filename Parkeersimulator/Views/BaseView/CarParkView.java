@@ -67,7 +67,7 @@ public class CarParkView extends JPanel implements AbstrView {
                     Color color;
                     if(car == null && !location.getIsReserved()){
                         color = Color.white;
-                    }else if(location.getIsReserved()){
+                    }else if(car == null && location.getIsReserved()){
                         color = Color.black;
                     }else{
                         color = car.getColor();

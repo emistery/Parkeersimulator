@@ -6,13 +6,11 @@ import Parkeersimulator.Cars.Car;
 import Parkeersimulator.Cars.ParkingPassCar;
 import Parkeersimulator.Cars.ReservationCar;
 import Parkeersimulator.Views.AbstrView;
-import javax.swing.*;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 import java.lang.Runnable;
-
 
 /**
  * A simulation of a car park
@@ -63,10 +61,11 @@ public class Simulator implements Runnable {
     private int openPassSpots;
 
     private Car[][][] cars;
-    private ArrayList<Location> locations = new ArrayList<Location>();
-    private ArrayList<AbstrView> views = new ArrayList<AbstrView>();
+    private ArrayList<Location> locations = new ArrayList<>();
+    private ArrayList<AbstrView> views = new ArrayList<>();
     private ArrayList<Car> missedCars = new ArrayList<>();
     private ArrayList<Car> missedPassCars = new ArrayList<>();
+    private ArrayList<Reservation> reservations = new ArrayList<>();
 
     //
     private double earnings;
@@ -265,7 +264,7 @@ public class Simulator implements Runnable {
         this.tick++;
         tickker();
     	advanceTime();
-        carsReserving();
+        randomReservation();
     	handleExit();
     	updateViews();
     	// Pause.
@@ -353,7 +352,6 @@ public class Simulator implements Runnable {
             views.add(view);
 
         })).start();
-
     }
 
     /**
@@ -390,13 +388,17 @@ public class Simulator implements Runnable {
         running=false;
     }
 
-    private void carsReserving(){
-        int reservations = getNumberOfCars(weekDayReserveArrivals, weekendReserveArrivals, weekDayReserveArrivals);
-        for(int i = 0; i < reservations; i++){
+    private void makeReservation(Car car, Location location, int timeOfArrival){
+        reservations.add(new Reservation(car, location, timeOfArrival));
+    }
+
+    private void randomReservation() {
+        Random random = new Random();
+        if (random.nextInt(10) == random.nextInt(10)) {
             Location reserveLocation = getFirstFreePassLocation();
             reserveLocation.setIsReserved(true);
-            i++;
-
+            int timeOfArrival = tick + random.nextInt(100);
+            makeReservation(new ReservationCar(), reserveLocation, timeOfArrival);
         }
     }
 
@@ -417,9 +419,6 @@ public class Simulator implements Runnable {
      * handles the cars entering the car park from a que
      * @param queue a que with cars
      */
-
-
-
     private void carsEntering(CarQueue queue) {
         int i = 0;
         // Remove car from the front of the queue and assign to a parking space.
@@ -438,11 +437,9 @@ public class Simulator implements Runnable {
                 } else if (car instanceof ReservationCar && openPassSpots > 0){
                     Location freeReservedLocation = getFirstReservedLocation();
                     setCarAt(freeReservedLocation, car);
-
                 }
                 i++;
             }
-        //}
     }
 
     private boolean openSpots(){
@@ -491,8 +488,6 @@ public class Simulator implements Runnable {
     public Location getFirstReservedLocation(){
         for(Location location : locations){
             if (location.checkPassLocation() && location.getIsReserved()) {
-                return location;
-            }else if(location.checkPassLocation()){
                 return location;
             }
         }
@@ -611,14 +606,20 @@ public class Simulator implements Runnable {
             }}
             break;
     	case RESERVE:
-            if(entrancePassQueue.carsInQueue() >= entranceCarQueue.getMaxSize()) {
+    	    for(Reservation reservation : reservations){
+    	        if(tick == reservation.getTimeOfArrival()){
+    	            entrancePassQueue.addCar(reservation.getCar());
+                }
+            }
+    	    /*
+            if(entrancePassQueue.carsInQueue() >= entrancePassQueue.getMaxSize()) {
                 for (int i = 0; i < numberOfCars; i++) {
                     missedPassCars.add(new ReservationCar());
                 }
             }else {
                 for (int i = 0; i < numberOfCars; i++) {
                     entrancePassQueue.addCar(new ReservationCar());
-                }}
+                }}*/
 
     	}
     }
