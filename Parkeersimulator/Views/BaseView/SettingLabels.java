@@ -63,7 +63,6 @@ public class SettingLabels extends JPanel implements AbstrView{
     }
     public void setController(SimulatorController contr) {
             controller = contr;
-            System.out.println(" added controller");
        updateView();
     }
     public Dimension getPreferredSize() {return new Dimension(800, 65);}
