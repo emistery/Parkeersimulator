@@ -5,6 +5,7 @@ import java.awt.*;
 
 public class ParkingPassCar extends Car {
 	private static final Color COLOR=Color.blue;
+	private int delay;
 	
     public ParkingPassCar() {
     	Random random = new Random();
@@ -15,5 +16,9 @@ public class ParkingPassCar extends Car {
     
     public Color getColor(){
     	return COLOR;
+    }
+
+    public void printDelay(){
+        System.out.println(delay);
     }
 }

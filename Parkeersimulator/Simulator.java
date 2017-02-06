@@ -4,6 +4,7 @@ package Parkeersimulator;
 import Parkeersimulator.Cars.AdHocCar;
 import Parkeersimulator.Cars.Car;
 import Parkeersimulator.Cars.ParkingPassCar;
+import Parkeersimulator.Cars.ReservationCar;
 import Parkeersimulator.Views.AbstrView;
 import javax.swing.*;
 
@@ -23,6 +24,7 @@ public class Simulator implements Runnable {
     //types of cars
 	private static final String AD_HOC = "1";
 	private static final String PASS = "2";
+	private static final String RESERVE = "3";
 	
     //all the queues
     private CarQueue entranceCarQueue;
@@ -43,7 +45,10 @@ public class Simulator implements Runnable {
     private int weekendArrivals = 200; // average number of arriving cars per hour
     private int weekDayPassArrivals= 50; // average number of arriving cars per hour
     private int weekendPassArrivals = 5; // average number of arriving cars per hour
+    private int weekDayReserveArrivals = 30;
+    private int weekendReserveArrivals = 50;
     private int thursdayArrivals = 150;
+
 
     private int enterSpeed = 3; // number of cars that can enter per minute
     private int paymentSpeed = 2; // number of cars that can pay per minute
@@ -390,32 +395,40 @@ public class Simulator implements Runnable {
     	int numberOfCars=getNumberOfCars(weekDayArrivals, weekendArrivals, thursdayArrivals);
         addArrivingCars(numberOfCars, AD_HOC);
     	numberOfCars=getNumberOfCars(weekDayPassArrivals, weekendPassArrivals, weekDayPassArrivals);
-        addArrivingCars(numberOfCars, PASS);    	
+        addArrivingCars(numberOfCars, PASS);
+        numberOfCars=getNumberOfCars(weekDayReserveArrivals, weekendPassArrivals, weekDayPassArrivals);
+        addArrivingCars(numberOfCars, RESERVE);
     }
 
     /**
      * handles the cars entering the car park from a que
      * @param queue a que with cars
      */
+
+
+
     private void carsEntering(CarQueue queue) {
         int i = 0;
         // Remove car from the front of the queue and assign to a parking space.
-        if (spotsAvailable()) {
+        //if (spotsAvailable()) {
 
             while (queue.carsInQueue() > 0 &&
                     spotsAvailable() &&
                     i < enterSpeed) {
                 Car car = queue.removeCar();
-                if (car.getHasToPay() && openAdHocSpots > 0) {
+                if (car instanceof AdHocCar && openAdHocSpots > 3) {
                     Location freeLocation = getFirstFreeLocation();
                     setCarAt(freeLocation, car);
-                } else if (!car.getHasToPay() && openPassSpots > 0) {
+                } else if (car instanceof ParkingPassCar && openPassSpots > 3) {
+                    Location freePassLocation = getFirstFreePassLocation();
+                    setCarAt(freePassLocation, car);
+                } else if (car instanceof ReservationCar && openPassSpots > 3){
                     Location freePassLocation = getFirstFreePassLocation();
                     setCarAt(freePassLocation, car);
                 }
                 i++;
             }
-        }
+        //}
     }
 
     private boolean openSpots(){
@@ -571,7 +584,17 @@ public class Simulator implements Runnable {
             for (int i = 0; i < amountOfCars; i++) {
             	entrancePassQueue.addCar(new ParkingPassCar());
             }}
-            break;	            
+            break;
+    	case RESERVE:
+            if(entrancePassQueue.carsInQueue() >= entranceCarQueue.getMaxSize()) {
+                for (int i = 0; i < numberOfCars; i++) {
+                    missedPassCars.add(new ReservationCar());
+                }
+            }else {
+                for (int i = 0; i < numberOfCars; i++) {
+                    entrancePassQueue.addCar(new ReservationCar());
+                }}
+
     	}
     }
 
@@ -615,13 +638,19 @@ public class Simulator implements Runnable {
         }
         Car oldCar = getCarAt(location);
         if (oldCar == null) {
-            if(car.getHasToPay()) {
+            if(car instanceof AdHocCar) {
                 cars[location.getFloor()][location.getRow()][location.getPlace()] = car;
                 car.setLocation(location);
                 openAdHocSpots--;
                 numberOfOpenSpots--;
                 return true;
-            }else if(!car.getHasToPay()){
+            }else if(car instanceof ParkingPassCar){
+                cars[location.getFloor()][location.getRow()][location.getPlace()] = car;
+                car.setLocation(location);
+                openPassSpots--;
+                numberOfOpenSpots--;
+                return true;
+            }else if(car instanceof ReservationCar){
                 cars[location.getFloor()][location.getRow()][location.getPlace()] = car;
                 car.setLocation(location);
                 openPassSpots--;
@@ -648,9 +677,11 @@ public class Simulator implements Runnable {
         cars[location.getFloor()][location.getRow()][location.getPlace()] = null;
         car.setLocation(null);
         numberOfOpenSpots++;
-        if(car.getHasToPay()) {
+        if(car instanceof AdHocCar) {
             openAdHocSpots++;
-        }else if(!car.getHasToPay()){
+        }else if(car instanceof ParkingPassCar){
+            openPassSpots++;
+        }else if(car instanceof ReservationCar){
             openPassSpots++;
         }
         return car;
