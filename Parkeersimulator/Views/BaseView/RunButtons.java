@@ -67,7 +67,8 @@ public class RunButtons extends JPanel implements ActionListener {
         if(e.getSource() == eenDag){
             controller.runSimulator(1440);
             disableButtons();
-            timer = new Timer( controller.getTickPause() * 1440 + 200, new ActionListener(){
+            int delayDag = controller.getTickPause() * 1440 + 200;
+            timer = new Timer( delayDag, new ActionListener(){
                 public void actionPerformed(ActionEvent evt) {
                     enableButtons();
                 }
@@ -78,7 +79,8 @@ public class RunButtons extends JPanel implements ActionListener {
         if(e.getSource() == eenWeek){
             controller.runSimulator(10080);
             disableButtons();
-            timer = new Timer(controller.getTickPause() * 10080 + 200, new ActionListener(){
+            int delayWeek = controller.getTickPause() * 10080 + 200;
+            timer = new Timer(delayWeek, new ActionListener(){
                 public void actionPerformed(ActionEvent evt) {
                     enableButtons();
                 }
@@ -89,7 +91,8 @@ public class RunButtons extends JPanel implements ActionListener {
         if(e.getSource() == eentick){
             controller.runSimulator(1);
             disableButtons();
-            timer = new Timer(controller.getTickPause() * 1 + 200, new ActionListener(){
+            int delayEen = controller.getTickPause() * 1 + 200;
+            timer = new Timer(delayEen, new ActionListener(){
                 public void actionPerformed(ActionEvent evt) {
                     enableButtons();
                 }

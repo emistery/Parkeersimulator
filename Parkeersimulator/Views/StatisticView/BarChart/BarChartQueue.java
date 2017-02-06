@@ -2,7 +2,6 @@ package Parkeersimulator.Views.StatisticView.BarChart;
 
 import Parkeersimulator.SimulatorController;
 import Parkeersimulator.Views.AbstrView;
-import Parkeersimulator.Views.Time;
 
 import javax.swing.*;
 import java.awt.*;
@@ -49,11 +48,10 @@ public class BarChartQueue extends JPanel implements AbstrView{
 
 
 
-        GridLayout mainGrid = new GridLayout(2,1);
+        //GridLayout mainGrid = new GridLayout(2,1);
         setLayout(gridBag);
-        chartPanel = new ChartPanel(values, names, "Wachtrijen",100);
-        JPanel tab = new JPanel();
-
+        chartPanel = new ChartPanel(values, names, "Wachtrijen",25);
+        // JPanel tab = new JPanel();
         c.ipady = 0;
         c.ipadx = 400;
         c.gridx = 0;
@@ -86,6 +84,6 @@ public class BarChartQueue extends JPanel implements AbstrView{
         long tmp = Math.round(value);
         return (double) tmp / factor;
     }
-    public void disableView(){};
-    public void enableView(){};
+    public void disableView(){}
+    public void enableView(){}
 }

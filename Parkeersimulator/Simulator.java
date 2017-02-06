@@ -43,11 +43,11 @@ public class Simulator implements Runnable {
     private int weekendArrivals = 200; // average number of arriving cars per hour
     private int weekDayPassArrivals= 50; // average number of arriving cars per hour
     private int weekendPassArrivals = 5; // average number of arriving cars per hour
-    private int thursdayArrivals = 195;
+    private int thursdayArrivals = 150;
 
     private int enterSpeed = 3; // number of cars that can enter per minute
-    private int paymentSpeed = 7; // number of cars that can pay per minute
-    private int exitSpeed = 5; // number of cars that can leave per minute
+    private int paymentSpeed = 2; // number of cars that can pay per minute
+    private int exitSpeed = 3; // number of cars that can leave per minute
 
 
     private int numberOfFloors;
@@ -287,6 +287,7 @@ public class Simulator implements Runnable {
             hour++;
         }
         while (hour > 23) {
+            //reset the day earnings to 0
             dayEarnings = 0.00;
             hour -= 24;
             day++;
@@ -335,7 +336,7 @@ public class Simulator implements Runnable {
     public void addView(AbstrView view)
     {
         (new Thread(() -> {
-            while(running == true) {
+            while(running) {
                 try {
                     Thread.sleep(100);
                 } catch (InterruptedException e) {
@@ -354,7 +355,7 @@ public class Simulator implements Runnable {
      */
     public void removeView(AbstrView view){
         (new Thread(() -> {
-            while(running == true) {
+            while(running) {
                 try {
                     Thread.sleep(100);
                 } catch (InterruptedException e) {
@@ -387,7 +388,7 @@ public class Simulator implements Runnable {
      */
     private void carsArriving(){
     	int numberOfCars=getNumberOfCars(weekDayArrivals, weekendArrivals, thursdayArrivals);
-        addArrivingCars(numberOfCars, AD_HOC);    	
+        addArrivingCars(numberOfCars, AD_HOC);
     	numberOfCars=getNumberOfCars(weekDayPassArrivals, weekendPassArrivals, weekDayPassArrivals);
         addArrivingCars(numberOfCars, PASS);    	
     }
@@ -405,10 +406,10 @@ public class Simulator implements Runnable {
                     spotsAvailable() &&
                     i < enterSpeed) {
                 Car car = queue.removeCar();
-                if (car.getHasToPay() == true && openAdHocSpots > 0) {
+                if (car.getHasToPay() && openAdHocSpots > 0) {
                     Location freeLocation = getFirstFreeLocation();
                     setCarAt(freeLocation, car);
-                } else if (car.getHasToPay() == false && openPassSpots > 0) {
+                } else if (!car.getHasToPay() && openPassSpots > 0) {
                     Location freePassLocation = getFirstFreePassLocation();
                     setCarAt(freePassLocation, car);
                 }
@@ -612,13 +613,13 @@ public class Simulator implements Runnable {
         }
         Car oldCar = getCarAt(location);
         if (oldCar == null) {
-            if(car.getHasToPay() == true) {
+            if(car.getHasToPay()) {
                 cars[location.getFloor()][location.getRow()][location.getPlace()] = car;
                 car.setLocation(location);
                 openAdHocSpots--;
                 numberOfOpenSpots--;
                 return true;
-            }else if(car.getHasToPay() == false){
+            }else if(!car.getHasToPay()){
                 cars[location.getFloor()][location.getRow()][location.getPlace()] = car;
                 car.setLocation(location);
                 openPassSpots--;
@@ -645,9 +646,9 @@ public class Simulator implements Runnable {
         cars[location.getFloor()][location.getRow()][location.getPlace()] = null;
         car.setLocation(null);
         numberOfOpenSpots++;
-        if(car.getHasToPay() == true) {
+        if(car.getHasToPay()) {
             openAdHocSpots++;
-        }else if(car.getHasToPay() == false){
+        }else if(!car.getHasToPay()){
             openPassSpots++;
         }
         return car;

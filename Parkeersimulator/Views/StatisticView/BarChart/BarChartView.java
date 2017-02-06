@@ -111,6 +111,6 @@ public class BarChartView extends JPanel implements AbstrView{
         long tmp = Math.round(value);
         return (double) tmp / factor;
     }
-    public void disableView(){};
-    public void enableView(){};
+    public void disableView(){}
+    public void enableView(){}
 }
