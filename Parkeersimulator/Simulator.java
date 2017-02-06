@@ -49,7 +49,7 @@ public class Simulator implements Runnable {
 
 
     private int enterSpeed = 3; // number of cars that can enter per minute
-    private int paymentSpeed = 2; // number of cars that can pay per minute
+    private int paymentSpeed = 7; // number of cars that can pay per minute
     private int exitSpeed = 3; // number of cars that can leave per minute
 
 
