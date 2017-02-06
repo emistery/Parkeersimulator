@@ -61,6 +61,7 @@ public class Simulator implements Runnable {
     private ArrayList<Location> locations = new ArrayList<Location>();
     private ArrayList<AbstrView> views = new ArrayList<AbstrView>();
     private ArrayList<Car> missedCars = new ArrayList<>();
+    private ArrayList<Car> missedPassCars = new ArrayList<>();
 
     //
     private double earnings;
@@ -83,7 +84,7 @@ public class Simulator implements Runnable {
         exitCarQueue = new CarQueue();
 
         entranceCarQueue.setMaxSize(15);
-        //entrancePassQueue.setSize(15);
+        entrancePassQueue.setMaxSize(15);
 
         this.numberOfFloors = numberOfFloors;
         this.numberOfRows = numberOfRows;
@@ -165,6 +166,11 @@ public class Simulator implements Runnable {
     }
     public int getPassCars(){
         return numberOfRows * numberOfPlaces - openPassSpots;
+    }
+
+    public int getMissedPassCars(){
+        int missedPassCar = missedPassCars.size();
+        return missedPassCar;
     }
 
     //Set methods
@@ -555,9 +561,14 @@ public class Simulator implements Runnable {
                 }}
             break;
     	case PASS:
+    	    if(entrancePassQueue.carsInQueue() >= entranceCarQueue.getMaxSize()) {
+    	        for (int i = 0; i < numberOfCars; i++) {
+    	            missedPassCars.add(new ParkingPassCar());
+                }
+            } else {
             for (int i = 0; i < numberOfCars; i++) {
             	entrancePassQueue.addCar(new ParkingPassCar());
-            }
+            }}
             break;	            
     	}
     }

@@ -24,6 +24,7 @@ public class StatisticView implements AbstrView {
     private JLabel earningsLabel = new JLabel("Total earnings: ");
     private JLabel missedEarningsLabel = new JLabel("Missed earnings: ");
     private JLabel missedCarsLabel = new JLabel("Missed Cars: ");
+    private JLabel missedPassCarsLabel = new JLabel("Missed pass Cars: ");
     private JLabel dayLabel = new JLabel("Current day: ");
 
     public static String newline = System.getProperty("line.separator");
@@ -81,6 +82,7 @@ public class StatisticView implements AbstrView {
       panel.add(earningsLabel);
       panel.add(missedEarningsLabel);
       panel.add(missedCarsLabel);
+      panel.add(missedPassCarsLabel);
       panel.add(dayLabel);//todo
 
       panel.repaint();
@@ -111,6 +113,7 @@ public class StatisticView implements AbstrView {
       earningsLabel.setText("Total earnings : € " + earnings);
       missedEarningsLabel.setText("Missed earnings : € " + simulator.calculateMissedEarnings());
       missedCarsLabel.setText("Missed cars: " + missedCars);
+      missedPassCarsLabel.setText("Missed pass cars: " + simulator.getMissedPassCars());
       dayLabel.setText(simulator.displayDay());
 
       //create new Bar Graph every week and add it to a new tab.
