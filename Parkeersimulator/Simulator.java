@@ -82,7 +82,7 @@ public class Simulator implements Runnable {
         paymentCarQueue = new CarQueue();
         exitCarQueue = new CarQueue();
 
-        entranceCarQueue.setSize(15);
+        entranceCarQueue.setMaxSize(15);
         //entrancePassQueue.setSize(15);
 
         this.numberOfFloors = numberOfFloors;
@@ -545,7 +545,7 @@ public class Simulator implements Runnable {
         // Add the cars to the back of the queue.
     	switch(type) {
     	case AD_HOC:
-    	    if(entranceCarQueue.carsInQueue() >= entranceCarQueue.getSize()) {
+    	    if(entranceCarQueue.carsInQueue() >= entranceCarQueue.getMaxSize()) {
                 for (int i = 0; i < numberOfCars; i++) {
                     missedCars.add(new AdHocCar());
                 }

@@ -21,11 +21,11 @@ public class CarQueue {
     	return queue.size();
     }
 
-    public void setSize(int queueSize) {
+    public void setMaxSize(int queueSize) {
         this.queueSize = queueSize;
     }
 
-    public int getSize(){
+    public int getMaxSize(){
         return queueSize;
     }
 
