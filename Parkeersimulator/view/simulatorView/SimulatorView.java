@@ -1,25 +1,27 @@
-package Parkeersimulator.Views.BaseView;
+package Parkeersimulator.view.simulatorView;
 
-import Parkeersimulator.SimulatorController;
-import Parkeersimulator.Views.AbstrView;
-import Parkeersimulator.Views.Time;
+import Parkeersimulator.controller.Controls;
+import Parkeersimulator.controller.RunButtons;
+import Parkeersimulator.controller.SettingLabels;
+import Parkeersimulator.model.Simulator;
+import Parkeersimulator.view.statisticView.AbstractView.AbstractView;
+import Parkeersimulator.Time;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class SimulatorView extends JFrame implements AbstrView {
-        private CarParkView carParkView;
+public class SimulatorView extends AbstractView {
+        private JFrame frame;
         private Controls controls;
-        private SimulatorController controller;
-
-    private JLabel tickLabel = new JLabel("0, Happy opening!");
+        private JLabel tickLabel = new JLabel("0, Happy opening!");
 
 
-    public SimulatorView(CarParkView carParkView) {
-        controls = new Controls();
+    public SimulatorView(CarParkView carParkView, Simulator simulator) {
+        super(simulator);
+        frame = new JFrame();
+        controls = new Controls(simulator);
 
-        this.carParkView = carParkView;
-        Container contentPane = getContentPane();
+        Container contentPane = frame.getContentPane();
         contentPane.add(tickLabel, BorderLayout.NORTH);
         contentPane.add(controls, BorderLayout.SOUTH);
         contentPane.add(carParkView, BorderLayout.CENTER);
@@ -29,15 +31,15 @@ public class SimulatorView extends JFrame implements AbstrView {
         contentPane.add(eastPanel, BorderLayout.EAST);
 
         //automatically terminates jvm when closing window
-        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        pack();
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.pack();
 
-        setVisible(true);
+        frame.setVisible(true);
 
         carParkView.updateView();
-        updateView(0,0,0,0,0.0, 0.0, 0, "");
+        updateView(0, 0, 0, 0, 0.0, 0.0, 0, "");
     }
-
+    public JFrame getFrame(){return  frame;}
     public RunButtons getButtons(){
         return controls.getButtons();
     }
@@ -48,16 +50,10 @@ public class SimulatorView extends JFrame implements AbstrView {
         tickLabel.setText("Tick: "+tick + date);
     }
     public void disableView(){
-        setVisible(false);
+        frame.setVisible(false);
     }
     public void enableView(){
-        setVisible(true);
+        frame.setVisible(true);
     }
-
-    public void setController(SimulatorController contr) {
-        controller = contr;
-        System.out.println(" controller added");
-    }
-
 
 }

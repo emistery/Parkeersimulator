@@ -1,4 +1,4 @@
-package Parkeersimulator.Cars;
+package Parkeersimulator.model.car;
 
 import java.util.Random;
 import java.awt.*;

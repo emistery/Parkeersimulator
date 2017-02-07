@@ -1,8 +1,9 @@
-package Parkeersimulator.Views.StatisticView.BarChart;
+package Parkeersimulator.view.statisticView.BarChart;
 
-import Parkeersimulator.SimulatorController;
-import Parkeersimulator.Views.AbstrView;
-import Parkeersimulator.Views.Time;
+import Parkeersimulator.main.ParkeerSimulator;
+import Parkeersimulator.model.Simulator;
+import Parkeersimulator.view.statisticView.AbstractView.AbstractView;
+import Parkeersimulator.Time;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,8 +12,8 @@ import java.awt.*;
  * Created by Gebruiker on 2-2-2017.
  * BarCharts expire every first minute of the week(monday0:0) and stop updating.
  */
-public class BarChartView extends JPanel implements AbstrView{
-    private SimulatorController controller;
+public class BarChartView extends AbstractView {
+    private ParkeerSimulator controller;
 
     private JPanel textPanel;
     //private JTabbedPane weekTabs;
@@ -30,7 +31,8 @@ public class BarChartView extends JPanel implements AbstrView{
     private JLabel saturdayLabel;
     private JLabel sundayLabel;
 
-    public BarChartView(){
+    public BarChartView(Simulator simulator){
+        super(simulator);
         mondayLabel = new JLabel("€" + 0.00);
         tuesdayLabel = new JLabel("€" + 0.00);
         wednesdayLabel=new JLabel("€" + 0.00);
@@ -99,7 +101,7 @@ public class BarChartView extends JPanel implements AbstrView{
         }
     }
 
-    public void setController(SimulatorController contr){
+    public void setController(ParkeerSimulator contr){
         controller = contr;
     }
 

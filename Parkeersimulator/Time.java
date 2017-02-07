@@ -1,4 +1,4 @@
-package Parkeersimulator.Views;
+package Parkeersimulator;
 
 /**
  * Created by Gebruiker on 31-1-2017.

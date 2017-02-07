@@ -1,20 +1,15 @@
-package Parkeersimulator.Views.BaseView;
+package Parkeersimulator.view.simulatorView;
 
-import Parkeersimulator.Cars.Car;
-import Parkeersimulator.Location;
-import Parkeersimulator.Simulator;
-import Parkeersimulator.Views.AbstrView;
-
-import java.awt.event.*;
+import Parkeersimulator.model.car.Car;
+import Parkeersimulator.model.Location;
+import Parkeersimulator.model.Simulator;
+import Parkeersimulator.view.statisticView.AbstractView.AbstractView;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 
 
-public class CarParkView extends JPanel implements AbstrView {
-
-    Simulator simulator;
+public class CarParkView extends AbstractView {
     private Dimension size;
     private Image carParkImage;
 
@@ -22,8 +17,8 @@ public class CarParkView extends JPanel implements AbstrView {
      * Constructor for objects of class CarPark
      */
     public CarParkView(Simulator simulator) {
+        super(simulator);
         size = new Dimension(0, 0);
-        this.simulator = simulator;
         setBackground(Color.GREEN);
         setBorder(BorderFactory.createTitledBorder("De parkeergarage"));
 

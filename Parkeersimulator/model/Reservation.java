@@ -1,6 +1,6 @@
-package Parkeersimulator;
+package Parkeersimulator.model;
 
-import Parkeersimulator.Cars.Car;
+import Parkeersimulator.model.car.Car;
 
 /**
  * Created by Gebruiker on 6-2-2017.

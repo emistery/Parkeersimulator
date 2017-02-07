@@ -1,7 +1,8 @@
-package Parkeersimulator.Views.StatisticView.BarChart;
+package Parkeersimulator.view.statisticView.BarChart;
 
-import Parkeersimulator.SimulatorController;
-import Parkeersimulator.Views.AbstrView;
+import Parkeersimulator.main.ParkeerSimulator;
+import Parkeersimulator.model.Simulator;
+import Parkeersimulator.view.statisticView.AbstractView.AbstractView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,8 +11,8 @@ import java.awt.*;
  * Created by Gebruiker on 2-2-2017.
  * BarCharts expire every first minute of the week(monday0:0) and stop updating.
  */
-public class BarChartQueue extends JPanel implements AbstrView{
-    private SimulatorController controller;
+public class BarChartQueue extends AbstractView {
+    private ParkeerSimulator controller;
 
     private JPanel textPanel;
 
@@ -24,7 +25,8 @@ public class BarChartQueue extends JPanel implements AbstrView{
     private JLabel passLabel;
 
 
-    public BarChartQueue(){
+    public BarChartQueue(Simulator simulator){
+        super(simulator);
         adHocLabel = new JLabel("lengte: " + 0);
         passLabel = new JLabel("lengte: " + 0);
 
@@ -72,7 +74,7 @@ public class BarChartQueue extends JPanel implements AbstrView{
         passLabel.setText("lengte: " + values[1]);
     }
 
-    public void setController(SimulatorController contr){
+    public void setController(ParkeerSimulator contr){
         controller = contr;
     }
 

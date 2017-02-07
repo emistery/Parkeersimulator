@@ -1,11 +1,11 @@
-package Parkeersimulator;
+package Parkeersimulator.model;
 //-----MODEL-----
 //needs methods for views and controllers to subscribe to state changes
-import Parkeersimulator.Cars.AdHocCar;
-import Parkeersimulator.Cars.Car;
-import Parkeersimulator.Cars.ParkingPassCar;
-import Parkeersimulator.Cars.ReservationCar;
-import Parkeersimulator.Views.AbstrView;
+import Parkeersimulator.model.car.AdHocCar;
+import Parkeersimulator.model.car.Car;
+import Parkeersimulator.model.car.ParkingPassCar;
+import Parkeersimulator.model.car.ReservationCar;
+import Parkeersimulator.view.statisticView.AbstractView.AbstractView;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -19,7 +19,7 @@ public class Simulator implements Runnable {
     //set true while the simulator is running
     private boolean running;
 
-    //types of cars
+    //types of car
 	private static final String AD_HOC = "1";
 	private static final String PASS = "2";
 	private static final String RESERVE = "3";
@@ -39,18 +39,16 @@ public class Simulator implements Runnable {
     private int tick = 0;
 
 
-    private int weekDayArrivals= 100; // average number of arriving cars per hour
-    private int weekendArrivals = 200; // average number of arriving cars per hour
-    private int weekDayPassArrivals= 50; // average number of arriving cars per hour
-    private int weekendPassArrivals = 5; // average number of arriving cars per hour
-    private int weekDayReserveArrivals = 20;
-    private int weekendReserveArrivals = 50;
+    private int weekDayArrivals= 100; // average number of arriving car per hour
+    private int weekendArrivals = 200; // average number of arriving car per hour
+    private int weekDayPassArrivals= 50; // average number of arriving car per hour
+    private int weekendPassArrivals = 5; // average number of arriving car per hour
     private int thursdayArrivals = 150;
 
 
-    private int enterSpeed = 3; // number of cars that can enter per minute
-    private int paymentSpeed = 7; // number of cars that can pay per minute
-    private int exitSpeed = 3; // number of cars that can leave per minute
+    private int enterSpeed = 3; // number of car that can enter per minute
+    private int paymentSpeed = 7; // number of car that can pay per minute
+    private int exitSpeed = 3; // number of car that can leave per minute
 
 
     private int numberOfFloors;
@@ -62,7 +60,7 @@ public class Simulator implements Runnable {
 
     private Car[][][] cars;
     private ArrayList<Location> locations = new ArrayList<>();
-    private ArrayList<AbstrView> views = new ArrayList<>();
+    private ArrayList<AbstractView> views = new ArrayList<>();
     private ArrayList<Car> missedCars = new ArrayList<>();
     private ArrayList<Car> missedPassCars = new ArrayList<>();
     private ArrayList<Reservation> reservations = new ArrayList<>();
@@ -76,7 +74,7 @@ public class Simulator implements Runnable {
     private String displayTime;
 
     /**
-     * creates a new simulator, creates entrances, exits and a new car park that can hold cars
+     * creates a new simulator, creates entrances, exits and a new car park that can hold car
      * @param numberOfFloors sets the number of floors of the simulator
      * @param numberOfRows sets the number of rows of the simulator
      * @param numberOfPlaces sets the number of places of the simulator
@@ -258,7 +256,7 @@ public class Simulator implements Runnable {
 
     /**
      * 1 step in the simulation
-     * time advances, views are updated, cars leave and arrive
+     * time advances, views are updated, car leave and arrive
      */
     private void tick() {
         this.tick++;
@@ -276,6 +274,7 @@ public class Simulator implements Runnable {
             }
         }
     	handleEntrance();
+        System.out.println(""+paymentCarQueue.carsInQueue());
     }
 
     /**
@@ -316,7 +315,7 @@ public class Simulator implements Runnable {
     }
 
     /**
-     * executes the methods used to let cars enter the car park
+     * executes the methods used to let car enter the car park
      */
     private void handleEntrance(){
         //PassCar gets the fist spot, as it has priority
@@ -327,7 +326,7 @@ public class Simulator implements Runnable {
     }
 
     /**
-     * executes the methods used to let cars out of the car park and pay
+     * executes the methods used to let car out of the car park and pay
      */
     private void handleExit(){
         carsReadyToLeave();
@@ -339,7 +338,7 @@ public class Simulator implements Runnable {
      * subscribes a view to the simulation to be notified of updates
      * @param view the view to be subscribed
      */
-    public void addView(AbstrView view)
+    public void addView(AbstractView view)
     {
         (new Thread(() -> {
             while(running) {
@@ -358,7 +357,7 @@ public class Simulator implements Runnable {
      * removes a view from the list of views to be notified of updates
      * @param view the view to be removed
      */
-    public void removeView(AbstrView view){
+    public void removeView(AbstractView view){
         (new Thread(() -> {
             while(running) {
                 try {
@@ -369,7 +368,7 @@ public class Simulator implements Runnable {
             }
             Iterator it = views.iterator();
             while (it.hasNext()) {
-                AbstrView bla = (AbstrView) it.next();
+                AbstractView bla = (AbstractView) it.next();
                 if (view == bla) {
                     it.remove();
                 }
@@ -382,7 +381,7 @@ public class Simulator implements Runnable {
      */
     private void updateViews() {
         running=true;
-        for(AbstrView view : views){
+        for(AbstractView view : views){
             view.updateView(tick, openAdHocSpots, openPassSpots, numberOfOpenSpots, earnings, missedEarnings, totalMissedCars, displayTime);
         }
         running=false;
@@ -405,7 +404,7 @@ public class Simulator implements Runnable {
     }
 
     /**
-     * gets the amount of cars arriving this minute and adds them to the simulation
+     * gets the amount of car arriving this minute and adds them to the simulation
      */
 
     private void carsArriving(){
@@ -417,8 +416,8 @@ public class Simulator implements Runnable {
     }
 
     /**
-     * handles the cars entering the car park from a que
-     * @param queue a que with cars
+     * handles the car entering the car park from a que
+     * @param queue a que with car
      */
     private void carsEntering(CarQueue queue) {
         int i = 0;
@@ -436,16 +435,11 @@ public class Simulator implements Runnable {
                     Location freePassLocation = getFirstFreePassLocation();
                     setCarAt(freePassLocation, car);
                 } else if (car instanceof ReservationCar /*&& openPassSpots > 0*/) {
-                    Location freeReservedLocation = getFirstReservedLocation();
                     setCarAt(car.getLocation(), car);
                 }
                 i++;
             }
         }
-    }
-
-    private boolean openSpots(){
-        return numberOfOpenSpots > 0;
     }
 
     /**
@@ -475,8 +469,8 @@ public class Simulator implements Runnable {
     }
 
     /**
-     *gets the first free location for cars with a parking pass
-     * @return the first free location for cars with a parking pass
+     *gets the first free location for car with a parking pass
+     * @return the first free location for car with a parking pass
      */
     public Location getFirstFreePassLocation(){
         for(Location location : locations){
@@ -509,10 +503,10 @@ public class Simulator implements Runnable {
     }
 
     /**
-     * adds leaving cars to the payment queue
+     * adds leaving car to the payment queue
      */
     private void carsReadyToLeave(){
-        // Add leaving cars to the payment queue.
+        // Add leaving car to the payment queue.
         Car car = getFirstLeavingCar();
         while (car!=null) {
         	if (car.getHasToPay()){
@@ -527,10 +521,10 @@ public class Simulator implements Runnable {
     }
 
     /**
-     * let cars pay
+     * let car pay
      */
     private void carsPaying(){
-        // Let cars pay.
+        // Let car pay.
     	int i=0;
     	while (paymentCarQueue.carsInQueue()>0 && i < paymentSpeed){
             Car car = paymentCarQueue.removeCar();
@@ -542,10 +536,10 @@ public class Simulator implements Runnable {
     }
 
     /**
-     * let cars leave
+     * let car leave
      */
     private void carsLeaving(){
-        // Let cars leave.
+        // Let car leave.
     	int i=0;
     	while (exitCarQueue.carsInQueue()>0 && i < exitSpeed){
             exitCarQueue.removeCar();
@@ -554,16 +548,16 @@ public class Simulator implements Runnable {
     }
 
     /**
-     * calculates the amount of cars that will arrive this minute
-     * @param weekDay average number of cars on a weekday
-     * @param weekend average number of cars in the weekend
-     * @param thursday average number of cars on thursday(koopavond)
-     * @return the amount of cars that wil arrive this minute
+     * calculates the amount of car that will arrive this minute
+     * @param weekDay average number of car on a weekday
+     * @param weekend average number of car in the weekend
+     * @param thursday average number of car on thursday(koopavond)
+     * @return the amount of car that wil arrive this minute
      */
     private int getNumberOfCars(int weekDay, int weekend, int thursday){
         Random random = new Random();
 
-        // Get the average number of cars that arrive per hour.
+        // Get the average number of car that arrive per hour.
         int averageNumberOfCarsPerHour = day < 5
                 ? weekDay
                 : weekend;
@@ -571,20 +565,20 @@ public class Simulator implements Runnable {
             averageNumberOfCarsPerHour=thursday;
         }
 
-        // Calculate the number of cars that arrive this minute.
+        // Calculate the number of car that arrive this minute.
         double standardDeviation = averageNumberOfCarsPerHour * 0.3;
         double numberOfCarsPerHour = averageNumberOfCarsPerHour + random.nextGaussian() * standardDeviation;
         return (int)Math.round(numberOfCarsPerHour / 60);	
     }
 
     /**
-     * adds the arriving cars to the ques or lets the cars drive of
+     * adds the arriving car to the ques or lets the car drive of
      * @param numberOfCars
      * @param type
      */
     private void addArrivingCars(int numberOfCars, String type){
         int amountOfCars = numberOfCars;
-        // Add the cars to the back of the queue.
+        // Add the car to the back of the queue.
     	switch(type) {
     	case AD_HOC:
     	    while(entranceCarQueue.carsInQueue() <= entranceCarQueue.getMaxSize() && amountOfCars>0){
@@ -737,7 +731,7 @@ public class Simulator implements Runnable {
     }
 
     /**
-     * advances the time for all the cars
+     * advances the time for all the car
      */
     public void tickker() {
         for(Location location : locations){

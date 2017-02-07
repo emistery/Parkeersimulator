@@ -1,10 +1,10 @@
-package Parkeersimulator.Views.StatisticView;
+package Parkeersimulator.view.statisticView;
 
 /**
  * Created by Emiel on 30-1-2017.
  */
-import Parkeersimulator.Simulator;
-import Parkeersimulator.Views.AbstrView;
+import Parkeersimulator.model.Simulator;
+import Parkeersimulator.view.statisticView.AbstractView.AbstractView;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -20,7 +20,7 @@ import javax.swing.*;
 
 
 @SuppressWarnings("serial")
-public class DrawGraph extends JPanel implements AbstrView {
+public class DrawGraph extends AbstractView {
     //hoogte van grafiek
     private static final int MAX_SCORE = 400;
     //grootte van het veld
@@ -45,7 +45,8 @@ public class DrawGraph extends JPanel implements AbstrView {
     private List<Integer> passCars;
 
 
-    public DrawGraph(ArrayList<Integer> scores, ArrayList<Integer> passList) {
+    public DrawGraph(ArrayList<Integer> scores, ArrayList<Integer> passList, Simulator simulator) {
+        super(simulator);
         adHocCars = scores;
         passCars = passList;
     }
@@ -178,7 +179,7 @@ public class DrawGraph extends JPanel implements AbstrView {
             scores.add(random.nextInt(maxScore));
         }*/
 
-        DrawGraph mainPanel = new DrawGraph(adHoc, pass);
+        DrawGraph mainPanel = new DrawGraph(adHoc, pass, simulator);
         return mainPanel;
     }
 

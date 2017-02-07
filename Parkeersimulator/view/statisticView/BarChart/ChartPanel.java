@@ -1,4 +1,4 @@
-package Parkeersimulator.Views.StatisticView.BarChart;
+package Parkeersimulator.view.statisticView.BarChart;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -86,34 +86,6 @@ public class ChartPanel extends JPanel {
             g.drawString(names[i], x, y);
         }
     }
-
-    }
-
-/*
-    public static void main(String[] argv) {
-        JFrame f = new JFrame();
-        f.setSize(400, 300);
-        double[] values = new double[3];
-        String[] names = new String[3];
-        values[0] = 1;
-        names[0] = "Item 1";
-
-        values[1] = 2;
-        names[1] = "Item 2";
-
-        values[2] = 4;
-        names[2] = "Item 3";
-
-        f.getContentPane().add(new ChartPanel(values, names, "title"));
-
-        WindowListener wndCloser = new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                System.exit(0);
-            }
-        };
-        f.addWindowListener(wndCloser);
-        f.setVisible(true);
-    }
-    */
+}
 
 

@@ -1,6 +1,6 @@
-package Parkeersimulator.Views.BaseView;
-import Parkeersimulator.SimulatorController;
-import Parkeersimulator.Views.AbstrView;
+package Parkeersimulator.controller;
+import Parkeersimulator.model.Simulator;
+import Parkeersimulator.view.statisticView.AbstractView.AbstractView;
 //import com.sun.webkit.ColorChooser;
 
 
@@ -10,8 +10,7 @@ import java.awt.*;
 /**
  * Created by Lenovo T420 on 2-2-2017.
  */
-public class SettingLabels extends JPanel implements AbstrView{
-    private SimulatorController controller;
+public class SettingLabels extends AbstractController {
     private JLabel weekDayArrivals;
     private JLabel weekendArrivals;
     private JLabel weekDayPassArrivals;
@@ -31,7 +30,8 @@ public class SettingLabels extends JPanel implements AbstrView{
     private JTextField setPaymentSpeed;
     private JTextField setExitSpeed;
 
-    public SettingLabels(){
+    public SettingLabels(Simulator simulator){
+        super(simulator);
         setBackground(new Color(43, 43, 43));
 
         GridLayout textGrid = new GridLayout(4,4);
@@ -61,23 +61,20 @@ public class SettingLabels extends JPanel implements AbstrView{
 
         setVisible(true);
     }
-    public void setController(SimulatorController contr) {
-            controller = contr;
-       updateView();
-    }
+
     public Dimension getPreferredSize() {return new Dimension(800, 65);}
 
     public void updateView(){updateView(0, 0, 0, 0, 0, 0,0, "");}
     public void updateView(int tick, int adHocSpots, int passSpots, int cars, double earnings, double missedEarnings, int missedCars, String displayTime){
-        weekDayArrivals.setText("weekDayArrivals "+controller.getWeekDayArrivals());
-        weekendArrivals.setText("weekendArrivals "+controller.getWeekendArrivals());
-        weekDayPassArrivals.setText("weekDayPassArrivals "+controller.getWeekDayPassArrivals());
-        weekendPassArrivals.setText("weekendPassArrivals "+controller.getWeekendPassArrivals());
-        thursdayArrivals.setText("thursdayArrivals "+controller.getThursdayArrivals());
+        weekDayArrivals.setText("weekDayArrivals "+ simulator.getWeekDayArrivals());
+        weekendArrivals.setText("weekendArrivals "+ simulator.getWeekendArrivals());
+        weekDayPassArrivals.setText("weekDayPassArrivals "+ simulator.getWeekDayPassArrivals());
+        weekendPassArrivals.setText("weekendPassArrivals "+ simulator.getWeekendPassArrivals());
+        thursdayArrivals.setText("thursdayArrivals "+ simulator.getThursdayArrivals());
 
-        enterSpeed.setText("enterSpeed"+ controller.getEnterSpeed());
-        paymentSpeed.setText("paymentSpeed"+ controller.getPaymentSpeed());
-        exitSpeed.setText("exitSpeed"+ controller.getExitSpeed());
+        enterSpeed.setText("enterSpeed"+ simulator.getEnterSpeed());
+        paymentSpeed.setText("paymentSpeed"+ simulator.getPaymentSpeed());
+        exitSpeed.setText("exitSpeed"+ simulator.getExitSpeed());
     }
     private void initializeLabels(){
         weekDayArrivals = new JLabel();
@@ -100,50 +97,50 @@ public class SettingLabels extends JPanel implements AbstrView{
     private void initializeTextFields(){
         setWeekDayArrivals = new JTextField(4);
         setWeekDayArrivals.addActionListener(e -> {
-            if(controller != null) {
+            if(simulator != null) {
                 int value = Integer.parseInt(setWeekDayArrivals.getText());
                 if (value > 0) {
-                    controller.setWeekDayArrivals(value);
+                    simulator.setWeekDayArrivals(value);
                     updateView();
                 }
             }
         });
         setWeekendArrivals = new JTextField(4);
         setWeekendArrivals.addActionListener(e -> {
-            if(controller != null) {
+            if(simulator != null) {
                 int value = Integer.parseInt(setWeekendArrivals.getText());
                 if (value > 0) {
-                    controller.setWeekendArrivals(value);
+                    simulator.setWeekendArrivals(value);
                     updateView();
                 }
             }
         });
         setWeekDayPassArrivals = new JTextField(4);
         setWeekDayPassArrivals.addActionListener(e -> {
-            if(controller != null) {
+            if(simulator != null) {
                 int value = Integer.parseInt(setWeekDayPassArrivals.getText());
                 if (value > 0) {
-                    controller.setWeekDayPassArrivals(value);
+                    simulator.setWeekDayPassArrivals(value);
                     updateView();
                 }
             }
         });
         setWeekendPassArrivals = new JTextField(4);
         setWeekendPassArrivals.addActionListener(e -> {
-            if(controller != null) {
+            if(simulator != null) {
                 int value = Integer.parseInt(setWeekendPassArrivals.getText());
                 if (value > 0) {
-                    controller.setWeekendPassArrivals(value);
+                    simulator.setWeekendPassArrivals(value);
                     updateView();
                 }
             }
         });
         setThursdayArrivals = new JTextField(4);
         setThursdayArrivals.addActionListener(e -> {
-            if(controller != null) {
+            if(simulator != null) {
                 int value = Integer.parseInt(setThursdayArrivals.getText());
                 if (value > 0) {
-                    controller.setThursdayArrivals(value);
+                    simulator.setThursdayArrivals(value);
                     updateView();
                 }
             }
@@ -152,30 +149,30 @@ public class SettingLabels extends JPanel implements AbstrView{
 
         setEnterSpeed = new JTextField(4);
         setEnterSpeed.addActionListener(e -> {
-            if(controller != null) {
+            if(simulator != null) {
                 int value = Integer.parseInt(setEnterSpeed.getText());
                 if (value > 0) {
-                    controller.setEnterSpeed(value);
+                    simulator.setEnterSpeed(value);
                     updateView();
                 }
             }
         });
         setPaymentSpeed = new JTextField(4);
         setPaymentSpeed.addActionListener(e -> {
-            if(controller != null) {
+            if(simulator != null) {
                 int value = Integer.parseInt(setPaymentSpeed.getText());
                 if (value > 0) {
-                    controller.setPaymentSpeed(value);
+                    simulator.setPaymentSpeed(value);
                     updateView();
                 }
             }
         });
         setExitSpeed = new JTextField(4);
         setExitSpeed.addActionListener(e -> {
-            if(controller != null) {
+            if(simulator != null) {
                 int value = Integer.parseInt(setExitSpeed.getText());
                 if (value > 0) {
-                    controller.setExitSpeed(value);
+                    simulator.setExitSpeed(value);
                     updateView();
                 }
             }

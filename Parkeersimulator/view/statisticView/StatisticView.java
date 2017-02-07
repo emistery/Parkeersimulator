@@ -1,34 +1,32 @@
 /**
  * Created by Lenovo T420 on 27-1-2017.
  */
-package Parkeersimulator.Views.StatisticView;
-import Parkeersimulator.Simulator;
-import Parkeersimulator.SimulatorController;
-import Parkeersimulator.Views.AbstrView;
-import Parkeersimulator.Views.StatisticView.BarChart.BarChartQueue;
-import Parkeersimulator.Views.StatisticView.BarChart.BarChartView;
-import Parkeersimulator.Views.Time;
+package Parkeersimulator.view.statisticView;
+import Parkeersimulator.model.Simulator;
+import Parkeersimulator.main.ParkeerSimulator;
+import Parkeersimulator.view.statisticView.AbstractView.AbstractView;
+import Parkeersimulator.view.statisticView.BarChart.BarChartQueue;
+import Parkeersimulator.view.statisticView.BarChart.BarChartView;
+import Parkeersimulator.Time;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.*;
 
-public class StatisticView implements AbstrView {
+public class StatisticView extends AbstractView {
     private JFrame frame;
-    private SimulatorController controller;
-    private JTabbedPane tabbedPane;
+    private ParkeerSimulator parkeerSimulator;
     private JLabel tickLabel = new JLabel("tick: ");
-    private JLabel carLabel = new JLabel("amount of cars : ");
+    private JLabel carLabel = new JLabel("amount of car : ");
     private JLabel adhocLabel = new JLabel("free Ad Hoc Spots: ");
     private JLabel passLabel = new JLabel("free Pass Spots: ");
     private JLabel earningsLabel = new JLabel("Total earnings: ");
     private JLabel missedEarningsLabel = new JLabel("Missed earnings: ");
-    private JLabel missedCarsLabel = new JLabel("Missed Cars: ");
-    private JLabel missedPassCarsLabel = new JLabel("Missed pass Cars: ");
+    private JLabel missedCarsLabel = new JLabel("Missed car: ");
+    private JLabel missedPassCarsLabel = new JLabel("Missed pass car: ");
     private JLabel dayLabel = new JLabel("Current day: ");
 
     public static String newline = System.getProperty("line.separator");
-    private Simulator simulator;
 
     private BarChartView activeBarChart;
     private JTabbedPane weekTabs;
@@ -42,13 +40,13 @@ public class StatisticView implements AbstrView {
     private BarChartQueue queueBarChart;
 
   public StatisticView(Simulator simulator) {
-      this.simulator = simulator;
+      super(simulator);
       adHocs = new ArrayList<>();
       pPass = new ArrayList<>();
       frame = new JFrame();
 
       JPanel panel = createPanel();
-      mainPanel = new DrawGraph(adHocs, pPass);
+      mainPanel = new DrawGraph(adHocs, pPass, simulator);
       mainPanel.createAndShowGui(adHocs, pPass);
 
       JPanel chartMainPanel = new JPanel();
@@ -56,9 +54,9 @@ public class StatisticView implements AbstrView {
       mainGrid.setVgap(0);
       chartMainPanel.setLayout(mainGrid);
 
-      queueBarChart = new BarChartQueue();
+      queueBarChart = new BarChartQueue(simulator);
 
-      activeBarChart = new BarChartView();
+      activeBarChart = new BarChartView(simulator);
       weekTabs = new JTabbedPane();
       weekTabs.addTab("Week 1", activeBarChart);
       chartMainPanel.add(weekTabs);
@@ -84,7 +82,6 @@ public class StatisticView implements AbstrView {
       panel.add(missedCarsLabel);
       panel.add(missedPassCarsLabel);
       panel.add(dayLabel);//todo
-
       panel.repaint();
 
       frame.pack();
@@ -112,16 +109,16 @@ public class StatisticView implements AbstrView {
       passLabel.setText("amount of open Pass spots: " + passSpots);
       earningsLabel.setText("Total earnings : € " + earnings);
       missedEarningsLabel.setText("Missed earnings : € " + simulator.calculateMissedEarnings());
-      missedCarsLabel.setText("Missed cars: " + missedCars);
-      missedPassCarsLabel.setText("Missed pass cars: " + simulator.getMissedPassCars());
+      missedCarsLabel.setText("Missed car: " + missedCars);
+      missedPassCarsLabel.setText("Missed pass car: " + simulator.getMissedPassCars());
       dayLabel.setText(simulator.displayDay());
 
       //create new Bar Graph every week and add it to a new tab.
       int week = Time.getWeek(tick)+1;
       if((tick%10080==0&&tick>10079)) {
-          activeBarChart = new BarChartView();
-          activeBarChart.setController(controller);
-          controller.addView(activeBarChart);
+          activeBarChart = new BarChartView(simulator);
+          activeBarChart.setController(parkeerSimulator);
+          simulator.addView(activeBarChart);
       }
       if((tick%10081==0&&tick>10080)) {
           weekTabs.addTab("Week "+week, activeBarChart);
@@ -132,8 +129,8 @@ public class StatisticView implements AbstrView {
           pPass.remove(0);
       }
       if((tick%GRAPH_UPDATE_FREQUENCY)==0 ||adHocs.size()==0) {
-          adHocs.add(controller.getAdHocCars());
-          pPass.add(controller.getPassCars());
+          adHocs.add(parkeerSimulator.getAdHocCars());
+          pPass.add(parkeerSimulator.getPassCars());
       }
       mainPanel.createAndShowGui(adHocs, pPass);
       frame.repaint();
@@ -142,8 +139,8 @@ public class StatisticView implements AbstrView {
       frame.setVisible(false);
   }
   public void enableView(){
-      Point point = controller.getSimulatorView().getLocation();
-      point.x = controller.getSimulatorView().getWidth();
+      Point point = parkeerSimulator.getSimulatorView().getFrame().getLocation();
+      point.x = parkeerSimulator.getSimulatorView().getFrame().getWidth();
       frame.setLocation(point);
       frame.setVisible(true);
   }
@@ -158,12 +155,12 @@ public class StatisticView implements AbstrView {
         return panel;
     }
 
-    public void setController(SimulatorController contr){
-      controller = contr;
-      activeBarChart.setController(controller);
-      queueBarChart.setController(controller);
-      controller.addView(activeBarChart);
-      controller.addView(queueBarChart);
+    public void setParkeerSimulator(ParkeerSimulator contr){
+      parkeerSimulator = contr;
+      activeBarChart.setController(parkeerSimulator);
+      queueBarChart.setController(parkeerSimulator);
+      simulator.addView(activeBarChart);
+      simulator.addView(queueBarChart);
 
 
     }

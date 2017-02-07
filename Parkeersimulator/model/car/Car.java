@@ -1,6 +1,6 @@
-package Parkeersimulator.Cars;
+package Parkeersimulator.model.car;
 
-import Parkeersimulator.Location;
+import Parkeersimulator.model.Location;
 
 import java.awt.*;
 
@@ -13,7 +13,7 @@ public abstract class Car {
     private int totalMinutes;
 
     /**
-     * Constructor for objects of class Cars
+     * Constructor for objects of class car
      */
     public Car() {
 
