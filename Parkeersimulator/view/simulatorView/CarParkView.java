@@ -8,7 +8,6 @@ import Parkeersimulator.view.statisticView.AbstractView.AbstractView;
 import javax.swing.*;
 import java.awt.*;
 
-
 public class CarParkView extends AbstractView {
     private Dimension size;
     private Image carParkImage;
@@ -21,7 +20,6 @@ public class CarParkView extends AbstractView {
         size = new Dimension(0, 0);
         setBackground(Color.GREEN);
         setBorder(BorderFactory.createTitledBorder("De parkeergarage"));
-
     }
 
     /**
@@ -50,6 +48,7 @@ public class CarParkView extends AbstractView {
     public void updateView(int tick, int adHocSpots, int passSpots, int cars, double earnings, double missedEarnings, int missedCars, String day) {
         updateView();
     }
+
     public void updateView() {
         // Create a new car park image if the size has changed.
         if (!size.equals(getSize())) {
@@ -67,16 +66,6 @@ public class CarParkView extends AbstractView {
                     }else{
                         color = car.getColor();
                     }
-
-
-
-
-                    //Color color = car == null ? Color.white : car.getColor();
-                    /**
-                    if(location.getIsReserved()) {
-                        color = Color.black;
-                    }
-                     */
                     drawPlace(graphics, location, color);
                 }
         repaint();
@@ -100,5 +89,4 @@ public class CarParkView extends AbstractView {
                 getHeight()/40 - 1); // TODO use dynamic size or constants
 
     }
-
 }

@@ -81,6 +81,4 @@ public class BarChartQueue extends AbstractView {
         long tmp = Math.round(value);
         return (double) tmp / factor;
     }
-    public void disableView(){}
-    public void enableView(){}
 }

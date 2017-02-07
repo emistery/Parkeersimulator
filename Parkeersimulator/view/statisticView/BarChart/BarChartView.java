@@ -16,8 +16,6 @@ public class BarChartView extends AbstractView {
     private ParkeerSimulator controller;
 
     private JPanel textPanel;
-    //private JTabbedPane weekTabs;
-
     private ChartPanel chartPanel;
 
     private double[] values;
@@ -113,6 +111,4 @@ public class BarChartView extends AbstractView {
         long tmp = Math.round(value);
         return (double) tmp / factor;
     }
-    public void disableView(){}
-    public void enableView(){}
 }

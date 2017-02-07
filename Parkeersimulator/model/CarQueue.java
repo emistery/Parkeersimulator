@@ -30,11 +30,6 @@ public class CarQueue {
         return queueSize;
     }
 
-    public void driveAway(){
-        int length = queue.size()-1;
-        queue.remove(length);
-    }
-
     public int getLength(){
         return queue.size();
     }

@@ -15,7 +15,6 @@ public class SimulatorView extends AbstractView {
         private Controls controls;
         private JLabel tickLabel = new JLabel("0, Happy opening!");
 
-
     public SimulatorView(CarParkView carParkView, Simulator simulator) {
         super(simulator);
         frame = new JFrame();

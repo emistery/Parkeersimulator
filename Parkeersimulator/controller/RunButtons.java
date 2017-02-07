@@ -94,7 +94,7 @@ public class RunButtons extends AbstractController implements ActionListener {
         if(e.getSource() == eentick){
             simulator.run(1);
             disableButtons();
-            int delayEen = simulator.getTickPause() * 1 + 200;
+            int delayEen = simulator.getTickPause() + 200;
             timer = new Timer(delayEen, new ActionListener(){
                 public void actionPerformed(ActionEvent evt) {
                     enableButtons();
@@ -139,8 +139,8 @@ public class RunButtons extends AbstractController implements ActionListener {
         eentick.setEnabled(false);
         textField.setEnabled(false);
     }
-    public void setParkeerSimulator(ParkeerSimulator contr){
-        parkeerSimulator = contr;
+    public void setParkeerSimulator(ParkeerSimulator parkSimulator){
+        parkeerSimulator = parkSimulator;
     }
 
 }

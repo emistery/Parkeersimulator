@@ -16,7 +16,7 @@ import java.awt.RenderingHints;
 import java.awt.Stroke;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.*;
+
 
 
 @SuppressWarnings("serial")
@@ -136,6 +136,7 @@ public class DrawGraph extends AbstractView {
             g2.drawLine(x1, y1, x2, y2);
         }
     }
+
     public void drawPoints(List<Point> graphPoints, Graphics g2) {
         for (int i = 0; i < graphPoints.size(); i++) {
             if (i % pointInterval == 0) {
@@ -151,52 +152,17 @@ public class DrawGraph extends AbstractView {
             }
         }
     }
+
     @Override
     public Dimension getPreferredSize() {
         return new Dimension(PREF_W, PREF_H);
     }
 
-
     public DrawGraph createAndShowGui(ArrayList<Integer> adHoc, ArrayList<Integer> pass) {
-        /*
-        this.simulator = simulator;
-        //    Random random = new Random();
-        int maxDataPoints = 100;
-        int maxScore = simulator.getNumberOfPlaces();
-
-        for (int i = 0; i < maxDataPoints; i++) {
-            if(i >= maxDataPoints){
-                clearGraph();
-            }
-            int filledSpots = simulator.getNumberOfPlaces() - simulator.getNumberOfOpenSpots();
-            scores.add(filledSpots);
-            */
-
-       /* Random random = new Random();
-        int maxDataPoints = 16;
-        int maxScore = 20;
-        for (int i = 0; i < maxDataPoints ; i++) {
-            scores.add(random.nextInt(maxScore));
-        }*/
-
         DrawGraph mainPanel = new DrawGraph(adHoc, pass, simulator);
         return mainPanel;
     }
-
     private void clearGraph(){
         adHocCars.clear();
-    }
-
-    public void updateView(int tick, int adHocSpots, int passSpots, int cars, double earnings, double missedEarnings, int missedCars, String displayTime){
-
-
-
-    }
-
-    public void disableView(){
-
-    }
-    public void enableView(){
-
     }
 }
