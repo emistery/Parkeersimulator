@@ -2,7 +2,7 @@ package Parkeersimulator.view.statisticView.BarChart;
 
 import Parkeersimulator.main.ParkeerSimulator;
 import Parkeersimulator.model.Simulator;
-import Parkeersimulator.view.statisticView.AbstractView.AbstractView;
+import Parkeersimulator.view.abstractView.AbstractView;
 
 import javax.swing.*;
 import java.awt.*;

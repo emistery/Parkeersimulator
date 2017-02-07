@@ -1,11 +1,7 @@
 package Parkeersimulator.controller;
 import Parkeersimulator.model.Simulator;
 import Parkeersimulator.view.simulatorView.SettingLabels;
-import Parkeersimulator.view.statisticView.AbstractView.AbstractView;
-
-
 import javax.swing.*;
-import java.awt.*;
 
 /**
  * Created by Lenovo T420 on 2-2-2017.

@@ -5,7 +5,7 @@ import Parkeersimulator.model.car.AdHocCar;
 import Parkeersimulator.model.car.Car;
 import Parkeersimulator.model.car.ParkingPassCar;
 import Parkeersimulator.model.car.ReservationCar;
-import Parkeersimulator.view.statisticView.AbstractView.AbstractView;
+import Parkeersimulator.view.abstractView.AbstractView;
 
 import java.util.ArrayList;
 import java.util.Iterator;

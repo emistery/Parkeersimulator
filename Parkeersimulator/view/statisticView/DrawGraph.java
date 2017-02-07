@@ -4,7 +4,7 @@ package Parkeersimulator.view.statisticView;
  * Created by Emiel on 30-1-2017.
  */
 import Parkeersimulator.model.Simulator;
-import Parkeersimulator.view.statisticView.AbstractView.AbstractView;
+import Parkeersimulator.view.abstractView.AbstractView;
 
 import java.awt.BasicStroke;
 import java.awt.Color;

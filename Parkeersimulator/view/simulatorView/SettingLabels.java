@@ -2,7 +2,7 @@ package Parkeersimulator.view.simulatorView;
 
 import Parkeersimulator.controller.SettingController;
 import Parkeersimulator.model.Simulator;
-import Parkeersimulator.view.statisticView.AbstractView.AbstractView;
+import Parkeersimulator.view.abstractView.AbstractView;
 
 import javax.swing.*;
 import java.awt.*;

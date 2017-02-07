@@ -4,10 +4,9 @@
 package Parkeersimulator.main;
 
 import Parkeersimulator.controller.RunController;
-import Parkeersimulator.controller.SettingController;
 import Parkeersimulator.model.Simulator;
 import Parkeersimulator.view.simulatorView.SettingLabels;
-import Parkeersimulator.view.statisticView.AbstractView.AbstractView;
+import Parkeersimulator.view.abstractView.AbstractView;
 import Parkeersimulator.view.simulatorView.CarParkView;
 import Parkeersimulator.view.simulatorView.SimulatorView;
 import Parkeersimulator.view.statisticView.StatisticView;

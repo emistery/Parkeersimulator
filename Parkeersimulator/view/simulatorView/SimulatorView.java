@@ -2,8 +2,8 @@ package Parkeersimulator.view.simulatorView;
 
 import Parkeersimulator.controller.RunController;
 import Parkeersimulator.model.Simulator;
-import Parkeersimulator.view.statisticView.AbstractView.AbstractView;
 import Parkeersimulator.Time;
+import Parkeersimulator.view.abstractView.AbstractView;
 
 import javax.swing.*;
 import java.awt.*;

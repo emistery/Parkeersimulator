@@ -4,7 +4,7 @@
 package Parkeersimulator.view.statisticView;
 import Parkeersimulator.model.Simulator;
 import Parkeersimulator.main.ParkeerSimulator;
-import Parkeersimulator.view.statisticView.AbstractView.AbstractView;
+import Parkeersimulator.view.abstractView.AbstractView;
 import Parkeersimulator.view.statisticView.BarChart.BarChartQueue;
 import Parkeersimulator.view.statisticView.BarChart.BarChartView;
 import Parkeersimulator.Time;
