@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
 
-public class RunButtons extends AbstractController implements ActionListener {
+public class RunController extends AbstractController implements ActionListener {
     private ParkeerSimulator parkeerSimulator;
     private JButton eenDag;
     private JButton eenWeek;
@@ -21,7 +21,7 @@ public class RunButtons extends AbstractController implements ActionListener {
 
     private Timer timer;
 
-    public RunButtons(Simulator simulator) {
+    public RunController(Simulator simulator) {
         super(simulator);
         eenDag = new JButton("1 dag");
         eenDag.addActionListener(this);

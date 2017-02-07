@@ -1,8 +1,6 @@
 package Parkeersimulator.view.simulatorView;
 
-import Parkeersimulator.controller.Controls;
-import Parkeersimulator.controller.RunButtons;
-import Parkeersimulator.controller.SettingLabels;
+import Parkeersimulator.controller.RunController;
 import Parkeersimulator.model.Simulator;
 import Parkeersimulator.view.statisticView.AbstractView.AbstractView;
 import Parkeersimulator.Time;
@@ -12,21 +10,29 @@ import java.awt.*;
 
 public class SimulatorView extends AbstractView {
         private JFrame frame;
-        private Controls controls;
+        private RunController runController;
+        private SettingLabels settingLabels;
+
         private JLabel tickLabel = new JLabel("0, Happy opening!");
 
     public SimulatorView(CarParkView carParkView, Simulator simulator) {
         super(simulator);
         frame = new JFrame();
-        controls = new Controls(simulator);
+        runController = new RunController(simulator);
+        settingLabels = new SettingLabels(simulator);
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.add(runController);
+        panel.add(settingLabels);
 
         Container contentPane = frame.getContentPane();
         contentPane.add(tickLabel, BorderLayout.NORTH);
-        contentPane.add(controls, BorderLayout.SOUTH);
+        contentPane.add(panel, BorderLayout.SOUTH);
         contentPane.add(carParkView, BorderLayout.CENTER);
 
         JPanel eastPanel = new JPanel();
-        eastPanel.add(controls.getButtons().getTickPause());
+        eastPanel.add(runController.getTickPause());
         contentPane.add(eastPanel, BorderLayout.EAST);
 
         //automatically terminates jvm when closing window
@@ -39,10 +45,10 @@ public class SimulatorView extends AbstractView {
         updateView(0, 0, 0, 0, 0.0, 0.0, 0, "");
     }
     public JFrame getFrame(){return  frame;}
-    public RunButtons getButtons(){
-        return controls.getButtons();
+    public RunController getRunController(){
+        return runController;
     }
-    public SettingLabels getSettingLabels(){return controls.getSettingLabels();}
+    public SettingLabels getSettingLabels(){return settingLabels;}
 
     public void updateView(int tick, int adHocSpots, int passSpots, int cars, double earnings, double missedEarnings, int missedCars, String displayTime) {
        String date = Time.getDate(tick);
