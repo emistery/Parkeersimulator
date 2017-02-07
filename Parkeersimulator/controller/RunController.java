@@ -46,9 +46,9 @@ public class RunController extends AbstractController implements ActionListener 
             if(parkeerSimulator != null){
                 parkeerSimulator.getStatisticView().disableView();}
         });
+        add(eentick);
         add(eenDag);
         add(eenWeek);
-        add(eentick);
         add(textField);
         add(tickPause);
         add(addView);
