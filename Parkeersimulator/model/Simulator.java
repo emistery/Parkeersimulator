@@ -7,6 +7,7 @@ import Parkeersimulator.model.car.ParkingPassCar;
 import Parkeersimulator.model.car.ReservationCar;
 import Parkeersimulator.view.abstractView.AbstractView;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
@@ -86,14 +87,14 @@ public class Simulator implements Runnable {
         exitCarQueue = new CarQueue();
 
         entranceCarQueue.setMaxSize(15);
-        entrancePassQueue.setMaxSize(2);
+        entrancePassQueue.setMaxSize(15);
 
         this.numberOfFloors = numberOfFloors;
         this.numberOfRows = numberOfRows;
         this.numberOfPlaces = numberOfPlaces;
         this.numberOfOpenSpots =numberOfFloors*numberOfRows*numberOfPlaces;
-        this.openAdHocSpots = 2*numberOfRows*numberOfPlaces;
         this.openPassSpots = numberOfRows*numberOfPlaces -60;
+        this.openAdHocSpots = numberOfOpenSpots-openPassSpots;
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
         fillLocation(numberOfFloors, numberOfRows, numberOfPlaces);
     }
@@ -320,8 +321,8 @@ public class Simulator implements Runnable {
         //PassCar gets the fist spot, as it has priority
 
     	carsArriving();
-    	carsEntering(entrancePassQueue);
-    	carsEntering(entranceCarQueue);
+    	carsEntering(entrancePassQueue, PASS);
+    	carsEntering(entranceCarQueue, AD_HOC);
     }
 
     /**
@@ -392,15 +393,20 @@ public class Simulator implements Runnable {
 
     private void randomReservation() {
         Random random = new Random();
-        if (random.nextInt(10) == random.nextInt(10)&& openPassSpots>0) {
-            Location reserveLocation = getFirstFreePassLocation();
+        if (random.nextInt(10) == random.nextInt(10)) {
+            if (openPassSpots > 0) {
+                Location reserveLocation = getFirstFreePassLocation();
 
-            getLocation(reserveLocation).setIsReserved(true);
-            openPassSpots--;
-            numberOfOpenSpots--;
-            int timeOfArrival = tick + random.nextInt(100);
+                getLocation(reserveLocation).setIsReserved(true);
+                openPassSpots--;
+                numberOfOpenSpots--;
+                int timeOfArrival = tick + random.nextInt(100);
 
-            makeReservation(new ReservationCar(), reserveLocation, timeOfArrival);
+                makeReservation(new ReservationCar(), reserveLocation, timeOfArrival);
+            } else {
+                //todo gemiste reserveringen toevoegen
+                missedPassCars.add(new ParkingPassCar());
+            }
         }
     }
 
@@ -418,30 +424,37 @@ public class Simulator implements Runnable {
 
     /**
      * handles the car entering the car park from a que
-     * @param queue a que with car
+     * @param queue a que with cars
      */
-    private void carsEntering(CarQueue queue) {
+    private void carsEntering(CarQueue queue, String type) {
         int i = 0;
         // Remove car from the front of the queue and assign to a parking space.
-        if (spotsAvailable()) {
-
-            while (queue.carsInQueue() > 0 &&
-                    spotsAvailable() &&
-                    i < enterSpeed) {
-                Car car = queue.removeCar();
-                if (car instanceof AdHocCar && openAdHocSpots > 0) {
+        switch(type) {
+            case AD_HOC:
+                while (queue.carsInQueue() > 0 &&
+                        openAdHocSpots>0 &&
+                        i < enterSpeed) {
+                    Car car = queue.removeCar();
                     Location freeLocation = getFirstFreeLocation();
                     setCarAt(freeLocation, car);
-                } else if (car instanceof ParkingPassCar && openPassSpots > 0) {
-                    Location freePassLocation = getFirstFreePassLocation();
-                    setCarAt(freePassLocation, car);
-                } else if (car instanceof ReservationCar) {
-                    setCarAt(car.getLocation(), car);
+                    i++;
                 }
-                i++;
+                break;
+            case PASS:
+                while (queue.carsInQueue() > 0 &&
+                        openPassSpots>0 &&
+                        i < enterSpeed) {
+                    Car car = queue.removeCar();
+                    if (car instanceof ParkingPassCar && openPassSpots > 0) {
+                        Location freePassLocation = getFirstFreePassLocation();
+                        setCarAt(freePassLocation, car);
+                    } else if (car instanceof ReservationCar) {
+                        setCarAt(car.getLocation(), car);
+                    }
+                    i++;
+                }
             }
         }
-    }
 
     /**
      * returns true if ANY spots are available
