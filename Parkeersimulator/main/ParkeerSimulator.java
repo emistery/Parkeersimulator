@@ -3,7 +3,6 @@
  */
 package Parkeersimulator.main;
 
-import Parkeersimulator.controller.RunController;
 import Parkeersimulator.model.Simulator;
 import Parkeersimulator.view.simulatorView.SettingLabels;
 import Parkeersimulator.view.abstractView.AbstractView;
@@ -26,10 +25,9 @@ public class ParkeerSimulator {
         simulator.addView(carParkView);
         simulator.addView(simulatorView);
 
-        RunController runController = getSimulatorView().getRunController();
+        getSimulatorView().getRunController().setParkeerSimulator(this);
         SettingLabels settingLabels = getSimulatorView().getSettingLabels();
 
-        runController.setParkeerSimulator(this);
         settingLabels.updateView();
         getStatisticView().setParkeerSimulator(this);
 

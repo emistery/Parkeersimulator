@@ -86,14 +86,14 @@ public class Simulator implements Runnable {
         exitCarQueue = new CarQueue();
 
         entranceCarQueue.setMaxSize(15);
-        entrancePassQueue.setMaxSize(15);
+        entrancePassQueue.setMaxSize(2);
 
         this.numberOfFloors = numberOfFloors;
         this.numberOfRows = numberOfRows;
         this.numberOfPlaces = numberOfPlaces;
         this.numberOfOpenSpots =numberOfFloors*numberOfRows*numberOfPlaces;
         this.openAdHocSpots = 2*numberOfRows*numberOfPlaces;
-        this.openPassSpots = numberOfRows*numberOfPlaces;
+        this.openPassSpots = numberOfRows*numberOfPlaces -60;
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
         fillLocation(numberOfFloors, numberOfRows, numberOfPlaces);
     }
@@ -274,7 +274,6 @@ public class Simulator implements Runnable {
             }
         }
     	handleEntrance();
-        System.out.println(""+paymentCarQueue.carsInQueue());
     }
 
     /**
@@ -393,10 +392,12 @@ public class Simulator implements Runnable {
 
     private void randomReservation() {
         Random random = new Random();
-        if (random.nextInt(10) == random.nextInt(10)) {
+        if (random.nextInt(10) == random.nextInt(10)&& openPassSpots>0) {
             Location reserveLocation = getFirstFreePassLocation();
-            reserveLocation.setIsReserved(true);
 
+            getLocation(reserveLocation).setIsReserved(true);
+            openPassSpots--;
+            numberOfOpenSpots--;
             int timeOfArrival = tick + random.nextInt(100);
 
             makeReservation(new ReservationCar(), reserveLocation, timeOfArrival);
@@ -434,7 +435,7 @@ public class Simulator implements Runnable {
                 } else if (car instanceof ParkingPassCar && openPassSpots > 0) {
                     Location freePassLocation = getFirstFreePassLocation();
                     setCarAt(freePassLocation, car);
-                } else if (car instanceof ReservationCar /*&& openPassSpots > 0*/) {
+                } else if (car instanceof ReservationCar) {
                     setCarAt(car.getLocation(), car);
                 }
                 i++;
@@ -474,16 +475,7 @@ public class Simulator implements Runnable {
      */
     public Location getFirstFreePassLocation(){
         for(Location location : locations){
-            if (getCarAt(location) == null && location.checkPassLocation() && !location.getIsReserved() ) {
-                return location;
-            }
-        }
-        return null;
-    }
-
-    public Location getFirstReservedLocation(){
-        for(Location location : locations){
-            if (location.checkPassLocation() && location.getIsReserved()) {
+            if (getCarAt(location) == null && location.checkPassLocation() && !getLocation(location).getIsReserved() ) {
                 return location;
             }
         }
@@ -592,14 +584,15 @@ public class Simulator implements Runnable {
             }
             break;
     	case PASS:
+            while(entrancePassQueue.carsInQueue() <= entrancePassQueue.getMaxSize() && amountOfCars>0) {
+                entrancePassQueue.addCar(new ParkingPassCar());
+                amountOfCars--;
+            }
     	    if(entrancePassQueue.carsInQueue() >= entrancePassQueue.getMaxSize()) {
     	        for (int i = 0; i < amountOfCars; i++) {
     	            missedPassCars.add(new ParkingPassCar());
                 }
-            } else {
-            for (int i = 0; i < amountOfCars; i++) {
-            	entrancePassQueue.addCar(new ParkingPassCar());
-            }}
+            }
             break;
     	case RESERVE:
     	    for(Reservation reservation : reservations){
@@ -665,8 +658,6 @@ public class Simulator implements Runnable {
                 location.setIsReserved(false);
                 cars[location.getFloor()][location.getRow()][location.getPlace()] = car;
                 car.setLocation(location);
-                openPassSpots--;
-                numberOfOpenSpots--;
                 return true;
             }
         }
@@ -715,6 +706,18 @@ public class Simulator implements Runnable {
             }
         }
     }
+    public Location getLocation(Location location){
+        for(Location loc : locations){
+            if(loc.getFloor()==location.getFloor()){
+                if(loc.getRow()==location.getRow()){
+                    if(loc.getPlace()==location.getPlace()){
+                        return loc;
+                    }
+                }
+            }
+        }
+        return null;
+    }
 
     /**
      * gets the first car to leave its spot
@@ -748,10 +751,12 @@ public class Simulator implements Runnable {
      * @return true if the location exists
      */
     private boolean locationIsValid(Location location) {
-        int floor = location.getFloor();
-        int row = location.getRow();
-        int place = location.getPlace();
-        return !(floor < 0 || floor >= numberOfFloors || row < 0 || row > numberOfRows || place < 0 || place > numberOfPlaces);
+        if(location!=null) {
+            int floor = location.getFloor();
+            int row = location.getRow();
+            int place = location.getPlace();
+            return !(floor < 0 || floor >= numberOfFloors || row < 0 || row > numberOfRows || place < 0 || place > numberOfPlaces);
+        }return false;
     }
 
     /**
