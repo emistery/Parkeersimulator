@@ -86,7 +86,7 @@ public class BarChartView extends AbstractView {
         if(tick%10080!=0 && tick!=0) {
             int day = Time.getDayNumber(tick);
             if (controller != null) {
-                values[day] = controller.getDayEarnings();
+                values[day] = simulator.getDayEarnings();
 
                 mondayLabel.setText("€" + round(values[0], 2));
                 tuesdayLabel.setText("€" + round(values[1], 2));

@@ -12,7 +12,7 @@ import java.awt.*;
  * BarCharts expire every first minute of the week(monday0:0) and stop updating.
  */
 public class BarChartQueue extends AbstractView {
-    private ParkeerSimulator controller;
+    private ParkeerSimulator parkeerSimulator;
 
     private JPanel textPanel;
 
@@ -47,13 +47,8 @@ public class BarChartQueue extends AbstractView {
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
 
-
-
-
-        //GridLayout mainGrid = new GridLayout(2,1);
         setLayout(gridBag);
         chartPanel = new ChartPanel(values, names, "Wachtrijen",25);
-        // JPanel tab = new JPanel();
         c.ipady = 0;
         c.ipadx = 400;
         c.gridx = 0;
@@ -67,15 +62,15 @@ public class BarChartQueue extends AbstractView {
         add(chartPanel,c);
     }
     public void updateView(int tick, int adHocSpots, int passSpots, int cars, double earnings, double missedEarnings, int missedCars, String displayTime){
-        values[0] = ((double)controller.getAdHocQueue());
-        values[1] = ((double)controller.getPassQueue());
+        values[0] = ((double)simulator.getAdHocQueueSize());
+        values[1] = ((double)simulator.getPassQueueSize());
 
         adHocLabel.setText("lengte: " + values[0]);
         passLabel.setText("lengte: " + values[1]);
     }
 
-    public void setController(ParkeerSimulator contr){
-        controller = contr;
+    public void setParkeerSimulator(ParkeerSimulator contr){
+        parkeerSimulator = contr;
     }
 
     public static double round(double value, int places) {

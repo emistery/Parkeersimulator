@@ -129,8 +129,8 @@ public class StatisticView extends AbstractView {
           pPass.remove(0);
       }
       if((tick%GRAPH_UPDATE_FREQUENCY)==0 ||adHocs.size()==0) {
-          adHocs.add(parkeerSimulator.getAdHocCars());
-          pPass.add(parkeerSimulator.getPassCars());
+          adHocs.add(simulator.getAdHocCars());
+          pPass.add(simulator.getPassCars());
       }
       mainPanel.createAndShowGui(adHocs, pPass);
       frame.repaint();
@@ -158,7 +158,7 @@ public class StatisticView extends AbstractView {
     public void setParkeerSimulator(ParkeerSimulator contr){
       parkeerSimulator = contr;
       activeBarChart.setController(parkeerSimulator);
-      queueBarChart.setController(parkeerSimulator);
+      queueBarChart.setParkeerSimulator(parkeerSimulator);
       simulator.addView(activeBarChart);
       simulator.addView(queueBarChart);
 
