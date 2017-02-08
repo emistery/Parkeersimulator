@@ -48,6 +48,7 @@ public class Simulator implements Runnable {
     private int weekendPassArrivals = 5; // average number of arriving car per hour
     private int thursdayArrivals = 150;
 
+    private static int originalWeekDay = 100;
 
     private int enterSpeed = 3; // number of car that can enter per minute
     private int paymentSpeed = 4; // number of car that can pay per minute
@@ -293,6 +294,7 @@ public class Simulator implements Runnable {
             hour++;
         }
         while (hour > 23) {
+
             //reset the day earnings to 0
             String currentDay = Time.getDay(tick);
             currentDay = currentDay.toLowerCase().trim();
@@ -304,6 +306,8 @@ public class Simulator implements Runnable {
         while (day > 6) {
             day -= 7;
         }
+
+
         setMinute(minute);
         setHour(hour);
         setDay(day);
@@ -784,6 +788,9 @@ public class Simulator implements Runnable {
     private void handlePayment(Car car){
         int totalMinutes = car.getTotalMinutes();
         double profit = totalMinutes * price;
+        if(car instanceof ReservationCar) {
+            profit = profit + 2;
+        }
         dayEarnings += profit;
         earnings += profit;
         earnings = round(earnings, 2);

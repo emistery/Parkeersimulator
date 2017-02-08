@@ -53,7 +53,8 @@ public class SimulatorView extends AbstractView {
 
     public void updateView(int tick, int adHocSpots, int passSpots, int cars, double earnings, double missedEarnings, int missedCars, String displayTime) {
        String date = Time.getDate(tick);
-        tickLabel.setText("Tick: "+tick + date);
+        tickLabel.setText("Tick: "+tick + date + "          Red: Ad-hoc Cars    Blue: Parking pass cars     " +
+                "Black: Reservation     Green: Car on reservated spot");
     }
     public void disableView(){
         frame.setVisible(false);

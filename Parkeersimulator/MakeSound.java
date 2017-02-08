@@ -22,7 +22,7 @@ public class MakeSound {
     private String day;
 
     /**
-     * @param filename the name of the file that is going to be played
+     * @param filename the name of the day that is going to be played
      */
 
     public MakeSound(String day){
