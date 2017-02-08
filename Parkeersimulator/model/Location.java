@@ -69,7 +69,7 @@ public class Location {
     }
 
     public boolean checkPassLocation(){
-        return floor == 2 && row>1;
+        return floor == 2 && row >=0;
     }
 
     public boolean getIsReserved(){

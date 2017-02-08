@@ -48,7 +48,7 @@ public class Simulator implements Runnable {
 
 
     private int enterSpeed = 3; // number of car that can enter per minute
-    private int paymentSpeed = 7; // number of car that can pay per minute
+    private int paymentSpeed = 4; // number of car that can pay per minute
     private int exitSpeed = 3; // number of car that can leave per minute
 
 
@@ -93,7 +93,7 @@ public class Simulator implements Runnable {
         this.numberOfRows = numberOfRows;
         this.numberOfPlaces = numberOfPlaces;
         this.numberOfOpenSpots =numberOfFloors*numberOfRows*numberOfPlaces;
-        this.openPassSpots = numberOfRows*numberOfPlaces -60;
+        this.openPassSpots = numberOfRows*numberOfPlaces;
         this.openAdHocSpots = numberOfOpenSpots-openPassSpots;
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
         fillLocation(numberOfFloors, numberOfRows, numberOfPlaces);
