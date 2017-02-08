@@ -581,7 +581,14 @@ public class Simulator implements Runnable {
 
         // Calculate the number of car that arrive this minute.
         double standardDeviation = averageNumberOfCarsPerHour * 0.3;
-        double numberOfCarsPerHour = averageNumberOfCarsPerHour + random.nextGaussian() * standardDeviation;
+        double rushDeviation = averageNumberOfCarsPerHour * 2;
+        double numberOfCarsPerHour;
+        if(Time.getHour(tick)>8 && Time.getHour(tick)<17) {
+            numberOfCarsPerHour = averageNumberOfCarsPerHour + random.nextGaussian() * rushDeviation;
+        }else{
+            numberOfCarsPerHour = averageNumberOfCarsPerHour + random.nextGaussian() * standardDeviation;
+        }
+
         return (int)Math.round(numberOfCarsPerHour / 60);	
     }
 
