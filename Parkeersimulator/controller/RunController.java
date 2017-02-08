@@ -25,7 +25,7 @@ public class RunController extends AbstractController implements ActionListener 
         super(simulator);
         eenDag = new JButton("1 dag");
         eenDag.addActionListener(this);
-        eenWeek = new JButton("1week");
+        eenWeek = new JButton("1 week");
         eenWeek.addActionListener(this);
         eentick = new JButton("1 minuut");
         eentick.addActionListener(this);
