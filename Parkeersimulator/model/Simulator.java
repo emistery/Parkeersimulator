@@ -761,7 +761,6 @@ public class Simulator implements Runnable {
         }
         return null;
     }
-
     /**
      * advances the time for all the car
      */
