@@ -64,9 +64,9 @@ public class StatisticView extends AbstractView {
 
       JTabbedPane tabbedPane = new JTabbedPane();
       tabbedPane.addTab("Statistics", panel);
-      tabbedPane.addTab("Chart", mainPanel);
-      tabbedPane.addTab("BarChart", chartMainPanel);
-      tabbedPane.addTab("Queue Bar Chart", queueBarChart);
+      tabbedPane.addTab("Amount of cars", mainPanel);
+      tabbedPane.addTab("Day earnings", chartMainPanel);
+      tabbedPane.addTab("Queue length", queueBarChart);
       frame.add(tabbedPane);
 
       /* todo klasse maken*/
