@@ -56,15 +56,15 @@ public class SettingLabels extends AbstractView
 
     public void updateView(){updateView(0, 0, 0, 0, 0, 0,0, "");}
     public void updateView(int tick, int adHocSpots, int passSpots, int cars, double earnings, double missedEarnings, int missedCars, String displayTime){
-        weekDayArrivals.setText("weekDayArrivals "+ simulator.getWeekDayArrivals());
-        weekendArrivals.setText("weekendArrivals "+ simulator.getWeekendArrivals());
-        weekDayPassArrivals.setText("weekDayPassArrivals "+ simulator.getWeekDayPassArrivals());
-        weekendPassArrivals.setText("weekendPassArrivals "+ simulator.getWeekendPassArrivals());
-        thursdayArrivals.setText("thursdayArrivals "+ simulator.getThursdayArrivals());
+        weekDayArrivals.setText("weekDayArrivals: "+ simulator.getWeekDayArrivals());
+        weekendArrivals.setText("weekendArrivals: "+ simulator.getWeekendArrivals());
+        weekDayPassArrivals.setText("weekDayPassArrivals: "+ simulator.getWeekDayPassArrivals());
+        weekendPassArrivals.setText("weekendPassArrivals: "+ simulator.getWeekendPassArrivals());
+        thursdayArrivals.setText("thursdayArrivals: "+ simulator.getThursdayArrivals());
 
-        enterSpeed.setText("enterSpeed"+ simulator.getEnterSpeed());
-        paymentSpeed.setText("paymentSpeed"+ simulator.getPaymentSpeed());
-        exitSpeed.setText("exitSpeed"+ simulator.getExitSpeed());
+        enterSpeed.setText("enterSpeed: "+ simulator.getEnterSpeed());
+        paymentSpeed.setText("paymentSpeed: "+ simulator.getPaymentSpeed());
+        exitSpeed.setText("exitSpeed: "+ simulator.getExitSpeed());
     }
     private void initializeLabels(){
         weekDayArrivals = new JLabel();

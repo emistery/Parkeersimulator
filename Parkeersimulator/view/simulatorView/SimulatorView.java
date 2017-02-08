@@ -18,6 +18,7 @@ public class SimulatorView extends AbstractView {
     public SimulatorView(CarParkView carParkView, Simulator simulator) {
         super(simulator);
         frame = new JFrame();
+        frame.setTitle("ParkeerSimulator");
         runController = new RunController(simulator);
         settingLabels = new SettingLabels(simulator);
 

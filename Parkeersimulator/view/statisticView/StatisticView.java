@@ -44,6 +44,7 @@ public class StatisticView extends AbstractView {
       adHocs = new ArrayList<>();
       pPass = new ArrayList<>();
       frame = new JFrame();
+      frame.setTitle("Statistieken");
 
       JPanel panel = createPanel();
       mainPanel = new DrawGraph(adHocs, pPass, simulator);
