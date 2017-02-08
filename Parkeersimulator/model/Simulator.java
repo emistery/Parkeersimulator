@@ -36,7 +36,7 @@ public class Simulator implements Runnable {
     private int minute = 0;
 
     //pause between and number of ticks
-    private int tickPause = 1;
+    private int tickPause = 10;
     private int tick = 0;
 
 
@@ -249,8 +249,8 @@ public class Simulator implements Runnable {
             }
             Long executionTime = System.currentTimeMillis()-beginTime;
             double average = round((double)executionTime/numberOfTick, 2);
-            System.out.println("execution of "+ numberOfTick+" steps took "+executionTime+" milliseconds with an average of "+ average+" ms/tick");
-            System.out.println("total tickpause is "+numberOfTick*tickPause );
+            //System.out.println("execution of "+ numberOfTick+" steps took "+executionTime+" milliseconds with an average of "+ average+" ms/tick");
+            //System.out.println("total tickpause is "+numberOfTick*tickPause );
         })).start();
 
     }
@@ -836,29 +836,29 @@ public class Simulator implements Runnable {
         String currentDay ="day";
         switch(day){
             case 00:
-                currentDay = "Maandag";
+                currentDay = "Monday";
             break;
             case 01:
-                currentDay = "Dinsdag";
+                currentDay = "Tuesday";
             break;
             case 02:
-                currentDay = "Woensdag";
+                currentDay = "Wednesday";
             break;
             case 03:
-                currentDay = "Donderdag";
+                currentDay = "Thursday";
             break;
             case 04:
-                currentDay = "Vrijdag";
+                currentDay = "Friday";
             break;
             case 05:
-                currentDay = "Zaterdag";
+                currentDay = "Saturday";
             break;
             case 06:
-                currentDay = "Zondag";
+                currentDay = "Sunday";
             break;
         }
         Integer.toString(hour, minute);
-        displayTime = ("Dag: " + currentDay + " Tijd: " + hour + ":" + minute);
+        displayTime = ("Day: " + currentDay + " Time: " + hour + ":" + minute);
         return displayTime;
     }
 

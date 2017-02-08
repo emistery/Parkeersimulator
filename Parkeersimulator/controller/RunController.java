@@ -23,11 +23,11 @@ public class RunController extends AbstractController implements ActionListener 
 
     public RunController(Simulator simulator) {
         super(simulator);
-        eenDag = new JButton("1 dag");
+        eenDag = new JButton("1 day");
         eenDag.addActionListener(this);
         eenWeek = new JButton("1 week");
         eenWeek.addActionListener(this);
-        eentick = new JButton("1 minuut");
+        eentick = new JButton("1 minute");
         eentick.addActionListener(this);
 
         textField = new JTextField(5);
@@ -35,13 +35,13 @@ public class RunController extends AbstractController implements ActionListener 
         tickPause = new JTextField(4);
         tickPause.addActionListener(this);
 
-        addView = new JButton("Meer informatie");
+        addView = new JButton("More information");
 
         addView.addActionListener(e -> {
             if(parkeerSimulator != null){
                 parkeerSimulator.getStatisticView().enableView();}
         });
-        removeView = new JButton("Minder informatie");
+        removeView = new JButton("Less information");
         removeView.addActionListener(e -> {
             if(parkeerSimulator != null){
                 parkeerSimulator.getStatisticView().disableView();}
@@ -70,7 +70,7 @@ public class RunController extends AbstractController implements ActionListener 
         if(e.getSource() == eenDag){
             simulator.run(1440);
             disableButtons();
-            int delayDag = simulator.getTickPause() * 1440 + 200;
+            int delayDag = simulator.getTickPause() * 1440 + 1000;
             timer = new Timer( delayDag, new ActionListener(){
                 public void actionPerformed(ActionEvent evt) {
                     enableButtons();
@@ -82,7 +82,7 @@ public class RunController extends AbstractController implements ActionListener 
         if(e.getSource() == eenWeek){
             simulator.run(10080);
             disableButtons();
-            int delayWeek = simulator.getTickPause() * 10080 + 200;
+            int delayWeek = simulator.getTickPause() * 10080 + 3500;
             timer = new Timer(delayWeek, new ActionListener(){
                 public void actionPerformed(ActionEvent evt) {
                     enableButtons();
@@ -109,7 +109,7 @@ public class RunController extends AbstractController implements ActionListener 
             int ticker = Integer.parseInt(text);
             simulator.run(ticker);
             disableButtons();
-            int delayFree = simulator.getTickPause() * ticker + 200;
+            int delayFree = simulator.getTickPause() * ticker + 100;
             timer = new Timer(delayFree, new ActionListener(){
                 public void actionPerformed(ActionEvent evt) {
                     enableButtons();

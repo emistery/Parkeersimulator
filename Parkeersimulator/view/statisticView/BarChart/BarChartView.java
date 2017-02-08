@@ -40,7 +40,7 @@ public class BarChartView extends AbstractView {
         sundayLabel = new JLabel("€" + 0.00);
 
         values = new double[]{0,0,0,0,0,0,0};
-        names = new String[]{"Maandag", "Dinsdag", "Woensdag", "Donderdag", "Vrijdag", "Zaterdag", "Zondag"};
+        names = new String[]{"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
 
         textPanel = new JPanel();
         GridLayout textGrid = new GridLayout(1,0);

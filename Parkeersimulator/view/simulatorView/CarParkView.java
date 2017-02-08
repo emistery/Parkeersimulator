@@ -19,7 +19,7 @@ public class CarParkView extends AbstractView {
         super(simulator);
         size = new Dimension(0, 0);
         setBackground(Color.GREEN);
-        setBorder(BorderFactory.createTitledBorder("De parkeergarage"));
+        setBorder(BorderFactory.createTitledBorder("The Parking Garage"));
     }
 
     /**

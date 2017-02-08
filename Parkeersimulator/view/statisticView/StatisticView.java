@@ -16,14 +16,14 @@ import java.util.*;
 public class StatisticView extends AbstractView {
     private JFrame frame;
     private ParkeerSimulator parkeerSimulator;
-    private JLabel tickLabel = new JLabel("tick: ");
-    private JLabel carLabel = new JLabel("amount of car : ");
-    private JLabel adhocLabel = new JLabel("free Ad Hoc Spots: ");
-    private JLabel passLabel = new JLabel("free Pass Spots: ");
-    private JLabel earningsLabel = new JLabel("Total earnings: ");
-    private JLabel missedEarningsLabel = new JLabel("Missed earnings: ");
-    private JLabel missedCarsLabel = new JLabel("Missed car: ");
-    private JLabel missedPassCarsLabel = new JLabel("Missed pass car: ");
+    private JLabel tickLabel = new JLabel("Current tick: ");
+    private JLabel carLabel = new JLabel("Amount of open spots: ");
+    private JLabel adhocLabel = new JLabel("Free ad-hoc spots: ");
+    private JLabel passLabel = new JLabel("Free pass spots: ");
+    private JLabel earningsLabel = new JLabel("Total earnings: €");
+    private JLabel missedEarningsLabel = new JLabel("Missed earnings: €");
+    private JLabel missedCarsLabel = new JLabel("Missed cars: ");
+    private JLabel missedPassCarsLabel = new JLabel("Missed pass cars: ");
     private JLabel dayLabel = new JLabel("Current day: ");
 
     public static String newline = System.getProperty("line.separator");
@@ -44,7 +44,7 @@ public class StatisticView extends AbstractView {
       adHocs = new ArrayList<>();
       pPass = new ArrayList<>();
       frame = new JFrame();
-      frame.setTitle("Statistieken");
+      frame.setTitle("Statistics");
 
       JPanel panel = createPanel();
       mainPanel = new DrawGraph(adHocs, pPass, simulator);
@@ -101,14 +101,14 @@ public class StatisticView extends AbstractView {
   }
 
   public void updateView(int tick, int adHocSpots, int passSpots, int cars, double earnings, double missedEarnings, int missedCars, String displayTime){
-      carLabel.setText("amount of open spots: " + cars + newline);
-      tickLabel.setText("amount of ticks: " + tick);
-      adhocLabel.setText("amount of open Ad Hoc spots: " + adHocSpots);
-      passLabel.setText("amount of open Pass spots: " + passSpots);
-      earningsLabel.setText("Total earnings : € " + earnings);
-      missedEarningsLabel.setText("Missed earnings : € " + simulator.calculateMissedEarnings());
-      missedCarsLabel.setText("Missed car: " + missedCars);
-      missedPassCarsLabel.setText("Missed pass car: " + simulator.getMissedPassCars());
+      carLabel.setText("Amount of open spots: " + cars + newline);
+      tickLabel.setText("Current tick: " + tick);
+      adhocLabel.setText("Free ad-hoc spots: " + adHocSpots);
+      passLabel.setText("Free pass spots: " + passSpots);
+      earningsLabel.setText("Total earnings: € " + earnings);
+      missedEarningsLabel.setText("Missed earnings: € " + simulator.calculateMissedEarnings());
+      missedCarsLabel.setText("Missed cars: " + missedCars);
+      missedPassCarsLabel.setText("Missed pass cars: " + simulator.getMissedPassCars());
       dayLabel.setText(simulator.displayDay());
 
       //create new Bar Graph every week and add it to a new tab.

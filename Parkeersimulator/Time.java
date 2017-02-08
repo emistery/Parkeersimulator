@@ -30,21 +30,21 @@ public class Time{
     public static String getDay(int tick){
         String day;
         switch(getDayNumber(tick)){
-            case(0): day = "maandag ";
+            case(0): day = "Monday ";
                 break;
-            case(1):day = "dinsdag ";
+            case(1):day = "Tuesday ";
                 break;
-            case(2):day = "woensdag ";
+            case(2):day = "Wednesday ";
                 break;
-            case(3):day = "donderdag ";
+            case(3):day = "Thursday ";
                 break;
-            case(4):day = "vrijdag ";
+            case(4):day = "Friday ";
                 break;
-            case(5):day = "zaterdag ";
+            case(5):day = "Saturday ";
                 break;
-            case(6):day = "zondag ";
+            case(6):day = "Sunday ";
                 break;
-            default:day ="swag-- day could not be found";
+            default:day ="day could not be found";
         }
         return day;
     }
