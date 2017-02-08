@@ -1,6 +1,8 @@
 package Parkeersimulator.model;
 //-----MODEL-----
 //needs methods for views and controllers to subscribe to state changes
+import Parkeersimulator.MakeSound;
+import Parkeersimulator.Time;
 import Parkeersimulator.model.car.AdHocCar;
 import Parkeersimulator.model.car.Car;
 import Parkeersimulator.model.car.ParkingPassCar;
@@ -49,7 +51,7 @@ public class Simulator implements Runnable {
 
     private int enterSpeed = 3; // number of car that can enter per minute
     private int paymentSpeed = 4; // number of car that can pay per minute
-    private int exitSpeed = 3; // number of car that can leave per minute
+    private int exitSpeed = 3 ; // number of car that can leave per minute
 
 
     private int numberOfFloors;
@@ -292,6 +294,9 @@ public class Simulator implements Runnable {
         }
         while (hour > 23) {
             //reset the day earnings to 0
+            String currentDay = Time.getDay(tick);
+            currentDay = currentDay.toLowerCase().trim();
+            MakeSound m = new MakeSound(currentDay);
             dayEarnings = 0.00;
             hour -= 24;
             day++;

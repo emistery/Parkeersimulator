@@ -65,7 +65,7 @@ public class BarChartView extends AbstractView {
         GridLayout mainGrid = new GridLayout(0,1);
         setLayout(gridBag);
         mainGrid.setVgap(0);
-        chartPanel = new ChartPanel(values, names, "Inkomen per dag", 14000);
+        chartPanel = new ChartPanel(values, names, "Profit for each day:", 14000);
         JPanel tab = new JPanel();
         tab.setLayout(mainGrid);
         c.ipady = 0;
