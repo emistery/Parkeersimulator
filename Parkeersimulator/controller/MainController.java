@@ -22,10 +22,9 @@ public class MainController extends AbstractController implements ActionListener
     private JTextField ticks;
     private JTextField tickPause;
 
-    private Timer timer;
-
     public MainController(Simulator simulator) {
         super(simulator);
+        setLayout(new FlowLayout());
         eenDag = new JButton("1 day");
         eenDag.addActionListener(this);
         eenWeek = new JButton("1 week");
@@ -53,6 +52,7 @@ public class MainController extends AbstractController implements ActionListener
             if(parkeerSimulator != null){
                 parkeerSimulator.getStatisticView().disableView();}
         });
+
         add(eentick);
         add(eenDag);
         add(eenWeek);
@@ -72,7 +72,7 @@ public class MainController extends AbstractController implements ActionListener
     public JTextField getTickPause(){
         return tickPause;
     }
-    public Dimension getPreferredSize() {return new Dimension(235, 35);}
+    //public Dimension getPreferredSize() {return new Dimension(235, 35);}
 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == eenDag) {

@@ -323,11 +323,10 @@ public class Simulator implements Runnable {
             hour++;
         }
         while (hour > 23) {
-
-            //reset the day earnings to 0
             String currentDay = Functions.getDay(tick);
             currentDay = currentDay.toLowerCase().trim();
             MakeSound m = new MakeSound(currentDay);
+            //reset the day earnings to 0
             dayEarnings = 0.00;
             hour -= 24;
             day++;

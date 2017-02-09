@@ -1,7 +1,5 @@
 package Parkeersimulator;
 
-import Parkeersimulator.model.Simulator;
-
 import java.io.File;
 import java.io.IOException;
 
@@ -12,7 +10,7 @@ import javax.sound.sampled.DataLine;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.SourceDataLine;
 
-public class MakeSound {
+public class MakeSound implements Runnable {
 
     private final int BUFFER_SIZE = 128000;
     private File soundFile;
@@ -24,11 +22,21 @@ public class MakeSound {
     /**
      * @param day the name of the day that is going to be played
      */
-
     public MakeSound(String day){
+        this.day = day;
+        new Thread(this).start();
+    }
+
+    public void run(){
+        playSound();
+    }
+    /*
+        public MakeSound(String day){
         this.day = day;
         playSound();
     }
+     */
+
 
     public void playSound(){
 
