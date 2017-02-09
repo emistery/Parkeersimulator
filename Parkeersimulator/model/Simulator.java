@@ -258,6 +258,7 @@ public class Simulator implements Runnable {
         }
         running = false;
     }
+
     public void doTicks(int numOfTicks) {
         if (running == false) {
             running = true;
