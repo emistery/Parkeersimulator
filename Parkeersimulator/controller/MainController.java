@@ -32,7 +32,7 @@ public class MainController extends AbstractController implements ActionListener
         eentick = new JButton("1 minute");
         eentick.addActionListener(this);
 
-        stopSimulatie = new JButton("Stop simulatie");
+        stopSimulatie = new JButton("Stop simulation");
         stopSimulatie.addActionListener(this);
         textField = new JTextField(5);
         textField.addActionListener(this);
