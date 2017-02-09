@@ -9,11 +9,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
 
-public class RunController extends AbstractController implements ActionListener {
+public class MainController extends AbstractController implements ActionListener {
     private ParkeerSimulator parkeerSimulator;
     private JButton eenDag;
     private JButton eenWeek;
     private JButton eentick;
+
+    private JButton stopSimulatie;
     private JButton addView;
     private JButton removeView;
     private JTextField textField;
@@ -21,7 +23,7 @@ public class RunController extends AbstractController implements ActionListener 
 
     private Timer timer;
 
-    public RunController(Simulator simulator) {
+    public MainController(Simulator simulator) {
         super(simulator);
         eenDag = new JButton("1 day");
         eenDag.addActionListener(this);
@@ -30,6 +32,8 @@ public class RunController extends AbstractController implements ActionListener 
         eentick = new JButton("1 minute");
         eentick.addActionListener(this);
 
+        stopSimulatie = new JButton("Stop simulatie");
+        stopSimulatie.addActionListener(this);
         textField = new JTextField(5);
         textField.addActionListener(this);
         tickPause = new JTextField(4);
@@ -50,6 +54,7 @@ public class RunController extends AbstractController implements ActionListener 
         add(eenDag);
         add(eenWeek);
         add(textField);
+        add(stopSimulatie);
         add(tickPause);
         add(addView);
         add(removeView);
@@ -68,55 +73,23 @@ public class RunController extends AbstractController implements ActionListener 
 
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == eenDag){
-            simulator.run(1440);
-            disableButtons();
-            int delayDag = simulator.getTickPause() * 1440 + 1000;
-            timer = new Timer( delayDag, new ActionListener(){
-                public void actionPerformed(ActionEvent evt) {
-                    enableButtons();
-                }
-            });
-            timer.setRepeats(false);
-            timer.start();
+            simulator.doTicks(1440);
         }
+
         if(e.getSource() == eenWeek){
-            simulator.run(10080);
-            disableButtons();
-            int delayWeek = simulator.getTickPause() * 10080 + 3500;
-            timer = new Timer(delayWeek, new ActionListener(){
-                public void actionPerformed(ActionEvent evt) {
-                    enableButtons();
-                }
-            });
-            timer.setRepeats(false);
-            timer.start();
+            simulator.doTicks(10080);
         }
         if(e.getSource() == eentick){
-            simulator.run(1);
-            disableButtons();
-            int delayEen = simulator.getTickPause() + 200;
-            timer = new Timer(delayEen, new ActionListener(){
-                public void actionPerformed(ActionEvent evt) {
-                    enableButtons();
-                }
-            });
-            timer.setRepeats(false);
-            timer.start();
+            simulator.doTicks(1);
         }
         if(e.getSource() == textField) {
 
             String text = textField.getText();
             int ticker = Integer.parseInt(text);
-            simulator.run(ticker);
-            disableButtons();
-            int delayFree = simulator.getTickPause() * ticker + 100;
-            timer = new Timer(delayFree, new ActionListener(){
-                public void actionPerformed(ActionEvent evt) {
-                    enableButtons();
-                }
-            });
-            timer.setRepeats(false);
-            timer.start();
+            simulator.doTicks(ticker);
+        }
+        if(e.getSource() == stopSimulatie) {
+            simulator.setNumberOfTicks(0);
         }
         if(e.getSource() == tickPause) {
             int time = Integer.parseInt(tickPause.getText());

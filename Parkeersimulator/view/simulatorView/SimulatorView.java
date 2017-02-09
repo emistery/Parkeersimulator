@@ -1,6 +1,6 @@
 package Parkeersimulator.view.simulatorView;
 
-import Parkeersimulator.controller.RunController;
+import Parkeersimulator.controller.MainController;
 import Parkeersimulator.model.Simulator;
 import Parkeersimulator.Time;
 import Parkeersimulator.view.abstractView.AbstractView;
@@ -10,7 +10,7 @@ import java.awt.*;
 
 public class SimulatorView extends AbstractView {
         private JFrame frame;
-        private RunController runController;
+        private MainController runController;
         private SettingLabels settingLabels;
 
         private JLabel tickLabel = new JLabel("0, Happy opening!");
@@ -19,7 +19,7 @@ public class SimulatorView extends AbstractView {
         super(simulator);
         frame = new JFrame();
         frame.setTitle("Parking Simulator");
-        runController = new RunController(simulator);
+        runController = new MainController(simulator);
         settingLabels = new SettingLabels(simulator);
 
         JPanel panel = new JPanel();
@@ -46,7 +46,7 @@ public class SimulatorView extends AbstractView {
         updateView(0, 0, 0, 0, 0.0, 0.0, 0, "");
     }
     public JFrame getFrame(){return  frame;}
-    public RunController getRunController(){
+    public MainController getRunController(){
         return runController;
     }
     public SettingLabels getSettingLabels(){return settingLabels;}

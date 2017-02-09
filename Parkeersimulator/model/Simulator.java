@@ -9,7 +9,6 @@ import Parkeersimulator.model.car.ParkingPassCar;
 import Parkeersimulator.model.car.ReservationCar;
 import Parkeersimulator.view.abstractView.AbstractView;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
@@ -19,8 +18,13 @@ import java.lang.Runnable;
  * A simulation of a car park
  */
 public class Simulator implements Runnable {
+    //set true while the simulator is updating views
+    private boolean updatingViews;
     //set true while the simulator is running
     private boolean running;
+
+    //amount of steps remaining
+    private int numberOfTicks;
 
     //types of car
 	private static final String AD_HOC = "1";
@@ -84,6 +88,8 @@ public class Simulator implements Runnable {
      * @param numberOfPlaces sets the number of places of the simulator
      */
     public Simulator(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
+        running = false;
+        numberOfTicks = 0;
         entranceCarQueue = new CarQueue();
         entrancePassQueue = new CarQueue();
         paymentCarQueue = new CarQueue();
@@ -104,7 +110,13 @@ public class Simulator implements Runnable {
 
 
     //Added getters & setters
-    //Get methods
+    //Getter methods
+
+    public boolean getRunning(){return running;}
+
+    public int getNumberOfTicks() {
+        return numberOfTicks;
+    }
 
     public int getDay(){
         return day;
@@ -179,6 +191,11 @@ public class Simulator implements Runnable {
     }
 
     //Set methods
+    public void setNumberOfTicks(int numberOfTicks) {
+        this.numberOfTicks = numberOfTicks;
+    }
+
+    public void setRunning(boolean b) {running = b;}
 
     public void setDay(int day){
         this.day = day;
@@ -235,11 +252,21 @@ public class Simulator implements Runnable {
      * runs the simulation for 10.000 steps
      */
     public void run() {
-        for (int i = 0; i < 10000; i++) {
+        while (numberOfTicks > 0 && running == true) {
             tick();
+            numberOfTicks--;
+        }
+        running = false;
+    }
+    public void doTicks(int numOfTicks) {
+        if (running == false) {
+            running = true;
+            numberOfTicks += numOfTicks;
+            new Thread(this).start();
+        }else {
+            numberOfTicks +=numOfTicks;
         }
     }
-
     /**
      * runs the simulation x steps
      * @param numberOfTick amount of steps taken
@@ -250,12 +277,12 @@ public class Simulator implements Runnable {
             for (int i = 0; i < numberOfTick; i++) {
                 tick();
             }
+
             Long executionTime = System.currentTimeMillis()-beginTime;
             double average = round((double)executionTime/numberOfTick, 2);
             //System.out.println("execution of "+ numberOfTick+" steps took "+executionTime+" milliseconds with an average of "+ average+" ms/tick");
             //System.out.println("total tickpause is "+numberOfTick*tickPause );
         })).start();
-
     }
 
     /**
@@ -350,7 +377,7 @@ public class Simulator implements Runnable {
     public void addView(AbstractView view)
     {
         (new Thread(() -> {
-            while(running) {
+            while(updatingViews) {
                 try {
                     Thread.sleep(100);
                 } catch (InterruptedException e) {
@@ -368,7 +395,7 @@ public class Simulator implements Runnable {
      */
     public void removeView(AbstractView view){
         (new Thread(() -> {
-            while(running) {
+            while(updatingViews) {
                 try {
                     Thread.sleep(100);
                 } catch (InterruptedException e) {
@@ -389,11 +416,11 @@ public class Simulator implements Runnable {
      * notifies the subscribed view to state changes and calls their updateView method
      */
     private void updateViews() {
-        running=true;
+        updatingViews =true;
         for(AbstractView view : views){
             view.updateView(tick, openAdHocSpots, openPassSpots, numberOfOpenSpots, earnings, missedEarnings, totalMissedCars, displayTime);
         }
-        running=false;
+        updatingViews =false;
     }
 
     private void makeReservation(Car car, Location location, int timeOfArrival){
