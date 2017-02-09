@@ -19,6 +19,7 @@ public class MakeSound implements Runnable {
     private SourceDataLine sourceLine;
     private String day;
 
+
     /**
      * @param day the name of the day that is going to be played
      */
@@ -36,7 +37,6 @@ public class MakeSound implements Runnable {
         playSound();
     }
      */
-
 
     public void playSound(){
 

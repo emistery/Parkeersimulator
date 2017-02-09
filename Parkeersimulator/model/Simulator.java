@@ -36,6 +36,7 @@ public class Simulator implements Runnable {
     private CarQueue entrancePassQueue;
     private CarQueue paymentCarQueue;
     private CarQueue exitCarQueue;
+
     //current time
     private int day = 0;
     private int hour = 0;
@@ -52,7 +53,6 @@ public class Simulator implements Runnable {
     private int weekendPassArrivals = 5; // average number of arriving car per hour
     private int thursdayArrivals = 150;
 
-    private static int originalWeekDay = 100;
 
     private int enterSpeed = 3; // number of car that can enter per minute
     private int paymentSpeed = 4; // number of car that can pay per minute
@@ -73,12 +73,14 @@ public class Simulator implements Runnable {
     private ArrayList<Car> missedPassCars = new ArrayList<>();
     private ArrayList<Reservation> reservations = new ArrayList<>();
 
+    private MakeSound makeSound;
+    private boolean mute = false;
     //
-    private double earnings;
-    private double missedEarnings;
-    private double dayEarnings;
+    private double earnings = 0;
+    private double missedEarnings = 0;
+    private double dayEarnings = 0;
     private double price = 0.03;
-    private int totalMissedCars;
+    private int totalMissedCars = 0;
     private String displayTime;
 
     /**
@@ -111,6 +113,9 @@ public class Simulator implements Runnable {
 
     //Added getters & setters
     //Getter methods
+    public MakeSound getMakeSound() {
+        return makeSound;
+    }
 
     public boolean getRunning(){return running;}
 
@@ -191,6 +196,10 @@ public class Simulator implements Runnable {
     }
 
     //Set methods
+    public void setMakeSound(MakeSound makeSound) {
+        this.makeSound = makeSound;
+    }
+
     public void setNumberOfTicks(int numberOfTicks) {
         this.numberOfTicks = numberOfTicks;
     }
@@ -252,10 +261,18 @@ public class Simulator implements Runnable {
      * runs the simulation for 10.000 steps
      */
     public void run() {
+        Long beginTime = System.currentTimeMillis();
+        int beginTick = tick;
         while (numberOfTicks > 0 && running == true) {
             tick();
             numberOfTicks--;
         }
+        Long executionTime = System.currentTimeMillis()-beginTime;
+        int numberOfTick = tick - beginTick;
+        double average = round((double)executionTime/numberOfTick, 2);
+        System.out.println("execution of "+ numberOfTick+" steps took "+executionTime+
+         "milliseconds with an average of "+ average+" ms/tick");
+        System.out.println("total tickpause is "+numberOfTick*tickPause );
         running = false;
     }
 
@@ -273,17 +290,13 @@ public class Simulator implements Runnable {
      * @param numberOfTick amount of steps taken
      */
     public void run(int numberOfTick) {
-        Long beginTime = System.currentTimeMillis();
+
         (new Thread(() -> {
             for (int i = 0; i < numberOfTick; i++) {
                 tick();
             }
 
-            Long executionTime = System.currentTimeMillis()-beginTime;
-            double average = round((double)executionTime/numberOfTick, 2);
-            //System.out.println("execution of "+ numberOfTick+" steps took "+executionTime+"
-            // milliseconds with an average of "+ average+" ms/tick");
-            //System.out.println("total tickpause is "+numberOfTick*tickPause );
+
         })).start();
     }
 
@@ -323,9 +336,11 @@ public class Simulator implements Runnable {
             hour++;
         }
         while (hour > 23) {
-            String currentDay = Functions.getDay(tick);
-            currentDay = currentDay.toLowerCase().trim();
-            MakeSound m = new MakeSound(currentDay);
+            if(!mute) {
+                String currentDay = Functions.getDay(tick);
+                currentDay = currentDay.toLowerCase().trim();
+                makeSound = new MakeSound(currentDay);
+            }
             //reset the day earnings to 0
             dayEarnings = 0.00;
             hour -= 24;
@@ -343,6 +358,11 @@ public class Simulator implements Runnable {
 
     }
 
+    public void mute(){
+        if(!mute) {
+            mute = true;
+        } else{mute = false;}
+    }
     /**
      * returns the earnings of the day
      * @return earnings of current day

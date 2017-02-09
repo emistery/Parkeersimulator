@@ -18,9 +18,10 @@ public class MainController extends AbstractController implements ActionListener
 
     private JButton stopSimulatie;
     private JButton addView;
-    private JButton removeView;
     private JTextField ticks;
     private JTextField tickPause;
+
+    private JButton mute;
 
     public MainController(Simulator simulator) {
         super(simulator);
@@ -42,16 +43,18 @@ public class MainController extends AbstractController implements ActionListener
         tickPause.setText("Pause ms");
 
         addView = new JButton("More information");
-
         addView.addActionListener(e -> {
-            if(parkeerSimulator != null){
+            if(!parkeerSimulator.getStatisticView().getEnabled()){
+                addView.setText("Less information");
                 parkeerSimulator.getStatisticView().enableView();}
-        });
-        removeView = new JButton("Less information");
-        removeView.addActionListener(e -> {
-            if(parkeerSimulator != null){
+                else{
+                addView.setText("More information");
                 parkeerSimulator.getStatisticView().disableView();}
         });
+
+
+        mute = new JButton("Mute");
+        mute.addActionListener(this);
 
         add(eentick);
         add(eenDag);
@@ -59,8 +62,8 @@ public class MainController extends AbstractController implements ActionListener
         add(ticks);
         add(stopSimulatie);
         add(addView);
-        add(removeView);
         add(tickPause);
+        add(mute);
 
         eenDag.setBounds(25, 10, 50, 30);
         eenWeek.setBounds(100, 10, 50, 30);
@@ -109,6 +112,14 @@ public class MainController extends AbstractController implements ActionListener
             } else {
                 tickPause.setText("pause ms");
             }
+        }
+        if (e.getSource() == mute){
+            if(mute.getText().contains("un")){
+                mute.setText("mute");
+            }else {
+                mute.setText("unmute");
+            }
+            simulator.mute();
         }
     }
 

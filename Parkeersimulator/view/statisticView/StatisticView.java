@@ -39,6 +39,8 @@ public class StatisticView extends AbstractView {
 
     private BarChartQueue queueBarChart;
 
+    private boolean enabled = false;
+
   public StatisticView(Simulator simulator) {
       super(simulator);
       adHocs = new ArrayList<>();
@@ -136,13 +138,18 @@ public class StatisticView extends AbstractView {
   }
   public void disableView(){
       frame.setVisible(false);
+      enabled=false;
   }
   public void enableView(){
+      enabled=true;
       Point point = parkeerSimulator.getSimulatorView().getFrame().getLocation();
       point.x = parkeerSimulator.getSimulatorView().getFrame().getWidth();
       frame.setLocation(point);
       frame.setVisible(true);
   }
+    public boolean getEnabled() {
+        return enabled;
+    }
 
     protected Component makeTextPanel(String text) {
         JPanel panel = new JPanel(false);
