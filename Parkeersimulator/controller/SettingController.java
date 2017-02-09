@@ -1,4 +1,5 @@
 package Parkeersimulator.controller;
+import Parkeersimulator.Functions;
 import Parkeersimulator.model.Simulator;
 import Parkeersimulator.view.simulatorView.SettingLabels;
 import javax.swing.*;
@@ -20,86 +21,118 @@ public class SettingController extends AbstractController {
         super(simulator);
         setWeekDayArrivals = new JTextField(4);
         setWeekDayArrivals.addActionListener(e -> {
-            if (simulator != null) {
-                int value = Integer.parseInt(setWeekDayArrivals.getText());
-                if (value > 0) {
+            String input = getSetWeekDayArrivals().getText();
+            if (Functions.isInt(input)) {
+                int value = Integer.parseInt(input);
+                if (value >= 0) {
                     simulator.setWeekDayArrivals(value);
                     view.updateView();
                 }
+            } else {
+                setWeekDayArrivals.setText("0 - 2147483647");
             }
         });
+
         setWeekendArrivals = new JTextField(4);
         setWeekendArrivals.addActionListener(e -> {
-            if (simulator != null) {
-                int value = Integer.parseInt(setWeekendArrivals.getText());
-                if (value > 0) {
+            String input = getSetWeekendArrivals().getText();
+            if (Functions.isInt(input)) {
+                int value = Integer.parseInt(input);
+                if (value >= 0) {
                     simulator.setWeekendArrivals(value);
                     view.updateView();
                 }
+            } else {
+                setWeekendArrivals.setText("0 - 2147483647");
             }
         });
+
+
         setWeekDayPassArrivals = new JTextField(4);
         setWeekDayPassArrivals.addActionListener(e -> {
-            if (simulator != null) {
-                int value = Integer.parseInt(setWeekDayPassArrivals.getText());
-                if (value > 0) {
+            String input = setWeekDayPassArrivals.getText();
+            if (Functions.isInt(input)) {
+                int value = Integer.parseInt(input);
+                if (value >= 0) {
                     simulator.setWeekDayPassArrivals(value);
                     view.updateView();
                 }
+            } else {
+                setWeekDayPassArrivals.setText("0 - 2147483647");
             }
         });
+
         setWeekendPassArrivals = new JTextField(4);
         setWeekendPassArrivals.addActionListener(e -> {
-            if (simulator != null) {
-                int value = Integer.parseInt(setWeekendPassArrivals.getText());
-                if (value > 0) {
+            String input = setWeekendPassArrivals.getText();
+            if (Functions.isInt(input)) {
+                int value = Integer.parseInt(input);
+                if (value >= 0) {
                     simulator.setWeekendPassArrivals(value);
                     view.updateView();
                 }
+            } else {
+                setWeekendPassArrivals.setText("0 - 2147483647");
             }
         });
+
         setThursdayArrivals = new JTextField(4);
         setThursdayArrivals.addActionListener(e -> {
-            if (simulator != null) {
-                int value = Integer.parseInt(setThursdayArrivals.getText());
-                if (value > 0) {
+            String input = setThursdayArrivals.getText();
+            if (Functions.isInt(input)) {
+                int value = Integer.parseInt(input);
+                if (value >= 0) {
                     simulator.setThursdayArrivals(value);
                     view.updateView();
                 }
+            } else {
+                setThursdayArrivals.setText("0 - 2147483647");
             }
         });
 
         setEnterSpeed = new JTextField(4);
         setEnterSpeed.addActionListener(e -> {
-            if (simulator != null) {
-                int value = Integer.parseInt(setEnterSpeed.getText());
-                if (value > 0) {
+            String input = setEnterSpeed.getText();
+            if (Functions.isInt(input)) {
+                int value = Integer.parseInt(input);
+                if (value >= 0) {
                     simulator.setEnterSpeed(value);
                     view.updateView();
                 }
+            } else {
+                setEnterSpeed.setText("0 - 2147483647");
             }
         });
+
         setPaymentSpeed = new JTextField(4);
         setPaymentSpeed.addActionListener(e -> {
-            if (simulator != null) {
-                int value = Integer.parseInt(setPaymentSpeed.getText());
-                if (value > 0) {
+            String input = setPaymentSpeed.getText();
+            if (Functions.isInt(input)) {
+                int value = Integer.parseInt(input);
+                if (value >= 0) {
                     simulator.setPaymentSpeed(value);
                     view.updateView();
                 }
+            } else {
+                setPaymentSpeed.setText("0 - 2147483647");
             }
         });
+
         setExitSpeed = new JTextField(4);
         setExitSpeed.addActionListener(e -> {
-            if (simulator != null) {
-                int value = Integer.parseInt(setExitSpeed.getText());
-                if (value > 0) {
+            String input = setExitSpeed.getText();
+            if (Functions.isInt(input)) {
+                int value = Integer.parseInt(input);
+                if (value >= 0) {
                     simulator.setExitSpeed(value);
                     view.updateView();
                 }
+            } else {
+                setExitSpeed.setText("0 - 2147483647");
             }
         });
     }
+
     public JTextField getSetWeekDayArrivals() {
         return setWeekDayArrivals;
     }

@@ -3,8 +3,14 @@ package Parkeersimulator;
 /**
  * Created by Gebruiker on 31-1-2017.
  */
-public class Time{
-    private Time(){}
+public class Functions {
+    private Functions(){}
+    public static boolean isInt(String input){
+        if (input.matches("[0-9]+")){
+            return true;
+        }
+        return false;
+    }
 
     public static String getDate(int tick){
         String date = " week: " +getWeek(tick)+" " +getDay(tick)+" " + getHour(tick)+ ":" + getMinute(tick);

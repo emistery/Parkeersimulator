@@ -2,7 +2,7 @@ package Parkeersimulator.view.simulatorView;
 
 import Parkeersimulator.controller.MainController;
 import Parkeersimulator.model.Simulator;
-import Parkeersimulator.Time;
+import Parkeersimulator.Functions;
 import Parkeersimulator.view.abstractView.AbstractView;
 
 import javax.swing.*;
@@ -32,10 +32,6 @@ public class SimulatorView extends AbstractView {
         contentPane.add(panel, BorderLayout.SOUTH);
         contentPane.add(carParkView, BorderLayout.CENTER);
 
-        JPanel eastPanel = new JPanel();
-        eastPanel.add(runController.getTickPause());
-        contentPane.add(eastPanel, BorderLayout.EAST);
-
         //automatically terminates jvm when closing window
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();
@@ -52,7 +48,7 @@ public class SimulatorView extends AbstractView {
     public SettingLabels getSettingLabels(){return settingLabels;}
 
     public void updateView(int tick, int adHocSpots, int passSpots, int cars, double earnings, double missedEarnings, int missedCars, String displayTime) {
-       String date = Time.getDate(tick);
+       String date = Functions.getDate(tick);
         tickLabel.setText("Tick: "+tick + date + "          Red: Ad-hoc Cars    Blue: Parking pass cars     " +
                 "Black: Reservation     Green: Car on reservated spot");
     }

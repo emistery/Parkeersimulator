@@ -1,5 +1,6 @@
 package Parkeersimulator.controller;
 
+import Parkeersimulator.Functions;
 import Parkeersimulator.main.ParkeerSimulator;
 import Parkeersimulator.model.Simulator;
 
@@ -18,7 +19,7 @@ public class MainController extends AbstractController implements ActionListener
     private JButton stopSimulatie;
     private JButton addView;
     private JButton removeView;
-    private JTextField textField;
+    private JTextField ticks;
     private JTextField tickPause;
 
     private Timer timer;
@@ -34,10 +35,12 @@ public class MainController extends AbstractController implements ActionListener
 
         stopSimulatie = new JButton("Stop simulation");
         stopSimulatie.addActionListener(this);
-        textField = new JTextField(5);
-        textField.addActionListener(this);
-        tickPause = new JTextField(4);
+        ticks = new JTextField(5);
+        ticks.addActionListener(this);
+        ticks.setText("Minutes");
+        tickPause = new JTextField(5);
         tickPause.addActionListener(this);
+        tickPause.setText("Pause ms");
 
         addView = new JButton("More information");
 
@@ -53,11 +56,11 @@ public class MainController extends AbstractController implements ActionListener
         add(eentick);
         add(eenDag);
         add(eenWeek);
-        add(textField);
+        add(ticks);
         add(stopSimulatie);
-        add(tickPause);
         add(addView);
         add(removeView);
+        add(tickPause);
 
         eenDag.setBounds(25, 10, 50, 30);
         eenWeek.setBounds(100, 10, 50, 30);
@@ -72,29 +75,39 @@ public class MainController extends AbstractController implements ActionListener
     public Dimension getPreferredSize() {return new Dimension(235, 35);}
 
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == eenDag){
+        if (e.getSource() == eenDag) {
             simulator.doTicks(1440);
         }
 
-        if(e.getSource() == eenWeek){
+        if (e.getSource() == eenWeek) {
             simulator.doTicks(10080);
         }
-        if(e.getSource() == eentick){
+        if (e.getSource() == eentick) {
             simulator.doTicks(1);
         }
-        if(e.getSource() == textField) {
-
-            String text = textField.getText();
-            int ticker = Integer.parseInt(text);
-            simulator.doTicks(ticker);
+        if (e.getSource() == ticks) {
+            String input = ticks.getText();
+            if (Functions.isInt(input)) {
+                int ticks = Integer.parseInt(input);
+                if (ticks >= 0) {
+                    simulator.doTicks(ticks);
+                }
+            } else {
+                ticks.setText("minutes");
+            }
         }
-        if(e.getSource() == stopSimulatie) {
+        if (e.getSource() == stopSimulatie) {
             simulator.setNumberOfTicks(0);
         }
-        if(e.getSource() == tickPause) {
-            int time = Integer.parseInt(tickPause.getText());
-            if(time>=0) {
-                simulator.setTickPause(time);
+        if (e.getSource() == tickPause) {
+            String input = tickPause.getText();
+            if (Functions.isInt(input)) {
+                int time = Integer.parseInt(input);
+                if (time >= 0) {
+                    simulator.setTickPause(time);
+                }
+            } else {
+                tickPause.setText("pause ms");
             }
         }
     }
@@ -103,14 +116,14 @@ public class MainController extends AbstractController implements ActionListener
         eenDag.setEnabled(true);
         eenWeek.setEnabled(true);
         eentick.setEnabled(true);
-        textField.setEnabled(true);
+        ticks.setEnabled(true);
     }
 
     private void disableButtons(){
         eenDag.setEnabled(false);
         eenWeek.setEnabled(false);
         eentick.setEnabled(false);
-        textField.setEnabled(false);
+        ticks.setEnabled(false);
     }
     public void setParkeerSimulator(ParkeerSimulator parkSimulator){
         parkeerSimulator = parkSimulator;

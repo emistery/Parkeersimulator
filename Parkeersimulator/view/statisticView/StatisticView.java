@@ -2,12 +2,12 @@
  * Created by Lenovo T420 on 27-1-2017.
  */
 package Parkeersimulator.view.statisticView;
+import Parkeersimulator.Functions;
 import Parkeersimulator.model.Simulator;
 import Parkeersimulator.main.ParkeerSimulator;
 import Parkeersimulator.view.abstractView.AbstractView;
 import Parkeersimulator.view.statisticView.BarChart.BarChartQueue;
 import Parkeersimulator.view.statisticView.BarChart.BarChartView;
-import Parkeersimulator.Time;
 
 import javax.swing.*;
 import java.awt.*;
@@ -112,10 +112,10 @@ public class StatisticView extends AbstractView {
       dayLabel.setText(simulator.displayDay());
 
       //create new Bar Graph every week and add it to a new tab.
-      int week = Time.getWeek(tick)+1;
+      int week = Functions.getWeek(tick)+1;
       if((tick%10080==0&&tick>10079)) {
           activeBarChart = new BarChartView(simulator);
-          activeBarChart.setController(parkeerSimulator);
+          activeBarChart.setParkeerSimulator(parkeerSimulator);
           simulator.addView(activeBarChart);
       }
       if((tick%10081==0&&tick>10080)) {
@@ -127,6 +127,7 @@ public class StatisticView extends AbstractView {
           pPass.remove(0);
       }
       if((tick%GRAPH_UPDATE_FREQUENCY)==0 ||adHocs.size()==0) {
+
           adHocs.add(simulator.getAdHocCars());
           pPass.add(simulator.getPassCars());
       }
@@ -154,7 +155,7 @@ public class StatisticView extends AbstractView {
 
     public void setParkeerSimulator(ParkeerSimulator contr){
       parkeerSimulator = contr;
-      activeBarChart.setController(parkeerSimulator);
+      activeBarChart.setParkeerSimulator(parkeerSimulator);
       queueBarChart.setParkeerSimulator(parkeerSimulator);
       simulator.addView(activeBarChart);
       simulator.addView(queueBarChart);

@@ -1,9 +1,9 @@
 package Parkeersimulator.view.statisticView.BarChart;
 
+import Parkeersimulator.Functions;
 import Parkeersimulator.main.ParkeerSimulator;
 import Parkeersimulator.model.Simulator;
 import Parkeersimulator.view.abstractView.AbstractView;
-import Parkeersimulator.Time;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +13,7 @@ import java.awt.*;
  * BarCharts expire every first minute of the week(monday0:0) and stop updating.
  */
 public class BarChartView extends AbstractView {
-    private ParkeerSimulator controller;
+    private ParkeerSimulator parkeerSimulator;
 
     private JPanel textPanel;
     private ChartPanel chartPanel;
@@ -82,8 +82,8 @@ public class BarChartView extends AbstractView {
         }
     public void updateView(int tick, int adHocSpots, int passSpots, int cars, double earnings, double missedEarnings, int missedCars, String displayTime){
         if(tick%10080!=0 && tick!=0) {
-            int day = Time.getDayNumber(tick);
-            if (controller != null) {
+            int day = Functions.getDayNumber(tick);
+            if (parkeerSimulator != null) {
                 values[day] = simulator.getDayEarnings();
 
                 mondayLabel.setText("€" + round(values[0], 2));
@@ -95,12 +95,12 @@ public class BarChartView extends AbstractView {
                 sundayLabel.setText("€" + round(values[6], 2));
             }
         }else if(tick%10080==0 && tick!=0){
-            controller = null;
+            parkeerSimulator = null;
         }
     }
 
-    public void setController(ParkeerSimulator contr){
-        controller = contr;
+    public void setParkeerSimulator(ParkeerSimulator contr){
+        parkeerSimulator = contr;
     }
 
     public static double round(double value, int places) {

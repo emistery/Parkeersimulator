@@ -1,8 +1,8 @@
 package Parkeersimulator.model;
 //-----MODEL-----
 //needs methods for views and controllers to subscribe to state changes
+import Parkeersimulator.Functions;
 import Parkeersimulator.MakeSound;
-import Parkeersimulator.Time;
 import Parkeersimulator.model.car.AdHocCar;
 import Parkeersimulator.model.car.Car;
 import Parkeersimulator.model.car.ParkingPassCar;
@@ -325,7 +325,7 @@ public class Simulator implements Runnable {
         while (hour > 23) {
 
             //reset the day earnings to 0
-            String currentDay = Time.getDay(tick);
+            String currentDay = Functions.getDay(tick);
             currentDay = currentDay.toLowerCase().trim();
             MakeSound m = new MakeSound(currentDay);
             dayEarnings = 0.00;
@@ -613,7 +613,7 @@ public class Simulator implements Runnable {
         double standardDeviation = averageNumberOfCarsPerHour * 0.3;
         double rushDeviation = averageNumberOfCarsPerHour * 2;
         double numberOfCarsPerHour;
-        if(Time.getHour(tick)>8 && Time.getHour(tick)<17) {
+        if(Functions.getHour(tick)>8 && Functions.getHour(tick)<17) {
             numberOfCarsPerHour = averageNumberOfCarsPerHour + random.nextGaussian() * rushDeviation;
         }else{
             numberOfCarsPerHour = averageNumberOfCarsPerHour + random.nextGaussian() * standardDeviation;
@@ -851,6 +851,8 @@ public class Simulator implements Runnable {
         return (double) tmp / factor;
     }
 
+
+
     /**
      * calculates the amount of money a missed car would have spend and adds this to the missed earnings
      * @param car the car which drove of to another car park
@@ -906,7 +908,7 @@ public class Simulator implements Runnable {
             break;
         }
         Integer.toString(hour, minute);
-        displayTime = ("Day: " + currentDay + " Time: " + hour + ":" + minute);
+        displayTime = ("Day: " + currentDay + " Functions: " + hour + ":" + minute);
         return displayTime;
     }
 
