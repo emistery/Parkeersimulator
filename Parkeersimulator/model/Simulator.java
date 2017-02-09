@@ -281,7 +281,8 @@ public class Simulator implements Runnable {
 
             Long executionTime = System.currentTimeMillis()-beginTime;
             double average = round((double)executionTime/numberOfTick, 2);
-            //System.out.println("execution of "+ numberOfTick+" steps took "+executionTime+" milliseconds with an average of "+ average+" ms/tick");
+            //System.out.println("execution of "+ numberOfTick+" steps took "+executionTime+"
+            // milliseconds with an average of "+ average+" ms/tick");
             //System.out.println("total tickpause is "+numberOfTick*tickPause );
         })).start();
     }
@@ -419,7 +420,8 @@ public class Simulator implements Runnable {
     private void updateViews() {
         updatingViews =true;
         for(AbstractView view : views){
-            view.updateView(tick, openAdHocSpots, openPassSpots, numberOfOpenSpots, earnings, missedEarnings, totalMissedCars, displayTime);
+            view.updateView(tick, openAdHocSpots, openPassSpots, numberOfOpenSpots, earnings, missedEarnings,
+                    totalMissedCars, displayTime);
         }
         updatingViews =false;
     }
@@ -789,7 +791,6 @@ public class Simulator implements Runnable {
         }
         return null;
     }
-
     /**
      * advances the time for all the car
      */

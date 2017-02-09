@@ -27,8 +27,8 @@ public class BarChartQueue extends AbstractView {
 
     public BarChartQueue(Simulator simulator){
         super(simulator);
-        adHocLabel = new JLabel("lengte: " + 0);
-        passLabel = new JLabel("lengte: " + 0);
+        adHocLabel = new JLabel("length: " + 0);
+        passLabel = new JLabel("length: " + 0);
 
         values = new double[]{0,0};
         names = new String[]{"AdHoc", "Pass"};
@@ -48,7 +48,7 @@ public class BarChartQueue extends AbstractView {
         c.fill = GridBagConstraints.HORIZONTAL;
 
         setLayout(gridBag);
-        chartPanel = new ChartPanel(values, names, "Wachtrijen",25);
+        chartPanel = new ChartPanel(values, names, "Queues",25);
         c.ipady = 0;
         c.ipadx = 400;
         c.gridx = 0;
@@ -65,8 +65,8 @@ public class BarChartQueue extends AbstractView {
         values[0] = ((double)simulator.getAdHocQueueSize());
         values[1] = ((double)simulator.getPassQueueSize());
 
-        adHocLabel.setText("lengte: " + values[0]);
-        passLabel.setText("lengte: " + values[1]);
+        adHocLabel.setText("length: " + values[0]);
+        passLabel.setText("length: " + values[1]);
     }
 
     public void setParkeerSimulator(ParkeerSimulator contr){
