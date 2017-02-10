@@ -17,9 +17,7 @@ import java.lang.Runnable;
 /**
  * A simulation of a car park
  */
-public class Simulator implements Runnable {
-    //set true while the simulator is updating views
-    private boolean updatingViews;
+public class Simulator extends AbstractModel implements Runnable {
     //set true while the simulator is running
     private boolean running;
 
@@ -68,7 +66,6 @@ public class Simulator implements Runnable {
 
     private Car[][][] cars;
     private ArrayList<Location> locations = new ArrayList<>();
-    private ArrayList<AbstractView> views = new ArrayList<>();
     private ArrayList<Car> missedCars = new ArrayList<>();
     private ArrayList<Car> missedPassCars = new ArrayList<>();
     private ArrayList<Reservation> reservations = new ArrayList<>();
@@ -399,25 +396,6 @@ public class Simulator implements Runnable {
     }
 
     /**
-     * subscribes a view to the simulation to be notified of updates
-     * @param view the view to be subscribed
-     */
-    public void addView(AbstractView view)
-    {
-        (new Thread(() -> {
-            while(updatingViews) {
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            views.add(view);
-
-        })).start();
-    }
-
-    /**
      * removes a view from the list of views to be notified of updates
      * @param view the view to be removed
      */
@@ -438,17 +416,6 @@ public class Simulator implements Runnable {
                 }
             }
         })).start();
-    }
-
-    /**
-     * notifies the subscribed view to state changes and calls their updateView method
-     */
-    private void updateViews() {
-        updatingViews =true;
-        for(AbstractView view : views){
-            view.updateView();
-        }
-        updatingViews =false;
     }
 
     private void makeReservation(Car car, Location location, int timeOfArrival){
