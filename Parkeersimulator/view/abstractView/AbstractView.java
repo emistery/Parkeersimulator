@@ -16,6 +16,8 @@ public abstract class AbstractView extends JPanel {
     public void updateView() {
     }
 
+    public Simulator getModel(){return simulator;}
+
     public void disableView() {
     }
 

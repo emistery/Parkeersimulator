@@ -11,11 +11,17 @@ import java.util.Iterator;
 public abstract class AbstractModel {
     //set true while the simulator is updating views
     protected boolean updatingViews;
-
     protected ArrayList<AbstractView> views = new ArrayList<>();
-
-
-
+    /**
+     * notifies the subscribed view to state changes and calls their updateView method
+     */
+    public void updateViews() {
+        updatingViews =true;
+        for(AbstractView view : views){
+            view.updateView();
+        }
+        updatingViews =false;
+    }
 
     /**
      * subscribes a view to the simulation to be notified of updates
@@ -57,16 +63,5 @@ public abstract class AbstractModel {
                 }
             }
         })).start();
-    }
-
-    /**
-     * notifies the subscribed view to state changes and calls their updateView method
-     */
-    public void updateViews() {
-        updatingViews =true;
-        for(AbstractView view : views){
-            view.updateView();
-        }
-        updatingViews =false;
     }
 }
