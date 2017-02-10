@@ -3,6 +3,7 @@ package Parkeersimulator.model;
 import Parkeersimulator.view.abstractView.AbstractView;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Created by Lenovo T420 on 10-2-2017.
@@ -32,6 +33,29 @@ public abstract class AbstractModel {
             }
             views.add(view);
 
+        })).start();
+    }
+
+    /**
+     * removes a view from the list of views to be notified of updates
+     * @param view the view to be removed
+     */
+    public void removeView(AbstractView view){
+        (new Thread(() -> {
+            while(updatingViews) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            Iterator it = views.iterator();
+            while (it.hasNext()) {
+                AbstractView bla = (AbstractView) it.next();
+                if (view == bla) {
+                    it.remove();
+                }
+            }
         })).start();
     }
 

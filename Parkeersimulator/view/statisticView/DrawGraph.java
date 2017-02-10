@@ -160,6 +160,7 @@ public class DrawGraph extends AbstractView {
 
     public DrawGraph createAndShowGui(ArrayList<Integer> adHoc, ArrayList<Integer> pass) {
         if(adHoc.size()==0){adHoc.add(1);}
+        if(pass.size()==0){pass.add(1);}
         DrawGraph mainPanel = new DrawGraph(adHoc, pass, simulator);
         return mainPanel;
     }

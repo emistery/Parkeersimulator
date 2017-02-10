@@ -395,29 +395,6 @@ public class Simulator extends AbstractModel implements Runnable {
         carsLeaving();
     }
 
-    /**
-     * removes a view from the list of views to be notified of updates
-     * @param view the view to be removed
-     */
-    public void removeView(AbstractView view){
-        (new Thread(() -> {
-            while(updatingViews) {
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            Iterator it = views.iterator();
-            while (it.hasNext()) {
-                AbstractView bla = (AbstractView) it.next();
-                if (view == bla) {
-                    it.remove();
-                }
-            }
-        })).start();
-    }
-
     private void makeReservation(Car car, Location location, int timeOfArrival){
         reservations.add(new Reservation(car, location, timeOfArrival));
     }
