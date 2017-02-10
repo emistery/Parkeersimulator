@@ -39,7 +39,7 @@ public class SimulatorView extends AbstractView {
         frame.setVisible(true);
 
         carParkView.updateView();
-        updateView(0, 0, 0, 0, 0.0, 0.0, 0, "");
+        updateView();
     }
     public JFrame getFrame(){return  frame;}
     public MainController getRunController(){
@@ -47,7 +47,8 @@ public class SimulatorView extends AbstractView {
     }
     public SettingLabels getSettingLabels(){return settingLabels;}
 
-    public void updateView(int tick, int adHocSpots, int passSpots, int cars, double earnings, double missedEarnings, int missedCars, String displayTime) {
+    public void updateView(){
+        int tick = simulator.getTick();
        String date = Functions.getDate(tick);
         tickLabel.setText("Tick: "+tick + date + "          Red: Ad-hoc Cars    Blue: Parking pass cars     " +
                 "Black: Reservation     Green: Car on reservated spot");

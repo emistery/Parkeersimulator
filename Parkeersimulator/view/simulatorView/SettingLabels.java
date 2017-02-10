@@ -54,8 +54,7 @@ public class SettingLabels extends AbstractView
         setVisible(true);
     }
 
-    public void updateView(){updateView(0, 0, 0, 0, 0, 0,0, "");}
-    public void updateView(int tick, int adHocSpots, int passSpots, int cars, double earnings, double missedEarnings, int missedCars, String displayTime){
+    public void updateView(){
         weekDayArrivals.setText("weekDayArrivals: "+ simulator.getWeekDayArrivals());
         weekendArrivals.setText("weekendArrivals: "+ simulator.getWeekendArrivals());
         weekDayPassArrivals.setText("weekDayPassArrivals: "+ simulator.getWeekDayPassArrivals());

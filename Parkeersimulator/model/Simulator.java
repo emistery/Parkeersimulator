@@ -138,6 +138,9 @@ public class Simulator implements Runnable {
     public int getTickPause(){
         return tickPause;
     }
+    public int getTotalMissedCars() {
+        return totalMissedCars;
+    }
 
     public int getTick(){
         return tick;
@@ -198,6 +201,10 @@ public class Simulator implements Runnable {
     //Set methods
     public void setMakeSound(MakeSound makeSound) {
         this.makeSound = makeSound;
+    }
+
+    public void setTotalMissedCars(int totalMissedCars) {
+        this.totalMissedCars = totalMissedCars;
     }
 
     public void setNumberOfTicks(int numberOfTicks) {
@@ -439,8 +446,7 @@ public class Simulator implements Runnable {
     private void updateViews() {
         updatingViews =true;
         for(AbstractView view : views){
-            view.updateView(tick, openAdHocSpots, openPassSpots, numberOfOpenSpots, earnings, missedEarnings,
-                    totalMissedCars, displayTime);
+            view.updateView();
         }
         updatingViews =false;
     }

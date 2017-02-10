@@ -61,7 +61,7 @@ public class BarChartQueue extends AbstractView {
         c.gridy = 1;
         add(chartPanel,c);
     }
-    public void updateView(int tick, int adHocSpots, int passSpots, int cars, double earnings, double missedEarnings, int missedCars, String displayTime){
+    public void updateView(){
         values[0] = ((double)simulator.getAdHocQueueSize());
         values[1] = ((double)simulator.getPassQueueSize());
 

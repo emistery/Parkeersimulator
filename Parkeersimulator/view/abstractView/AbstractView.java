@@ -13,7 +13,7 @@ public abstract class AbstractView extends JPanel {
         this.simulator = simulator;
     }
 
-    public void updateView(int tick, int adHocSpots, int passSpots, int cars, double earnings, double missedEarnings, int missedCars, String displayTime) {
+    public void updateView() {
     }
 
     public void disableView() {

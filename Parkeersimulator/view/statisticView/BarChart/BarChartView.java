@@ -80,7 +80,8 @@ public class BarChartView extends AbstractView {
         c.gridy = 1;
         add(chartPanel, c);
         }
-    public void updateView(int tick, int adHocSpots, int passSpots, int cars, double earnings, double missedEarnings, int missedCars, String displayTime){
+    public void updateView(){
+        int tick = simulator.getTick();
         if(tick%10080!=0 && tick!=0) {
             int day = Functions.getDayNumber(tick);
             if (parkeerSimulator != null) {

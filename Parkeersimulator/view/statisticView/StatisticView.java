@@ -34,7 +34,7 @@ public class StatisticView extends AbstractView {
     private ArrayList<Integer> adHocs;
     private ArrayList<Integer> pPass;
     private static final int GRAPH_POINTS = 25;
-    private static final int GRAPH_UPDATE_FREQUENCY = 60;
+    private static final int GRAPH_UPDATE_FREQUENCY = 120;
     private DrawGraph mainPanel;
 
     private BarChartQueue queueBarChart;
@@ -102,14 +102,15 @@ public class StatisticView extends AbstractView {
       return panel;
   }
 
-  public void updateView(int tick, int adHocSpots, int passSpots, int cars, double earnings, double missedEarnings, int missedCars, String displayTime){
-      carLabel.setText("Amount of open spots: " + cars + newline);
+  public void updateView(){
+      int tick = simulator.getTick();
+      carLabel.setText("Amount of open spots: " + simulator.getNumberOfOpenSpots() + newline);
       tickLabel.setText("Current tick: " + tick);
-      adhocLabel.setText("Free ad-hoc spots: " + adHocSpots);
-      passLabel.setText("Free pass spots: " + passSpots);
-      earningsLabel.setText("Total earnings: € " + earnings);
+      adhocLabel.setText("Free ad-hoc spots: " + simulator.getOpenAdHocSpots());
+      passLabel.setText("Free pass spots: " + simulator.getOpenPassSpots());
+      earningsLabel.setText("Total earnings: € " + simulator.getEarnings());
       missedEarningsLabel.setText("Missed earnings: € " + simulator.calculateMissedEarnings());
-      missedCarsLabel.setText("Missed cars: " + missedCars);
+      missedCarsLabel.setText("Missed cars: " + simulator.getTotalMissedCars());
       missedPassCarsLabel.setText("Missed pass cars: " + simulator.getMissedPassCars());
       dayLabel.setText(simulator.displayDay());
 
